@@ -35,3 +35,4 @@ bind '$' __history_previous_command_arguments
 
 set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
+set -g fish_color_search_match --background=#458588
