@@ -1,7 +1,7 @@
 " move to text buffer
-nnoremap <F3> :bnext<CR>
-nnoremap <F2> :bprevious<CR>
-nnoremap <F4> :bd<CR>
+nnoremap <silent><F3> :bnext<CR>
+nnoremap <silent><F2> :bprevious<CR>
+nnoremap <silent><F4> :bd<CR>
 
 " Better tabbing
 vnoremap < <gv
@@ -61,8 +61,8 @@ inoremap <silent><expr> <C-f>     pumvisible() ? compe#scroll({ 'delta': +4 })  
 inoremap <silent><expr> <C-d>     pumvisible() ? compe#scroll({ 'delta': -4 })  :  "\<C-d>"
 
 " QuickFixList
-nnoremap <silent> <C-q> :call ToggleQFList(0)<CR>
-nnoremap <silent> <leader>q :call ToggleQFList(1)<CR>
+nnoremap <silent> <C-q> :call ToggleList("Location List", 'l')<CR>
+nnoremap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 
 map *  <Plug>(asterisk-z*)
 map #  <Plug>(asterisk-z#)
@@ -84,7 +84,7 @@ nnoremap <silent> <leader>gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>d  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <silent> <leader>dn <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent> <leader>dN <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> <leader>dq <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> <leader>dq <cmd>lua vim.lsp.diagnostic.set_loclist({open_loclist = false})<CR>
 nnoremap <silent> <leader>=  <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <leader>a  <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 vnoremap <silent> <leader>a  <cmd><C-U>lua require('lspsaga.codeaction').range_code_action()<CR>

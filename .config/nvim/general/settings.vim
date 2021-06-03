@@ -74,7 +74,10 @@ augroup AutoFormating
   autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js Neoformat
 augroup END
 
-" au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+augroup Pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init({'wrap': 'hard'})
+  autocmd FileType text call pencil#init({'wrap': 'hard'})
+augroup END
 
-" cmap w!! w !sudo tee %
 command WW SudaWrite

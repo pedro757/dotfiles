@@ -37,12 +37,13 @@ call plug#begin("~/.config/nvim/plugged")
   " ranger
   Plug 'kevinhwang91/rnvimr',
   Plug 'kevinhwang91/nvim-bqf'
+  Plug 'romainl/vim-qf'
+  Plug 'sjl/gundo.vim'
 
   " Theme
   Plug 'morhetz/gruvbox'
   " Statusline
   Plug 'vim-airline/vim-airline'
-  " Plug 'mhinz/vim-signify'
   Plug 'lambdalisue/suda.vim'
 
   Plug 'tpope/vim-fugitive'
@@ -57,14 +58,17 @@ call plug#begin("~/.config/nvim/plugged")
   " noh in search
   Plug 'junegunn/gv.vim'
   Plug 'junegunn/vim-slash'
+  Plug 'junegunn/limelight.vim'
+  Plug 'folke/zen-mode.nvim'
+  Plug 'folke/which-key.nvim'
+  Plug 'preservim/vim-pencil'
+  Plug 'sunjon/shade.nvim'
   Plug 'haya14busa/vim-asterisk'
 
   " TMUX
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'roxma/vim-tmux-clipboard'
 
-  " Plug 'alvan/vim-closetag'
-  " Plug 'adelarsq/vim-matchit'
   Plug 'andymass/vim-matchup'
   Plug 'editorconfig/editorconfig-vim'
   Plug 'mattn/emmet-vim'

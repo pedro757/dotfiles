@@ -4,9 +4,10 @@ alias vim="nvim"
 alias old_vim="\vim"
 alias dcompose="docker-compose"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME/'
+alias la='exa --long --icons --git -a'
+alias ll='exa --long --icons --git'
 
 # set PATH /Users/MyUserName/.nvm/versions/node/v13.13.0/bin $PATH
-
 
 # Functions needed for !! and !$
 # Will only work in default (emacs) mode.
@@ -35,4 +36,5 @@ bind '$' __history_previous_command_arguments
 
 set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
-set -g fish_color_search_match --background=#458588
+
+set --global tide_prompt_char_icon ➜
