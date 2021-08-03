@@ -1,4 +1,3 @@
-:lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
   highlight = {
@@ -18,10 +17,17 @@ require'nvim-treesitter.configs'.setup {
   },
   matchup = {
     enable = true
-  }
+  },
+  textsubjects = {
+    enable = true,
+    keymaps = {
+      ['.'] = 'textsubjects-smart',
+      [';'] = 'textsubjects-big',
+    }
+  },
 }
-EOF
-
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-set foldlevelstart=20
+vim.cmd([[
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+  set foldlevelstart=20
+]])

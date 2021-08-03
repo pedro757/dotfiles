@@ -3,7 +3,8 @@ local npairs = require('nvim-autopairs')
 
 npairs.setup({
   check_ts = true,
-  ignored_next_char = string.gsub([[ [%%%'%[%"%.] ]],"%s+", "")
+  ignored_next_char = string.gsub([[ [%%%'%[%"%.] ]],"%s+", ""),
+  -- fast_wrap = {},
 })
 
 _G.MUtils= {}
@@ -31,8 +32,8 @@ MUtils.completion_confirm=function(tipo)
   end
 end
 
-map('i' , '<CR>','v:lua.MUtils.completion_confirm(1)', {expr = true , noremap = true})
-map('i' , '<c-l>','v:lua.MUtils.completion_confirm(0)', {expr = true , noremap = true})
+-- map('i' , '<CR>','v:lua.MUtils.completion_confirm(1)', {expr = true , noremap = true})
+-- map('i' , '<c-l>','v:lua.MUtils.completion_confirm(0)', {expr = true , noremap = true})
 
 require'compe'.setup {
   enabled = true;
@@ -54,6 +55,7 @@ require'compe'.setup {
     calc = true;
     nvim_lsp = true;
     nvim_lua = true;
-    vsnip = true;
+    luasnip = true;
+    emoji = true;
   };
 }

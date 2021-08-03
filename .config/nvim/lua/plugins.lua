@@ -1,25 +1,44 @@
 vim.cmd('packadd packer.nvim')
--- vim._update_package_paths()
 
-return require('packer').startup(function(use)
+return require('packer').startup{function()
+  -- TODO: dap debuger
+  --
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
-  -- use 'folke/lsp-colors.nvim'
+  use 'onsails/lspkind-nvim'
   -- use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'norcalli/nvim-colorizer.lua'
-  use 'karb94/neoscroll.nvim'
-  use 'sbdchd/neoformat'
+  -- use 'karb94/neoscroll.nvim'
+  use {
+    'sbdchd/neoformat',
+    cmd = { 'Neoformat' }
+  }
+  use 'nacro90/numb.nvim'
+  use 'jghauser/mkdir.nvim'
+  use 'mhinz/vim-grepper'
+  use 'ahmedkhalf/lsp-rooter.nvim'
+  use 'ThePrimeagen/refactoring.nvim'
+  use 'ThePrimeagen/git-worktree.nvim'
+  use 'b3nj5m1n/kommentary'
   -- DEBUG
+  use { 'michaelb/sniprun', run = 'install.sh'}
+  use 'Iron-E/nvim-cartographer'
+  use {
+    "rcarriga/vim-ultest",
+    requires = {"vim-test/vim-test"},
+    run = ":UpdateRemotePlugins",
+    cond = function()
+      return vim.fn.has "python3" == 1
+    end,
+  }
 
   use 'glepnir/indent-guides.nvim'
   use 'glepnir/lspsaga.nvim'
-  -- Snippets
-  use 'hrsh7th/vim-vsnip'
-  use 'hrsh7th/vim-vsnip-integ'
+  use 'L3MON4D3/LuaSnip'
   use 'hrsh7th/nvim-compe'
   use 'rafamadriz/friendly-snippets'
 
@@ -29,41 +48,95 @@ return require('packer').startup(function(use)
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'windwp/nvim-ts-autotag'
   use 'windwp/nvim-autopairs'
-  use { 'npxbr/glow.nvim', run = ':GlowInstall' }
-  use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
-  use { 'michaelb/sniprun', run = 'install.sh'}
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = 'cd app && yarn install',
+    ft = 'markdown'
+  }
+  use {
+    'jghauser/follow-md-links.nvim',
+    ft = 'markdown',
+    disable = true
+  }
   use 'lewis6991/gitsigns.nvim'
+  use {
+    'rhysd/git-messenger.vim',
+    cmd = { 'GitMessenger' },
+    keys = '<Plug>(git-messenger)',
+  }
+  use {
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen' }
+  }
 
-  -- ranger
-  use 'kevinhwang91/rnvimr'
+  use 'kyazdani42/nvim-tree.lua'
   use 'kevinhwang91/nvim-bqf'
+  use 'sjl/gundo.vim'
 
   -- Theme
   use 'morhetz/gruvbox'
-  -- Statusline
   use 'vim-airline/vim-airline'
-
+  use "tversteeg/registers.nvim"
+  use 'tpope/vim-eunuch'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-obsession'
   use 'tpope/vim-repeat'
   use 'tpope/vim-sensible'
-  use 'tpope/vim-commentary'
   use 'tpope/vim-sleuth'
-  use 'tpope/vim-abolish'
+  use {
+    'tpope/vim-characterize',
+    keys = { 'ga' }
+  }
+  use {
+    'tpope/vim-abolish',
+    cmd = { 'Abolish', 'Subvert', '%Subvert' }
+  }
 
-  use 'airblade/vim-rooter'
-  use 'junegunn/gv.vim'
-  use 'junegunn/vim-slash'
+  use {
+    'junegunn/gv.vim',
+    cmd = { 'GV', 'GV!', 'GV?' }
+  }
+  use 'haya14busa/is.vim'
   use 'haya14busa/vim-asterisk'
+  use {
+    'folke/zen-mode.nvim',
+    requires = { 'folke/twilight.nvim' },
+    cmd = { 'ZenMode' }
+  }
+  use 'preservim/vim-pencil'
 
   -- TMUX
   use 'christoomey/vim-tmux-navigator'
   use 'roxma/vim-tmux-clipboard'
 
-  use 'lambdalisue/suda.vim'
+  use {
+    'AndrewRadev/splitjoin.vim',
+    keys = { 'gJ', 'gS' },
+  }
+  use {
+    'chrisbra/NrrwRgn',
+    cmd = { 'NarrowRegion', 'NarrowWindow' },
+  }
+  use {
+    'godlygeek/tabular',
+    cmd = { 'Tab', 'Tabularize' }
+  }
+  use {
+    'lambdalisue/suda.vim',
+    cmd = { 'SudaWrite', 'SudaRead', 'SudaEdit' }
+  }
   use 'andymass/vim-matchup'
   use 'editorconfig/editorconfig-vim'
-  use 'mattn/emmet-vim'
+  use {
+    'mattn/emmet-vim',
+    ft = { 'html', 'typescriptreact', 'javascriptreact', 'javascript', 'markdown' }
+  }
   use 'machakann/vim-sandwich'
   use 'wellle/targets.vim'
-end)
+end,
+  config = {
+    display = {
+      open_fn = require('packer.util').float,
+    }
+  }
+}

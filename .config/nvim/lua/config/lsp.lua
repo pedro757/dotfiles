@@ -46,23 +46,31 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 local servers = { "pyright", "vimls", "jsonls", "cssls", "html", "sqlls", "intelephense", "dockerls", "bashls", "yamlls", "graphql", "gopls", "svelte", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    on_attach = on_attach,
     capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    on_attach = on_attach,
   }
 end
 
 local sumneko_root_path = '/home/pedro/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/Linux/lua-language-server"
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 nvim_lsp.sumneko_lua.setup{
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  root_dir = nvim_lsp.util.root_pattern(".git", "init.vim") or nvim_lsp.util.bufdir,
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   settings = {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
         -- Setup your lua path
-        path = vim.split(package.path, ';'),
+        path = runtime_path,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
@@ -70,10 +78,7 @@ nvim_lsp.sumneko_lua.setup{
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
+        library = vim.api.nvim_get_runtime_file("", true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {

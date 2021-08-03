@@ -1,4 +1,3 @@
-lua << EOF
 local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
@@ -20,6 +19,8 @@ require('telescope').setup{
         ["<C-k>"] = actions.move_selection_previous
       }
     },
+    file_ignore_patterns = { "plugged", "cache", "venv", "node_modules", ".git", "packer_compiled.lua" },
+    set_env = { ['COLORTERM'] = 'truecolor' },
   },
   -- extensions = {
   --   fzy_native = {
@@ -28,5 +29,5 @@ require('telescope').setup{
   --   }
   -- }
 }
+require("telescope").load_extension("git_worktree")
 -- require('telescope').load_extension('fzy_native')
-EOF
