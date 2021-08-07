@@ -1,11 +1,18 @@
+local execute = vim.api.nvim_command
+local fn = vim.fn
+
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  execute 'packadd packer.nvim'
+end
+
 vim.cmd('packadd packer.nvim')
 
-return require('packer').startup{function()
-  -- TODO: dap debuger
-  --
+return require('packer').startup{function(use)
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
-  use 'onsails/lspkind-nvim'
   -- use 'jose-elias-alvarez/nvim-lsp-ts-utils'
   use 'nvim-lua/popup.nvim'
   use 'nvim-lua/plenary.nvim'
@@ -35,6 +42,8 @@ return require('packer').startup{function()
       return vim.fn.has "python3" == 1
     end,
   }
+  use 'mfussenegger/nvim-dap'
+  use "Pocco81/DAPInstall.nvim"
 
   use 'glepnir/indent-guides.nvim'
   use 'glepnir/lspsaga.nvim'
@@ -75,8 +84,11 @@ return require('packer').startup{function()
 
   -- Theme
   use 'morhetz/gruvbox'
-  use 'vim-airline/vim-airline'
-  use "tversteeg/registers.nvim"
+  use {
+    'glepnir/galaxyline.nvim',
+    branch = 'main',
+    config = function() require'config/statusline' end,
+  }
   use 'tpope/vim-eunuch'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-obsession'
@@ -106,8 +118,9 @@ return require('packer').startup{function()
   use 'preservim/vim-pencil'
 
   -- TMUX
-  use 'christoomey/vim-tmux-navigator'
-  use 'roxma/vim-tmux-clipboard'
+  use 'aserowy/tmux.nvim'
+  -- use 'christoomey/vim-tmux-navigator'
+  -- use 'roxma/vim-tmux-clipboard'
 
   use {
     'AndrewRadev/splitjoin.vim',

@@ -40,12 +40,5 @@ augroup Targets
     \ })
 augroup END
 
-
-" augroup Pencil
-"   autocmd!
-"   autocmd FileType markdown,mkd call pencil#init({'wrap': 'hard'})
-"   autocmd FileType text call pencil#init({'wrap': 'hard'})
-" augroup END
-
 command Worktree lua require("telescope").extensions.git_worktree.git_worktrees()
 command WW SudaWrite

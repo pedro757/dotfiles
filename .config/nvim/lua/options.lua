@@ -24,7 +24,7 @@ vim.o.number         = true
 vim.o.relativenumber = true
 vim.o.cursorline     = true
 vim.o.background     = 'dark'
-vim.o.showtabline    = 2
+-- vim.o.showtabline    = 2
 vim.o.showmode       = false
 vim.o.backup         = false
 vim.o.writebackup    = false
@@ -40,4 +40,7 @@ vim.o.termguicolors  = true
 vim.o.swapfile       = false
 vim.o.undodir        = '/tmp/.vim-undo-dir'
 vim.o.undofile       = true
+vim.o.foldmethod     = 'expr'
+vim.o.foldexpr       = 'nvim_treesitter#foldexpr()'
+vim.o.foldlevelstart = 20
 vim.cmd('syntax enable')

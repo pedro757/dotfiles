@@ -8,6 +8,7 @@ local xmap     = require'cartographer'.x.silent
 local nnoremap = require'cartographer'.n.nore.silent
 local inoremap = require'cartographer'.i.nore.silent
 local vnoremap = require'cartographer'.v.nore.silent
+local xnoremap = require'cartographer'.x.nore.silent
 local cnoremap = require'cartographer'.c.nore
 -- " move to text buffer
 nnoremap['<F3>'] = ':bnext<CR>'
@@ -32,6 +33,8 @@ inoremap['<A-up>']    = "<Esc>:m .-2<CR>==gi"
 vnoremap['<A-down>']  = ":m '>+1<CR>gv=gv"
 vnoremap['<A-up>']    = ":m '<-2<CR>gv=gv"
 
+xnoremap['<leader>p'] = '"_dP'
+
 -- " Ranger
 nmap['<leader>r']  = ":NvimTreeToggle<CR>"
 
@@ -53,7 +56,6 @@ nnoremap.expr['j'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'j'"
 nnoremap.expr['k'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'k'"
 nmap['n']          = "<Plug>(is-n)zz"
 nmap['N']          = "<Plug>(is-N)zz"
-nmap['<Leader>gm'] = '<Plug>(git-messenger)'
 nmap['H']          = '^'
 nmap['L']          = 'g_'
 vmap['H']          = '^'
@@ -68,10 +70,8 @@ inoremap['?']      = '?<c-g>u'
 -- " Telescope
 nnoremap['<leader>f']  = "<cmd>Telescope find_files find_command=fd,-I,--type,f,--hidden previewer=false<cr>"
 nnoremap['<leader>g']  = "<cmd>lua require'telescope.builtin'.git_files({previewer = false})<CR>"
--- " nnoremap <leader>gr <cmd>lua require'telescope.builtin'.lsp_references()<CR><c-c>
 nnoremap['<leader>s']  = "<cmd>Telescope live_grep<cr>"
 nnoremap['<leader>b']  = "<cmd>Telescope buffers<cr><c-c>"
--- " nnoremap <leader>a <cmd>lua require'telescope.builtin'.lsp_range_code_actions()<CR><c-c>
 
 -- " Snippets And Completion
 imap.expr['<Tab>']         = 'pumvisible()                 ? "\\<C-n>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "\\<TAB>"'
@@ -103,10 +103,10 @@ map['g#']  = '<Plug>(asterisk-gz#)<Plug>(is-nohl-1)'
 nnoremap['gD']          = vim.lsp.buf.declaration
 nnoremap['gd']          = vim.lsp.buf.definition
 nnoremap['gh']          = vim.lsp.buf.hover
+nnoremap['gr']  = vim.lsp.buf.references
 nnoremap['<leader>i']   = vim.lsp.buf.implementation
 nnoremap['<leader>D']   = vim.lsp.buf.type_definition
 nnoremap['<leader>rn']  = vim.lsp.buf.rename
-nnoremap['<leader>gr']  = vim.lsp.buf.references
 nnoremap['<leader>d']   = vim.lsp.diagnostic.show_line_diagnostics
 nnoremap['<leader>dn']  = vim.lsp.diagnostic.goto_next
 nnoremap['<leader>dN']  = vim.lsp.diagnostic.goto_prev
@@ -116,6 +116,7 @@ nnoremap['<leader>a']   = require('lspsaga.codeaction').code_action
 vnoremap['<leader>a']   = require('lspsaga.codeaction').range_code_action
 nnoremap['<leader>hn']  = require"gitsigns.actions".next_hunk
 nnoremap['<leader>hN']  = require"gitsigns.actions".prev_hunk
+nnoremap['<Leader>hm'] = '<Plug>(git-messenger)'
 
 nmap['gs']  = "<plug>(GrepperOperator)"
 xmap['gs']  = "<plug>(GrepperOperator)"

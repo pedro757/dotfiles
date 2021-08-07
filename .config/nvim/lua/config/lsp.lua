@@ -42,7 +42,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
-
 local servers = { "pyright", "vimls", "jsonls", "cssls", "html", "sqlls", "intelephense", "dockerls", "bashls", "yamlls", "graphql", "gopls", "svelte", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -62,7 +61,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 nvim_lsp.sumneko_lua.setup{
-  root_dir = nvim_lsp.util.root_pattern(".git", "init.vim") or nvim_lsp.util.bufdir,
+  root_dir = nvim_lsp.util.root_pattern(".git", "init.lua") or nvim_lsp.util.bufdir,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   settings = {
     Lua = {
@@ -78,6 +77,7 @@ nvim_lsp.sumneko_lua.setup{
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
+        preloadFileSize = 130,
         library = vim.api.nvim_get_runtime_file("", true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
@@ -89,27 +89,14 @@ nvim_lsp.sumneko_lua.setup{
   on_attach = on_attach,
 }
 
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- This will disable virtual text, like doing:
-    -- let g:diagnostic_enable_virtual_text = 0
-    -- virtual_text = false,
-
-    -- This is similar to:
-    -- let g:diagnostic_show_sign = 1
-    -- To configure sign display,
-    --  see: ":help vim.lsp.diagnostic.set_signs()"
     signs = false,
     underline = true,
-
     virtual_text = {
       spacing = 4,
       prefix = '●',
     },
-
-    -- This is similar to:
-    -- "let g:diagnostic_insert_delay = 1"
     update_in_insert = true,
   }
 )
@@ -141,13 +128,3 @@ vim.lsp.protocol.CompletionItemKind = {
     "   (Operator)",
     "   (TypeParameter)"
 }
-
-vim.api.nvim_exec([[
-augroup highlightsColorLsp
-  autocmd!
-  au ColorScheme * hi LspDiagnosticsDefaultHint guifg=#928374 ctermfg=245
-  au ColorScheme * hi LspDiagnosticsDefaultInfo guifg=#928374 ctermfg=245
-  au ColorScheme * hi LspDiagnosticsDefaultError guifg=#d65d0e ctermfg=red
-  au ColorScheme * hi LspDiagnosticsDefaultWarning guifg=#fabd2f ctermfg=yellow
-augroup END
-]], false)

@@ -9,20 +9,18 @@ augroup customHighlights
   au ColorScheme * hi LspSagaCodeActionBorder guifg=#587c0c guibg=#282828
   au ColorScheme * hi LspSagaCodeActionTruncateLine guifg=#587c0c guibg=#282828
   au ColorScheme * hi LspSagaCodeActionContent guifg=#587c0c guibg=#282828
-  " Registers
-  au ColorScheme * hi RegistersSeparator guibg=#3c3836 guifg=#a89984
-  au ColorScheme * hi RegistersWindow guibg=#3c3836 guifg=#a89984
-  au ColorScheme * hi RegistersContentNumber guibg=#3c3836 guifg=#a89984
-  au ColorScheme * hi RegistersContentEscaped guibg=#3c3836 guifg=#a89984
-  au ColorScheme * hi RegistersContentWhitespace guibg=#3c3836 guifg=#a89984
-  au ColorScheme * hi RegistersContentString guibg=#3c3836 guifg=#587c0c
-  au ColorScheme * hi RegistersPrefixNamed guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixUnnamed guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixSelection guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixDefault guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixDelete guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixReadOnly guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixHistory guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixYank guibg=#3c3836 guifg=#d79921
-  au ColorScheme * hi RegistersPrefixLastSearch guibg=#3c3836 guifg=#d79921
+
+  au ColorScheme * hi StatusLine guifg=#3c3836
+  au ColorScheme * hi MsgArea guifg=#bdae93
+  au ColorScheme * hi ErrorMsg guifg=#fb4934 guibg=#282828
+  au ColorScheme * hi Visual guifg=#3c3836 guibg=#ffff00
+  au ColorScheme * hi TelescopeMatching guibg=#504945
+  au ColorScheme * hi TelescopeSelection guifg=#d5cda1 guibg=#3c3836
+  au ColorScheme * hi TelescopeNormal guifg=#d5cda1
+  au ColorScheme * hi Search guifg=#3c3836 guibg=#ffff00
+
+  au ColorScheme * hi LspDiagnosticsDefaultHint guifg=#928374 ctermfg=245
+  au ColorScheme * hi LspDiagnosticsDefaultInfo guifg=#928374 ctermfg=245
+  au ColorScheme * hi LspDiagnosticsDefaultError guifg=#d65d0e ctermfg=red
+  au ColorScheme * hi LspDiagnosticsDefaultWarning guifg=#fabd2f ctermfg=yellow
 augroup end
