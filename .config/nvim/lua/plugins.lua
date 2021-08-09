@@ -118,7 +118,7 @@ return require('packer').startup{function(use)
   use 'preservim/vim-pencil'
 
   -- TMUX
-  use 'aserowy/tmux.nvim'
+  use '~/Documents/tmux'
   -- use 'christoomey/vim-tmux-navigator'
   -- use 'roxma/vim-tmux-clipboard'
 
@@ -139,6 +139,13 @@ return require('packer').startup{function(use)
     cmd = { 'SudaWrite', 'SudaRead', 'SudaEdit' }
   }
   use 'andymass/vim-matchup'
+  use {
+    "vuki656/package-info.nvim",
+    config = function ()
+      return require('package-info').setup()
+    end,
+    ft = { 'json' }
+  }
   use 'editorconfig/editorconfig-vim'
   use {
     'mattn/emmet-vim',
