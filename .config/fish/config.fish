@@ -8,6 +8,7 @@ alias la='exa --long --icons --git -a'
 alias ll='exa --long --icons --git'
 
 # set PATH /Users/MyUserName/.nvm/versions/node/v13.13.0/bin $PATH
+set PATH /home/pedro/.cargo/bin $PATH
 
 # Functions needed for !! and !$
 # Will only work in default (emacs) mode.
@@ -33,6 +34,10 @@ end
 # The bindings for !! and !$
 bind ! __history_previous_command
 bind '$' __history_previous_command_arguments
+
+# bind \cj 'history-search-forward'
+# bind \ck 'history-search-backward'
+# bind \cl 'execute'
 
 set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
