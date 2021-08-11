@@ -71,7 +71,7 @@ inoremap['?']      = '?<c-g>u'
 nnoremap['<leader>f']  = "<cmd>Telescope find_files find_command=fd,-I,--type,f,--hidden previewer=false<cr>"
 nnoremap['<leader>g']  = "<cmd>lua require'telescope.builtin'.git_files({previewer = false})<CR>"
 nnoremap['<leader>s']  = "<cmd>Telescope live_grep<cr>"
-nnoremap['<leader>b']  = "<cmd>Telescope buffers<cr><c-c>"
+nnoremap['<leader>b']  = "<cmd>Telescope buffers<cr>"
 
 -- " Snippets And Completion
 imap.expr['<Tab>']         = 'pumvisible()                 ? "\\<C-n>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "\\<TAB>"'
