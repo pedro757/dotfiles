@@ -62,7 +62,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 
 nvim_lsp.sumneko_lua.setup{
   root_dir = function(fname)
-    return nvim_lsp.util.find_git_ancestor(fname) or nvim_lsp.util.root_pattern('lua/')(fname) or nvim_lsp.util.path.dirname(fname)
+    return nvim_lsp.util.root_pattern('lua/', 'git')(fname) or nvim_lsp.util.path.dirname(fname)
   end,
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   settings = {

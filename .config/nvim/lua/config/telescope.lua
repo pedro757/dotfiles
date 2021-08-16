@@ -22,12 +22,5 @@ require('telescope').setup{
     file_ignore_patterns = { "plugged", "cache", "venv", "node_modules", ".git", "packer_compiled.lua" },
     set_env = { ['COLORTERM'] = 'truecolor' },
   },
-  -- extensions = {
-  --   fzy_native = {
-  --     override_generic_sorter = false,
-  --     override_file_sorter = true,
-  --   }
-  -- }
 }
 require("telescope").load_extension("git_worktree")
--- require('telescope').load_extension('fzy_native')
