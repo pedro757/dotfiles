@@ -15,8 +15,18 @@ require("tmux").setup({
     persist_zoom = false,
   },
 })
-require('kommentary.config').configure_language("default", {
-    prefer_single_line_comments = true,
+require('kommentary.config').configure_language("typescriptreact", {
+  hook_function = function()
+    require('ts_context_commentstring.internal').update_commentstring()
+  end,
+})
+require('kommentary.config').configure_language("javascriptreact", {
+  hook_function = function()
+    require('ts_context_commentstring.internal').update_commentstring()
+  end,
+})
+require('kommentary.config').configure_language("lua", {
+  prefer_single_line_comments = true,
 })
 require("luasnip/loaders/from_vscode").lazy_load()
 require("refactoring").setup {}

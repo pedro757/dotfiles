@@ -7,7 +7,8 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   },
   context_commentstring = {
-    enable = true
+    enable = true,
+    enable_autocmd = false,
   },
   autotag = {
     enable = true,
