@@ -118,9 +118,7 @@ return require('packer').startup{function(use)
   use 'preservim/vim-pencil'
 
   -- TMUX
-  use '~/Documents/tmux'
-  -- use 'christoomey/vim-tmux-navigator'
-  -- use 'roxma/vim-tmux-clipboard'
+  use 'aserowy/tmux.nvim'
 
   use {
     'AndrewRadev/splitjoin.vim',
