@@ -8,6 +8,9 @@ local inoremap = require'cartographer'.i.nore.silent
 local vnoremap = require'cartographer'.v.nore.silent
 local xnoremap = require'cartographer'.x.nore.silent
 local cnoremap = require'cartographer'.c.nore
+local cmp      = require'cmp'
+local comple   = require'config.completion'
+
 -- " move to text buffer
 nnoremap['<F3>'] = ':bnext<CR>'
 nnoremap['<F2>'] = ':bprevious<CR>'
@@ -77,12 +80,12 @@ smap['<c-e>']              = "luasnip#choice_active()      ? '<Plug>luasnip-next
 inoremap.expr['<c-j>']     = '("\\<C-n>")'
 inoremap.expr['<c-k>']     = '("\\<C-p>")'
 inoremap['<c-h>']          = "<left>"
-inoremap.expr['<c-l>']     = "compe#confirm({ 'keys': '<right>', 'select': v:true })"
-inoremap.expr['<CR>']      = "compe#confirm({ 'keys': luaeval(\"require'nvim-autopairs'.autopairs_cr()\"), 'select': v:true })"
-inoremap.expr['<C-Space>'] = "compe#complete()"
-inoremap.expr['<C-e>']     = "pumvisible()  ? compe#close('<C-e>') :  '<C-e>'"
-inoremap.expr['<C-f>']     = "pumvisible()  ? compe#scroll({ 'delta': +4 })  :  '<C-f>'"
-inoremap.expr['<C-d>']     = "pumvisible()  ? compe#scroll({ 'delta': -4 })  :  '<C-d>'"
+inoremap['<c-l>']          = comple.ctrl_l
+inoremap.expr['<CR>']      = comple.enter
+inoremap['<C-u>']          = comple.scroll_up
+inoremap['<C-d>']          = comple.scroll_down
+inoremap['<C-Space>']      = cmp.complete
+inoremap['<C-e>']          = cmp.close
 
 -- " QuickFixList
 nnoremap['<C-q>']      = ":call ToggleList('Location List', 'l')<CR>"
