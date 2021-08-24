@@ -10,6 +10,11 @@ npairs.setup({
 
 
 cmp.setup{
+  snippet = {
+    expand = function(args)
+      require'luasnip'.lsp_expand(args.body)
+    end
+  },
   formatting = {
     format = function(_, vim_item)
       vim_item.kind = lspkind.presets.default[vim_item.kind] ..' '.. vim_item.kind
@@ -18,8 +23,11 @@ cmp.setup{
   },
   sources = {
     { name = 'buffer' },
+    { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
+    { name = 'luasnip' },
+    -- { name = 'emoji' },
   },
 }
 
