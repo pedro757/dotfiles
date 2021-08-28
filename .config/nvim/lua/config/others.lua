@@ -15,16 +15,16 @@ require("tmux").setup({
     persist_zoom = false,
   },
 })
-require('kommentary.config').configure_language("typescriptreact", {
+require('kommentary.config').configure_language({"typescriptreact", "javascriptreact"}, {
   hook_function = function()
     require('ts_context_commentstring.internal').update_commentstring()
   end,
 })
-require('kommentary.config').configure_language("javascriptreact", {
-  hook_function = function()
-    require('ts_context_commentstring.internal').update_commentstring()
-  end,
-})
+-- require('kommentary.config').configure_language("javascriptreact", {
+--   hook_function = function()
+--     require('ts_context_commentstring.internal').update_commentstring()
+--   end,
+-- })
 require('kommentary.config').configure_language("lua", {
   prefer_single_line_comments = true,
 })

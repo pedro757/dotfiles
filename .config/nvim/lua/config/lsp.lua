@@ -1,4 +1,6 @@
 local nvim_lsp = require('lspconfig')
+local configs = require'lspconfig/configs'
+
 require"lspsaga".init_lsp_saga({
   code_action_keys = {
     quit = { "q", "<C-c>", "<esc>", "<C-x>"},
@@ -58,6 +60,21 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
+
+if not nvim_lsp.emmet_ls then
+  configs.emmet_ls = {
+    default_config = {
+      cmd = {'emmet-ls', '--stdio'};
+      filetypes = {'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact'};
+      root_dir = function()
+        return vim.loop.cwd()
+      end;
+      settings = {};
+    };
+  }
+end
+
+nvim_lsp.emmet_ls.setup{ capabilities = capabilities }
 
 local sumneko_root_path = '/home/pedro/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/Linux/lua-language-server"
