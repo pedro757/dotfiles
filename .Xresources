@@ -4,6 +4,9 @@ XTerm*maximize: true
 xterm*metaSendsEscape: true
 XTerm*ptyInitialErase: true
 XTerm*backarrowKeyIsErase: true
+XTerm*vt100.translations: #override \
+  Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+  Shift Ctrl <Key> V: insert-selection(CLIPBOARD)
 xterm*Background: #282828
 xterm*Foreground: #ebdbb2
 ! hard contrast: *background: #1d2021
