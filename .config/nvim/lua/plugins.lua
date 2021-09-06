@@ -43,7 +43,8 @@ return require('packer').startup{function(use)
     end,
   }
   use 'mfussenegger/nvim-dap'
-  use "Pocco81/DAPInstall.nvim"
+  use 'Pocco81/DAPInstall.nvim'
+  use 'rcarriga/nvim-dap-ui'
 
   use 'glepnir/indent-guides.nvim'
   use 'glepnir/lspsaga.nvim'
@@ -154,10 +155,6 @@ return require('packer').startup{function(use)
     ft = { 'json' }
   }
   use 'editorconfig/editorconfig-vim'
-  use {
-    'mattn/emmet-vim',
-    ft = { 'html', 'typescriptreact', 'javascriptreact', 'javascript', 'markdown' }
-  }
   use 'machakann/vim-sandwich'
   use 'wellle/targets.vim'
 end,

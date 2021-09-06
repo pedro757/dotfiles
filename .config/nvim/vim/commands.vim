@@ -23,10 +23,10 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 140})
 augroup END
 
-augroup AutoFormating
-  autocmd!
-  autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js Neoformat
-augroup END
+" augroup AutoFormating
+"   autocmd!
+"   autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js Neoformat
+" augroup END
 
 augroup AutoCompile
   autocmd!

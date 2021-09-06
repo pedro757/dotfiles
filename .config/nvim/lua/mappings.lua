@@ -69,11 +69,12 @@ nnoremap['<leader>f']  = "<cmd>lua require'telescope.builtin'.fd({ previewer = f
 nnoremap['<leader>g']  = "<cmd>lua require'telescope.builtin'.git_files({previewer = false})<CR>"
 nnoremap['<leader>s']  = "<cmd>Telescope live_grep<cr>"
 nnoremap['<leader>b']  = "<cmd>Telescope buffers<cr>"
+vnoremap['<leader>r']  = require'config.telescope'.refactors
 
 -- " Snippets And Completion
 imap.expr['<Tab>']         = 'pumvisible()                 ? "\\<C-n>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "\\<TAB>"'
 smap.expr['<Tab>']         = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"'
-imap.expr['<S-Tab>']       = 'pumvisible()                 ? "\\<C-p>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-jump-prev"      : "\\<TAB>"'
+imap.expr['<S-Tab>']       = 'pumvisible()                 ? "\\<C-p>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-jump-prev"      : "\\<S-TAB>"'
 smap.expr['<S-Tab>']       = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-jump-prev"      : "<S-Tab>"'
 imap['<c-e>']              = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
 smap['<c-e>']              = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
