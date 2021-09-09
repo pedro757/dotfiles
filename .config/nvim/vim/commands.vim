@@ -23,6 +23,16 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 140})
 augroup END
 
+augroup luaSources
+  autocmd!
+  autocmd FileType lua lua require'cmp'.setup.buffer {
+\   sources = {
+\     { name = 'nvim_lua' },
+\     { name = 'buffer' },
+\   },
+\ }
+augroup END
+
 " augroup AutoFormating
 "   autocmd!
 "   autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js Neoformat

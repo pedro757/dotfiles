@@ -5,7 +5,6 @@ local cmp = require('cmp')
 npairs.setup({
   check_ts = true,
   ignored_next_char = string.gsub([[ [%%%'%[%"%.] ]],"%s+", ""),
-  -- fast_wrap = {},
 })
 
 
@@ -22,9 +21,8 @@ cmp.setup{
     end
   },
   sources = {
-    { name = 'buffer' },
     { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
+    { name = 'buffer' },
     { name = 'path' },
     { name = 'luasnip' },
     -- { name = 'emoji' },
