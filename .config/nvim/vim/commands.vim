@@ -29,6 +29,8 @@ augroup luaSources
 \   sources = {
 \     { name = 'nvim_lua' },
 \     { name = 'buffer' },
+\     { name = 'path' },
+\     { name = 'luasnip' },
 \   },
 \ }
 augroup END
