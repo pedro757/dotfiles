@@ -46,7 +46,8 @@ return require('packer').startup{function(use)
   use 'Pocco81/DAPInstall.nvim'
   use 'rcarriga/nvim-dap-ui'
 
-  use 'glepnir/indent-guides.nvim'
+  -- use 'glepnir/indent-guides.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
   use 'glepnir/lspsaga.nvim'
 
   -- COMPLETION
