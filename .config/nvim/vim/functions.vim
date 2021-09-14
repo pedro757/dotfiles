@@ -22,7 +22,6 @@ function! AddEmptyLineAbove()
   let &scrolloff = l:scrolloffsave
 endfunction
 
-" autocmd BufWritePre * %s/\s\+$//e
 function! TrimWhitespace()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e
@@ -45,9 +44,9 @@ function! ToggleList(bufname, pfx)
     endif
   endfor
   if a:pfx == 'l' && len(getloclist(0)) == 0
-      ""echohl ErrorMsg
-      echo "Location List is Empty."
-      return
+    ""echohl ErrorMsg
+    echo "Location List is Empty."
+    return
   endif
   if a:pfx == 'l'
     lopen
