@@ -51,8 +51,8 @@ gls.left[5] = {
   FilePath = {
     provider = function ()
       local file = ''
-      if vim.bo.filetype ~= '' and vim.fn.expand('%') ~= '' then
-        file = vim.fn.expand('%'):gsub(vim.fn.expand('%:t'), '')
+      if vim.fn.expand('%') ~= '' then
+        file = vim.fn.expand('%'):gsub(vim.fn.expand('%:t'):gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1"), '')
       else
         file = vim.fn.getcwd() .. ' '
         if vim.bo.modified then
