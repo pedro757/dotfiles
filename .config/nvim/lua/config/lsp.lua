@@ -61,11 +61,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-if not nvim_lsp.emmet_ls then
-  configs.emmet_ls = {
+if not nvim_lsp.ls_emmet then
+  configs.ls_emmet = {
     default_config = {
-      cmd = {'emmet-ls', '--stdio'};
-      filetypes = {'html', 'css', 'javascript', 'javascriptreact', 'typescriptreact'};
+      cmd = {'ls_emmet', '--stdio'};
+      filetypes = { 'html', 'css', 'scss', 'sass', 'javascript', 'javascriptreact', 'typescriptreact', 'markdown' };
       root_dir = function()
         return vim.loop.cwd()
       end;
@@ -74,7 +74,7 @@ if not nvim_lsp.emmet_ls then
   }
 end
 
-nvim_lsp.emmet_ls.setup{ capabilities = capabilities }
+nvim_lsp.ls_emmet.setup{ capabilities = capabilities }
 
 local sumneko_root_path = '/home/pedro/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/Linux/lua-language-server"
