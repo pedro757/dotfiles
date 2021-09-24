@@ -42,4 +42,5 @@ bind '$' __history_previous_command_arguments
 set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
 
-set --global tide_prompt_char_icon ➜
+set --global tide_character_icon " ➜"
+set --global tide_prompt_add_newline_before false
