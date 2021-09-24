@@ -1,5 +1,5 @@
 vim.g.mapleader      = ' '
-vim.o.cot            = 'menuone,noselect'
+vim.o.cot            = 'menu,menuone,noselect'
 vim.o.shm            = 'filnxtToOFc'
 vim.o.hidden         = true
 vim.o.wrap           = false
