@@ -23,3 +23,6 @@ yaml-language-server ls_emmet`
 `python2 -m pip install --user --upgrade pynvim`
 
 `python3 -m pip install --user --upgrade pynvim`
+
+## Install
+`cd ~ && git clone https://github.com/pedro757/dotfiles.git`
