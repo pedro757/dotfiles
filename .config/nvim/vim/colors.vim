@@ -24,6 +24,6 @@ augroup customHighlights
   au ColorScheme * hi LspDiagnosticsDefaultError guifg=#d65d0e ctermfg=red
   au ColorScheme * hi LspDiagnosticsDefaultWarning guifg=#fabd2f ctermfg=yellow
 
-  au ColorScheme * hi IndentBlanklineChar guifg=#323232 gui=nocombine
-  au ColorScheme * hi IndentBlanklineContextChar guifg=#404040 gui=nocombine
+  au ColorScheme * hi IndentBlanklineChar guifg=#343434 gui=nocombine
+  au ColorScheme * hi IndentBlanklineContextChar guifg=#424242 gui=nocombine
 augroup end
