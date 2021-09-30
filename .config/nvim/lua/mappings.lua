@@ -10,6 +10,7 @@ local xnoremap = require'cartographer'.x.nore.silent
 local cnoremap = require'cartographer'.c.nore
 local cmp      = require'cmp'
 local comple   = require'config.completion'
+local dap      = require'config.dap'
 
 -- " move to text buffer
 nnoremap['<F3>'] = ':bnext<CR>'
@@ -118,3 +119,8 @@ nnoremap['<Leader>hm'] = '<Plug>(git-messenger)'
 
 nmap['gs']  = "<plug>(GrepperOperator)"
 xmap['gs']  = "<plug>(GrepperOperator)"
+
+nnoremap['<leader>dd']  = require'dapui'.toggle
+nnoremap['<leader>db']  = require'dap'.toggle_breakpoint
+nnoremap['<leader>da']  = dap.attach
+
