@@ -5,13 +5,10 @@ local dbg_list = di_api.get_installed_debuggers()
 local function attach()
 	print("attaching")
 	dap.run({
+		name = "Attach to process",
 		type = "node2",
 		request = "attach",
 		pid = require'dap.utils'.pick_process,
-		cwd = vim.fn.getcwd(),
-		sourceMaps = true,
-		protocol = "inspector",
-		skipFiles = { "<node_internals>/**/*.js" }
 	})
 end
 
