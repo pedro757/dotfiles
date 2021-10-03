@@ -8,10 +8,6 @@ vim.g.rnvimr_ex_enable = 1
 vim.g.matchup_matchparen_offscreen = { method = 'popup', fullwidth = 1 }
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_side = 'right'
-vim.g.nvim_tree_bindings = {
-  { key = {"l"}, cb = require'nvim-tree.config'.nvim_tree_callback("edit") },
-  { key = { 'h' }, cb = require'nvim-tree.config'.nvim_tree_callback('close_node')}
-}
 vim.g.registers_window_border = "solid"
 vim.g.registers_hide_only_whitespace = 1
 vim.g.indent_blankline_show_first_indent_level = false

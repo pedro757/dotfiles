@@ -1,5 +1,15 @@
 require'colorizer'.setup()
 require'nvim-web-devicons'.setup()
+require'nvim-tree'.setup{
+	view = {
+		mappings = {
+			list = {
+				{ key = { 'l' }, cb = require'nvim-tree.config'.nvim_tree_callback("edit") },
+				{ key = { 'h' }, cb = require'nvim-tree.config'.nvim_tree_callback('close_node')}
+			}
+		}
+	}
+}
 require("indent_blankline").setup {
   char = "▏",
   show_current_context = true,
