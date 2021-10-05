@@ -111,10 +111,10 @@ nnoremap['<leader>dn'] = vim.lsp.diagnostic.goto_next
 nnoremap['<leader>dN'] = vim.lsp.diagnostic.goto_prev
 nnoremap['<leader>dq'] = vim.lsp.diagnostic.set_loclist
 nnoremap['<leader>=']  = vim.lsp.buf.formatting
-nnoremap['<leader>a']  = require('lspsaga.codeaction').code_action
-vnoremap['<leader>a']  = require('lspsaga.codeaction').range_code_action
-nnoremap['<leader>hn'] = require"gitsigns.actions".next_hunk
-nnoremap['<leader>hN'] = require"gitsigns.actions".prev_hunk
+nnoremap['<leader>a']  = require'lspsaga.codeaction'.code_action
+vnoremap['<leader>a']  = require'lspsaga.codeaction'.range_code_action
+nnoremap['<leader>hn'] = require'gitsigns.actions'.next_hunk
+nnoremap['<leader>hN'] = require'gitsigns.actions'.prev_hunk
 nnoremap['<Leader>hm'] = '<Plug>(git-messenger)'
 
 nmap['gs']  = "<plug>(GrepperOperator)"
@@ -123,4 +123,4 @@ xmap['gs']  = "<plug>(GrepperOperator)"
 nnoremap['<leader>dd']  = require'dapui'.toggle
 nnoremap['<leader>db']  = require'dap'.toggle_breakpoint
 nnoremap['<leader>da']  = dap.attach
-
+nnoremap['<leader>ds']  = require"dap".step_over
