@@ -19,7 +19,7 @@ require('telescope').setup{
         ["<C-k>"] = actions.move_selection_previous
       }
     },
-    file_ignore_patterns = { "plugged", "cache", "venv", "node_modules", ".git/", "packer_compiled.lua" },
+    file_ignore_patterns = { "plugged", "cache", "venv", ".venv", "node_modules", ".git/", "packer_compiled.lua" },
     set_env = { ['COLORTERM'] = 'truecolor' },
   },
 }
