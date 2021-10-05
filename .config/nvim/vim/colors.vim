@@ -20,10 +20,15 @@ augroup customHighlights
   au ColorScheme * hi Search guifg=#3c3836 guibg=#ffff00
 
   au ColorScheme * hi LspDiagnosticsDefaultHint guifg=#928374 ctermfg=245
+  au ColorScheme * hi DiagnosticHint guifg=#928374 ctermfg=245
   au ColorScheme * hi LspDiagnosticsDefaultInfo guifg=#928374 ctermfg=245
+  au ColorScheme * hi LspDiagnosticsDefaultInformation guifg=#928374 ctermfg=245
+  au ColorScheme * hi DiagnosticInfo guifg=#928374 ctermfg=245
   au ColorScheme * hi LspDiagnosticsDefaultError guifg=#d65d0e ctermfg=red
+  au ColorScheme * hi DiagnosticError guifg=#d65d0e ctermfg=red
   au ColorScheme * hi LspDiagnosticsDefaultWarning guifg=#fabd2f ctermfg=yellow
+  au ColorScheme * hi DiagnosticWarning guifg=#fabd2f ctermfg=yellow
 
   au ColorScheme * hi IndentBlanklineChar guifg=#363636 gui=nocombine
-  au ColorScheme * hi IndentBlanklineContextChar guifg=#444444 gui=nocombine
+  au ColorScheme * hi IndentBlanklineContextChar guifg=#464646 gui=nocombine
 augroup end
