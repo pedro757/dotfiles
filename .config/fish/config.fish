@@ -8,7 +8,7 @@ alias la='exa --long --icons --git -a'
 alias ll='exa --long --icons --git'
 
 # set PATH /Users/MyUserName/.nvm/versions/node/v13.13.0/bin $PATH
-set PATH /home/pedro/.cargo/bin $PATH
+set PATH $HOME/.cargo/bin $PATH
 
 # Functions needed for !! and !$
 # Will only work in default (emacs) mode.
