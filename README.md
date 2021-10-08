@@ -4,11 +4,22 @@ These are my configs files. I use arch an based linux, basically my development 
 ## Requirements
 Run these commands in a bash shell:
 
+## Install
+`cd ~ && git clone https://github.com/pedro757/dotfiles.git .dotfiles/`
+
+`alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME/'`
+
+`dotfiles checkout -f`
+
 #### Installing linux programs
 > Make sure your linux distro use `pacman`, otherwise install these programs with your favorite package manager
 
 `sudo pacman -S fish rigrep fd bat fzf kitty alacritty gopls neovim-nightly-bin tmux nvm xclip ranger exa`
 
+#### Installing fish plugins
+`curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher`
+
+`fisher update`
 
 #### Installing npm packages
 > Most of them are neovim language servers
@@ -23,6 +34,3 @@ yaml-language-server ls_emmet`
 `python2 -m pip install --user --upgrade pynvim`
 
 `python3 -m pip install --user --upgrade pynvim`
-
-## Install
-`cd ~ && git clone https://github.com/pedro757/dotfiles.git`
