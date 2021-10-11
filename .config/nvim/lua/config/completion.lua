@@ -7,7 +7,6 @@ npairs.setup({
   ignored_next_char = string.gsub([[ [%%%'%[%"%.] ]],"%s+", ""),
 })
 
-
 cmp.setup{
   snippet = {
     expand = function(args)
@@ -32,7 +31,7 @@ cmp.setup{
 M = {}
 
 M.ctrl_l = function()
-  if vim.fn.pumvisible() == 1 then
+  if cmp.visible() then
     return cmp.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -41,8 +40,9 @@ M.ctrl_l = function()
     return vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<right>', true, true, true))
   end
 end
+
 M.enter = function()
-  if vim.fn.pumvisible() == 1 then
+  if cmp.visible() then
     return cmp.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -52,7 +52,7 @@ M.enter = function()
   end
 end
 M.scroll_down = function()
-  if vim.fn.pumvisible() == 1 then
+  if cmp.visible() then
     return cmp.scroll_docs(-4)
   else
     return vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<c-d>', true, true, true))
@@ -60,7 +60,7 @@ M.scroll_down = function()
 end
 
 M.scroll_up = function()
-  if vim.fn.pumvisible() == 1 then
+  if cmp.visible() then
     return cmp.scroll_docs(4)
   else
     return vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<c-u>', true, true, true))
