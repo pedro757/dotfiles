@@ -48,8 +48,7 @@ cnoremap['<C-A>']       = '<Home>'
 cnoremap.expr['<C-k>']  = 'pumvisible() ? "\\<C-p>" : "<Up>"'
 cnoremap.expr['<C-j>']  = 'pumvisible() ? "\\<C-n>" : "<Down>"'
 cnoremap['<C-l>']       = '<CR>'
-
-vim.cmd('nnoremap <leader>c :<BS>')
+require'cartographer'.n.nore['<leader>c'] = ':<BS>'
 -- Vim Defaults
 nnoremap['Y']      = "y$"
 inoremap['<C-c>']  = "<Esc>"
