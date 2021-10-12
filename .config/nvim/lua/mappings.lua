@@ -78,15 +78,16 @@ imap.expr['<S-Tab>']  = 'pumvisible()                 ? "\\<C-p>"               
 smap.expr['<S-Tab>']  = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-jump-prev"      : "<S-Tab>"'
 imap['<c-e>']         = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
 smap['<c-e>']         = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
-inoremap['<c-j>']     = '<C-n>'
-inoremap['<c-k>']     = '<C-p>'
 inoremap['<c-h>']     = "<left>"
+inoremap['<c-k>']     = comple.prev
+inoremap['<c-j>']     = comple.next
 inoremap['<c-l>']     = comple.ctrl_l
 inoremap.expr['<CR>'] = comple.enter
 inoremap['<C-u>']     = comple.scroll_up
 inoremap['<C-d>']     = comple.scroll_down
 inoremap['<C-Space>'] = cmp.complete
 inoremap['<C-e>']     = cmp.close
+inoremap['<C-x>']     = cmp.close
 
 -- " QuickFixList
 nnoremap['<C-q>']      = ":call ToggleList('Location List', 'l')<CR>"

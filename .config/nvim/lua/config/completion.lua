@@ -37,7 +37,7 @@ M.ctrl_l = function()
       select = true,
     })
   else
-    return vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<right>', true, true, true))
+    return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<right>', true, true, true), "i", true)
   end
 end
 
@@ -55,7 +55,7 @@ M.scroll_down = function()
   if cmp.visible() then
     return cmp.scroll_docs(-4)
   else
-    return vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<c-d>', true, true, true))
+    return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-d>', true, true, true), "i", true)
   end
 end
 
@@ -63,7 +63,23 @@ M.scroll_up = function()
   if cmp.visible() then
     return cmp.scroll_docs(4)
   else
-    return vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<c-u>', true, true, true))
+    return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<c-u>', true, true, true), "i", true)
+  end
+end
+
+M.next = function()
+  if cmp.visible() then
+    cmp.select_next_item(cmp.SelectBehavior.Insert)
+  else
+    return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-j>', true, false, true), "i", true)
+  end
+end
+
+M.prev = function()
+  if cmp.visible() then
+    cmp.select_prev_item(cmp.SelectBehavior.Insert)
+  else
+    return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-k>', true, false, true), "i", true)
   end
 end
 
