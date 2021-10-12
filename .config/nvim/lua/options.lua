@@ -43,4 +43,5 @@ vim.o.undofile       = true
 vim.o.foldmethod     = 'expr'
 vim.o.foldexpr       = 'nvim_treesitter#foldexpr()'
 vim.o.foldlevelstart = 20
+vim.o.lazyredraw     = true
 vim.cmd('syntax enable')
