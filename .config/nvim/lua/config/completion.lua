@@ -14,17 +14,13 @@ cmp.setup{
     end
   },
   formatting = {
-    format = function(_, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind] ..' '.. vim_item.kind
-      return vim_item
-    end
+    format = lspkind.cmp_format(),
   },
   sources = {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'path' },
     { name = 'luasnip' },
-    -- { name = 'emoji' },
   },
 }
 
