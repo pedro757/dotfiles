@@ -124,3 +124,5 @@ nnoremap['<leader>dd']  = require'dapui'.toggle
 nnoremap['<leader>db']  = require'dap'.toggle_breakpoint
 nnoremap['<leader>da']  = dap.attach
 nnoremap['<leader>ds']  = require"dap".step_over
+nnoremap['<leader>di']  = require"dap".step_into
+nnoremap['<leader>do']  = require"dap".step_out
