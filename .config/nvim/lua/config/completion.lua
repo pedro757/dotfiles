@@ -24,15 +24,32 @@ cmp.setup{
   },
 }
 
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
 M = {}
 
 M.ctrl_l = function()
+  local mode = vim.api.nvim_get_mode()
   if cmp.visible() then
     return cmp.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     })
   else
+    if mode.mode == "c" then
+      return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<CR>', true, true, true), "i", true)
+    end
     return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<right>', true, true, true), "i", true)
   end
 end
