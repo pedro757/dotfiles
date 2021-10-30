@@ -45,9 +45,6 @@ nmap['<S-Enter>']  = ":call AddEmptyLineAbove()<CR>"
 nmap['<CR>']       = ":call AddEmptyLineBelow()<CR>"
 
 cnoremap['<C-A>']       = '<Home>'
-cnoremap.expr['<C-k>']  = 'pumvisible() ? "\\<C-p>" : "<Up>"'
-cnoremap.expr['<C-j>']  = 'pumvisible() ? "\\<C-n>" : "<Down>"'
-cnoremap['<C-l>']       = '<CR>'
 require'cartographer'.n.nore['<leader>c'] = ':<BS>'
 -- Vim Defaults
 nnoremap['Y']      = "y$"
