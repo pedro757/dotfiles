@@ -38,7 +38,7 @@ vnoremap['<A-up>']    = ":m '<-2<CR>gv=gv"
 xnoremap['<leader>p'] = '"_dP'
 
 -- " Ranger
-nmap['<leader>r']  = ":NvimTreeToggle<CR>"
+nmap['<leader>e']  = ":NvimTreeToggle<CR>"
 
 -- " New Line Pressing Enter
 nmap['<S-Enter>']  = ":call AddEmptyLineAbove()<CR>"
