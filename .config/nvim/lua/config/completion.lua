@@ -45,7 +45,12 @@ M.ctrl_l = function()
     return cmp.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    })
+    },
+      function()
+	if mode.mode == "c" then
+	  return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<CR>', true, true, true), "i", true)
+	end
+      end)
   else
     if mode.mode == "c" then
       return vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<CR>', true, true, true), "i", true)
