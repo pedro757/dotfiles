@@ -154,7 +154,8 @@ return require('packer').startup{function(use)
     config = function ()
       return require('package-info').setup()
     end,
-    ft = { 'json' }
+    ft = { 'json' },
+    requires = "MunifTanjim/nui.nvim",
   }
   use 'editorconfig/editorconfig-vim'
   use 'machakann/vim-sandwich'
