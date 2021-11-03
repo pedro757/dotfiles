@@ -23,6 +23,7 @@ require('telescope').setup{
     set_env = { ['COLORTERM'] = 'truecolor' },
   },
 }
+require('telescope').load_extension('projects')
 require("telescope").load_extension("git_worktree")
 
 local refactor = require("refactoring")

@@ -27,7 +27,7 @@ return require('packer').startup{function(use)
   use 'nacro90/numb.nvim'
   use 'jghauser/mkdir.nvim'
   use 'mhinz/vim-grepper'
-  use 'ahmedkhalf/lsp-rooter.nvim'
+  use 'ahmedkhalf/project.nvim'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ThePrimeagen/git-worktree.nvim'
   use 'b3nj5m1n/kommentary'

@@ -8,6 +8,7 @@ vim.g.rnvimr_ex_enable = 1
 vim.g.matchup_matchparen_offscreen = { method = 'popup', fullwidth = 1 }
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_side = 'right'
+vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.registers_window_border = "solid"
 vim.g.registers_hide_only_whitespace = 1
 vim.g.indent_blankline_show_first_indent_level = false
