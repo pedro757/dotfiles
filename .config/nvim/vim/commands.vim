@@ -31,6 +31,7 @@ augroup luaSources
 \     { name = 'buffer' },
 \     { name = 'path' },
 \     { name = 'luasnip' },
+\     { name = 'rg' }
 \   },
 \ }
 augroup END

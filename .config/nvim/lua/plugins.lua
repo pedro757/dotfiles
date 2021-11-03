@@ -57,6 +57,7 @@ return require('packer').startup{function(use)
   use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'lukas-reineke/cmp-rg'
   -- use 'hrsh7th/cmp-emoji'
   use 'saadparwaiz1/cmp_luasnip'
   use 'onsails/lspkind-nvim'

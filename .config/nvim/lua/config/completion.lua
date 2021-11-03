@@ -21,6 +21,7 @@ cmp.setup{
     { name = 'buffer' },
     { name = 'path' },
     { name = 'luasnip' },
+    { name = 'rg' }
   },
 }
 
