@@ -106,6 +106,20 @@ gls.left[10] = {
   }
 }
 
+gls.left[10] = {
+  PackageInfoStatus = {
+    provider = function()
+      return require("package-info").get_status()
+    end,
+    condition = function()
+      if vim.fn.expand("%") == 'package.json' then
+        return true
+      end
+    end,
+    highlight = {mycolors.fg,mycolors.bg},
+  }
+}
+
 gls.mid[1] = {
   ShowLspClient = {
     provider = 'GetLspClient',
