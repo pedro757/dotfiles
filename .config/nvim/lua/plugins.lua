@@ -48,7 +48,7 @@ return require('packer').startup{function(use)
 
   -- use 'glepnir/indent-guides.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
-  use 'glepnir/lspsaga.nvim'
+  use 'tami5/lspsaga.nvim'
 
   -- COMPLETION
   use 'hrsh7th/nvim-cmp'
