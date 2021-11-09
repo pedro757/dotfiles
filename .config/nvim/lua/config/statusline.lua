@@ -184,8 +184,8 @@ gls.right[5] = {
 
 gls.right[6] = {
   PerCent = {
-    provider = function ()
-      return fileinfo.current_line_percent() .. ' '
+    provider = function()
+      return fileinfo.current_line_percent() .. ' ' .. vim.fn.col(".") .. "  "
     end,
     highlight = {mycolors.fg,mycolors.bg,'bold'},
     separator = ' ',
