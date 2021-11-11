@@ -33,3 +33,4 @@ augroup customHighlights
   au ColorScheme * hi IndentBlanklineContextChar guifg=#464646 gui=nocombine
   au ColorScheme * hi MatchParen guibg=#3c3836
 augroup end
+colorscheme gruvbox

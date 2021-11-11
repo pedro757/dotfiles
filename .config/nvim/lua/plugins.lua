@@ -32,11 +32,18 @@ return require('packer').startup{function(use)
   use 'ThePrimeagen/git-worktree.nvim'
   use 'b3nj5m1n/kommentary'
   -- DEBUG
-  use { 'michaelb/sniprun', run = 'install.sh'}
+  -- use { 'michaelb/sniprun', run = 'install.sh'}
   use 'Iron-E/nvim-cartographer'
   use {
+    "vim-test/vim-test",
+    keys = { '<space>tt', '<space>tf', '<space>tl', '<space>ts', '<space>tv'},
+    cond = function()
+      return vim.fn.has "python3" == 1
+    end,
+  }
+  use {
     "rcarriga/vim-ultest",
-    requires = {"vim-test/vim-test"},
+    keys = { '<space>tt', '<space>tf', '<space>tl', '<space>ts', '<space>tv'},
     run = ":UpdateRemotePlugins",
     cond = function()
       return vim.fn.has "python3" == 1
@@ -66,7 +73,10 @@ return require('packer').startup{function(use)
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'nvim-treesitter/playground'
+  use {
+    'nvim-treesitter/playground',
+    cmd = { 'TSPlaygroundToggle' },
+  }
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'windwp/nvim-ts-autotag'
   use 'windwp/nvim-autopairs'
@@ -100,13 +110,11 @@ return require('packer').startup{function(use)
   use {
     'glepnir/galaxyline.nvim',
     branch = 'main',
-    config = function() require'config/statusline' end,
   }
   use 'tpope/vim-eunuch'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-obsession'
   use 'tpope/vim-repeat'
-  use 'tpope/vim-sensible'
   use 'tpope/vim-sleuth'
   use {
     'tpope/vim-characterize',
@@ -161,10 +169,14 @@ return require('packer').startup{function(use)
   use 'editorconfig/editorconfig-vim'
   use 'machakann/vim-sandwich'
   use 'wellle/targets.vim'
+  use 'lewis6991/impatient.nvim'
+  use 'dstein64/vim-startuptime'
+  use 'nathom/filetype.nvim'
 end,
   config = {
     display = {
       open_fn = require('packer.util').float,
-    }
+    },
+    compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
   }
 }

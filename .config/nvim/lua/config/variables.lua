@@ -12,6 +12,7 @@ vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.registers_window_border = "solid"
 vim.g.registers_hide_only_whitespace = 1
 vim.g.indent_blankline_show_first_indent_level = false
+vim.g.did_load_filetypes = 1
 -- vim.g.targets_seekRanges = 'cc cr cb cB lc ac Ac lr lb ar ab lB Ar aB Ab AB rr ll rb al rB Al bb aa bB Aa BB AA'
 -- vim.g.targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll lb ar ab lB Ar aB Ab AB rb al rB Al bb aa bB Aa BB AA'
 -- vim.g.targets_seekRanges = 'cc cr cb cB lc ac Ac lr rr ll lb ar ab lB Ar aB Ab AB rb rB al Al'

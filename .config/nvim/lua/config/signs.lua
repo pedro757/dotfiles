@@ -1,9 +1,5 @@
--- " Git Signs
--- let g:signify_sign_change = '~'
-
 require('gitsigns').setup({
   signs = {
-    -- TODO add hl to colorscheme
     add          = {hl = 'GitSignsAdd'   , text = '▎', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
     change       = {hl = 'GitSignsChange', text = '▎', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
     delete       = {hl = 'GitSignsDelete', text = '契', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
