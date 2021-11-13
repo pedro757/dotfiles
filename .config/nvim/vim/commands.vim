@@ -1,10 +1,6 @@
-if !isdirectory("/tmp/.vim-undo-dir")
-  call mkdir("/tmp/.vim-undo-dir", "", 0700)
-endif
-
 augroup StopNewlineComments
   autocmd!
-  autocmd FileType * setlocal formatoptions-=cro
+  au BufEnter * set formatoptions-=cro
 augroup END
 
 augroup TrimSpaces
@@ -35,11 +31,6 @@ augroup luaSources
 \   },
 \ }
 augroup END
-
-" augroup AutoFormating
-"   autocmd!
-"   autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js Neoformat
-" augroup END
 
 augroup AutoCompile
   autocmd!

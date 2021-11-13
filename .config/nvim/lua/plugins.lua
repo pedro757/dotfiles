@@ -53,7 +53,6 @@ return require('packer').startup{function(use)
   use 'Pocco81/DAPInstall.nvim'
   use 'rcarriga/nvim-dap-ui'
 
-  -- use 'glepnir/indent-guides.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'tami5/lspsaga.nvim'
 
@@ -61,7 +60,7 @@ return require('packer').startup{function(use)
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-nvim-lua'
+  use { 'hrsh7th/cmp-nvim-lua', ft = { 'lua' } }
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'lukas-reineke/cmp-rg'
