@@ -1,4 +1,6 @@
 require('plugins')
+require('impatient')
+require('packer_compiled')
 require('config.variables')
 require('options')
 require('mappings')

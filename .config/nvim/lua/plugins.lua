@@ -26,7 +26,11 @@ return require('packer').startup{function(use)
   }
   use 'nacro90/numb.nvim'
   use 'jghauser/mkdir.nvim'
-  use 'mhinz/vim-grepper'
+  use {
+    'mhinz/vim-grepper',
+    cmd = { 'Grepper', 'GrepperRg', 'GrepperAg', 'GrepperGrep' },
+    keys = '<plug>(GrepperOperator)',
+  }
   use 'ahmedkhalf/project.nvim'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ThePrimeagen/git-worktree.nvim'
@@ -52,15 +56,13 @@ return require('packer').startup{function(use)
   use 'mfussenegger/nvim-dap'
   use 'Pocco81/DAPInstall.nvim'
   use 'rcarriga/nvim-dap-ui'
-
   use 'lukas-reineke/indent-blankline.nvim'
   use 'tami5/lspsaga.nvim'
-
   -- COMPLETION
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-buffer'
-  use { 'hrsh7th/cmp-nvim-lua', ft = { 'lua' } }
+  use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'lukas-reineke/cmp-rg'
@@ -135,7 +137,10 @@ return require('packer').startup{function(use)
     requires = { 'folke/twilight.nvim' },
     cmd = { 'ZenMode' }
   }
-  use 'preservim/vim-pencil'
+  use {
+    'preservim/vim-pencil',
+    cmd = { 'Pencil', 'TogglePencil', 'PencilSoft', 'PencilHard', 'HardPencil', 'SoftPencil' },
+  }
 
   -- TMUX
   use 'aserowy/tmux.nvim'
@@ -158,12 +163,15 @@ return require('packer').startup{function(use)
   }
   use 'andymass/vim-matchup'
   use {
+    'MunifTanjim/nui.nvim',
+    ft = { 'json' }
+  }
+  use {
     "vuki656/package-info.nvim",
     config = function ()
       return require('package-info').setup()
     end,
     ft = { 'json' },
-    requires = "MunifTanjim/nui.nvim",
   }
   use 'editorconfig/editorconfig-vim'
   use 'machakann/vim-sandwich'
