@@ -27,7 +27,7 @@ require('telescope').load_extension('projects')
 require("telescope").load_extension("git_worktree")
 
 local refactor = require("refactoring")
-refactor.setup()
+refactor.setup({})
 
 -- telescope refactoring helper
 local function refactor(prompt_bufnr)

@@ -163,21 +163,33 @@ return require('packer').startup{function(use)
   }
   use 'andymass/vim-matchup'
   use {
-    'MunifTanjim/nui.nvim',
-    ft = { 'json' }
-  }
-  use {
     "vuki656/package-info.nvim",
     config = function ()
       return require('package-info').setup()
     end,
     ft = { 'json' },
+    cond = function()
+      if vim.fn.expand("%") == 'package.json' then
+        return true
+      end
+    end,
+    requires = {
+      'MunifTanjim/nui.nvim',
+      cond = function()
+        if vim.fn.expand("%") == 'package.json' then
+          return true
+        end
+      end,
+    }
   }
   use 'editorconfig/editorconfig-vim'
   use 'machakann/vim-sandwich'
   use 'wellle/targets.vim'
   use 'lewis6991/impatient.nvim'
-  use 'dstein64/vim-startuptime'
+  use {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime'
+  }
   use 'nathom/filetype.nvim'
 end,
   config = {

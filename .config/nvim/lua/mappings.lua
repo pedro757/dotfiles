@@ -35,7 +35,7 @@ inoremap['<A-up>']    = "<Esc>:m .-2<CR>==gi"
 vnoremap['<A-down>']  = ":m '>+1<CR>gv=gv"
 vnoremap['<A-up>']    = ":m '<-2<CR>gv=gv"
 
-xnoremap['<leader>p'] = '"_dP'
+xnoremap['p'] = '"_dP'
 
 -- " Ranger
 nmap['<leader>e']  = ":NvimTreeToggle<CR>"
@@ -45,11 +45,10 @@ nmap['<S-Enter>']  = ":call AddEmptyLineAbove()<CR>"
 nmap['<CR>']       = ":call AddEmptyLineBelow()<CR>"
 
 cnoremap['<C-A>']       = '<Home>'
-require'cartographer'.n.nore['<leader>c'] = ':<BS>'
+map.n.nore['<leader>c'] = ':<BS>'
 -- Vim Defaults
 nnoremap['Y']      = "y$"
 inoremap['<C-c>']  = "<Esc>"
-nnoremap['gb']     = ":ls<CR>:b<Space>"
 nnoremap.expr['j'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'j'"
 nnoremap.expr['k'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'k'"
 nmap['n']          = "<Plug>(is-n)zz"
