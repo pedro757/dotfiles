@@ -68,22 +68,22 @@ nnoremap['<leader>b']  = "<cmd>Telescope buffers<cr>"
 vnoremap['<leader>r']  = require'config.telescope'.refactors
 
 -- " Snippets And Completion
-imap.expr['<Tab>']    = 'pumvisible()                 ? "\\<C-n>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "\\<TAB>"'
-smap.expr['<Tab>']    = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"'
-imap.expr['<S-Tab>']  = 'pumvisible()                 ? "\\<C-p>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-jump-prev"      : "\\<S-TAB>"'
-smap.expr['<S-Tab>']  = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-jump-prev"      : "<S-Tab>"'
-imap['<c-e>']         = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
-smap['<c-e>']         = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
-inoremap['<c-h>']     = "<left>"
-inoremap.c['<c-k>']   = comple.prev
-inoremap.c['<c-j>']   = comple.next
-inoremap.c['<c-l>']   = comple.ctrl_l
-inoremap.expr['<CR>'] = comple.enter
-inoremap['<C-u>']     = comple.scroll_up
-inoremap['<C-d>']     = comple.scroll_down
-inoremap['<C-Space>'] = cmp.complete
-inoremap['<C-e>']     = cmp.close
-inoremap['<C-x>']     = cmp.close
+imap.expr['<Tab>']       = 'pumvisible()                 ? "\\<C-n>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "\\<TAB>"'
+smap.expr['<Tab>']       = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"'
+imap['<S-Tab>']          = comple.s_tab_complete
+smap['<S-Tab>']          = comple.s_tab_complete
+imap['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
+smap['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
+inoremap['<c-h>']        = "<left>"
+inoremap.c['<c-k>']      = comple.prev
+inoremap.c['<c-j>']      = comple.next
+inoremap.c['<c-l>']      = comple.ctrl_l
+inoremap.expr['<CR>']    = comple.enter
+inoremap.c.expr['<C-u>'] = comple.scroll_up
+inoremap.c.expr['<C-d>'] = comple.scroll_down
+inoremap.c['<C-Space>']  = cmp.complete
+inoremap.c['<C-e>']      = cmp.close
+inoremap.c['<C-x>']      = cmp.close
 
 -- " QuickFixList
 nnoremap['<C-q>']      = ":call ToggleList('Location List', 'l')<CR>"
