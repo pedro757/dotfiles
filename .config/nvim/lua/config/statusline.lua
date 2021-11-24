@@ -1,5 +1,4 @@
 local gl = require('galaxyline')
-local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local fileinfo = require('galaxyline.provider_fileinfo')
 local gls = gl.section
@@ -9,21 +8,25 @@ local mycolors = {
   fg = '#a89984',
   yellow = '#fabd2f',
   aqua = '#83a598',
+  red = '#ec5f67',
+  yellowopaco = '#ECBE7B'
+}
+
+local mode_color = {
+  n = mycolors.fg,
+  i = mycolors.aqua,
+  v=mycolors.yellow,
+  [''] = mycolors.yellow,
+  V=mycolors.yellow,
+  c = mycolors.fg,
+  s = mycolors.yellow,
+  S = mycolors.yellow,
 }
 
 gls.left[2] = {
   ViMode = {
     provider = function()
-      -- auto change color according the vim mode
-      local mode_color = {n = mycolors.fg, i=mycolors.aqua,v=mycolors.yellow,
-                          [''] = colors.blue,V=mycolors.yellow,
-                          c = mycolors.fg,no = colors.red,s = mycolors.yellow,
-                          S=mycolors.yellow,[''] = colors.orange,
-                          ic = mycolors.aqua,R = colors.violet,Rv = colors.violet,
-                          cv = colors.red,ce=colors.red, r = colors.cyan,
-                          rm = colors.cyan, ['r?'] = colors.cyan,
-                          ['!']  = colors.red,t = colors.red}
-      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()] ..' guibg='..mycolors.bg)
+      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.api.nvim_get_mode().mode] .. ' guibg='..mycolors.bg)
       return '▊   '
     end,
     separator = ' ',
@@ -49,12 +52,16 @@ gls.left[4] ={
 
 gls.left[5] = {
   FilePath = {
-    provider = function ()
+    provider = function()
       local file = ''
-      if vim.fn.expand('%') ~= '' then
-        file = vim.fn.expand('%'):gsub(vim.fn.expand('%:t'):gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1"), '')
+      local cwd = vim.loop.cwd()
+      local absolute_path = vim.api.nvim_buf_get_name(0)
+      local rel_path = absolute_path:gsub(cwd .. '/', '')
+      local filename = absolute_path:match("^.+/(.+)$")
+      if absolute_path ~= '' and filename ~= nil then
+        file = rel_path:gsub(filename:gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1"),'')
       else
-        file = vim.fn.getcwd() .. ' '
+        file = cwd .. ' '
         if vim.bo.modified then
           file = file .. '✚'
         end
@@ -79,14 +86,14 @@ gls.left[7] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
-    highlight = {colors.red,mycolors.bg}
+    highlight = {mycolors.red,mycolors.bg}
   }
 }
 gls.left[8] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
-    highlight = {colors.yellow,mycolors.bg},
+    highlight = {mycolors.yellowopaco,mycolors.bg},
   }
 }
 
@@ -112,7 +119,8 @@ gls.left[10] = {
       return require("package-info").get_status()
     end,
     condition = function()
-      if vim.fn.expand("%") == 'package.json' then
+      local filename = vim.api.nvim_buf_get_name(0):match("^.+/(.+)$")
+      if  filename == 'package.json' then
         return true
       end
     end,
