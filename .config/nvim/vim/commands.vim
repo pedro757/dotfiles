@@ -44,5 +44,16 @@ augroup Targets
     \ })
 augroup END
 
+
+augroup HelpMappings
+  au!
+  au FileType help nnoremap <buffer> <CR> <C-]>
+  au FileType help nnoremap <buffer> <BS> <C-T>
+  au FileType help nnoremap <buffer> o /'\l\{2,\}'<CR>
+  au FileType help nnoremap <buffer> O ?'\l\{2,\}'<CR>
+  au FileType help nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
+  au FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
+  au FileType help nnoremap <buffer> gq :q<cr>
+augroup END
 command Worktree lua require("telescope").extensions.git_worktree.git_worktrees()
 command WW SudaWrite
