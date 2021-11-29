@@ -220,7 +220,10 @@ gls.right[8] = {
 
 gls.right[9] = {
   RainbowBlue = {
-    provider = function() return ' ▊' end,
+    provider = function()
+      vim.api.nvim_command('hi RainbowBlue guifg='..mode_color[vim.api.nvim_get_mode().mode] .. ' guibg='..mycolors.bg)
+      return ' ▊'
+    end,
     highlight = {mycolors.fg,mycolors.bg},
     separator = ' ',
     separator_highlight = {'NONE',mycolors.bg},
