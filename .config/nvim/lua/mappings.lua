@@ -119,6 +119,7 @@ xmap['gs']  = "<plug>(GrepperOperator)"
 nnoremap['<leader>dd']  = require'dapui'.toggle
 nnoremap['<leader>db']  = require'dap'.toggle_breakpoint
 nnoremap['<leader>da']  = dap.attach
+nnoremap['<leader>dc']  = require"dap".continue
 nnoremap['<leader>ds']  = require"dap".step_over
 nnoremap['<leader>di']  = require"dap".step_into
 nnoremap['<leader>do']  = require"dap".step_out
