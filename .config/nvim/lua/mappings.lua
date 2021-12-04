@@ -47,7 +47,6 @@ nmap['<CR>']       = ":call AddEmptyLineBelow()<CR>"
 cnoremap['<C-A>']       = '<Home>'
 map.n.nore['<leader>c'] = ':<BS>'
 -- Vim Defaults
-nnoremap['Y']      = "y$"
 inoremap['<C-c>']  = "<Esc>"
 nnoremap.expr['j'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'j'"
 nnoremap.expr['k'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'k'"
@@ -102,10 +101,10 @@ nnoremap['gr']         = vim.lsp.buf.references
 nnoremap['<leader>i']  = vim.lsp.buf.implementation
 nnoremap['<leader>D']  = vim.lsp.buf.type_definition
 nnoremap['<leader>r']  = vim.lsp.buf.rename
-nnoremap['<leader>d']  = vim.lsp.diagnostic.show_line_diagnostics
-nnoremap['<leader>dn'] = vim.lsp.diagnostic.goto_next
-nnoremap['<leader>dN'] = vim.lsp.diagnostic.goto_prev
-nnoremap['<leader>dq'] = vim.lsp.diagnostic.set_loclist
+nnoremap['<leader>d']  = vim.diagnostic.open_float
+nnoremap['<leader>dn'] = vim.diagnostic.goto_next
+nnoremap['<leader>dN'] = vim.diagnostic.goto_prev
+nnoremap['<leader>dq'] = vim.diagnostic.setloclist
 nnoremap['<leader>=']  = vim.lsp.buf.formatting
 nnoremap['<leader>a']  = require'lspsaga.codeaction'.code_action
 vnoremap['<leader>a']  = require'lspsaga.codeaction'.range_code_action
