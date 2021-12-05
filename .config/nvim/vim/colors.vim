@@ -19,19 +19,15 @@ augroup customHighlights
   au ColorScheme * hi TelescopeNormal guifg=#d5cda1
   au ColorScheme * hi Search guifg=#3c3836 guibg=#ffff00
 
-  au ColorScheme * hi LspDiagnosticsDefaultHint guifg=#928374 ctermfg=245
   au ColorScheme * hi DiagnosticHint guifg=#928374 ctermfg=245
-  au ColorScheme * hi LspDiagnosticsDefaultInfo guifg=#928374 ctermfg=245
-  au ColorScheme * hi LspDiagnosticsDefaultInformation guifg=#928374 ctermfg=245
   au ColorScheme * hi DiagnosticInfo guifg=#928374 ctermfg=245
-  au ColorScheme * hi LspDiagnosticsDefaultError guifg=#d65d0e ctermfg=red
   au ColorScheme * hi DiagnosticError guifg=#d65d0e ctermfg=red
-  au ColorScheme * hi LspDiagnosticsDefaultWarning guifg=#fabd2f ctermfg=yellow
-  au ColorScheme * hi DiagnosticWarning guifg=#fabd2f ctermfg=yellow
+  au ColorScheme * hi DiagnosticWarn guifg=#fabd2f ctermfg=yellow
 
   au ColorScheme * hi IndentBlanklineChar guifg=#363636 gui=nocombine
   au ColorScheme * hi IndentBlanklineContextChar guifg=#464646 gui=nocombine
   au ColorScheme * hi MatchParen guibg=#3c3836
+  au ColorScheme * hi MatchupVirtualText guifg=#8ec07c guibg=#3c3836
   au ColorScheme * hi Pmenu guibg=#3c3836
   au ColorScheme * hi CmpItemAbbrMatch guifg=#8ec07c
   au ColorScheme * hi CmpItemAbbrMatchFuzzy guifg=#8ec07c
