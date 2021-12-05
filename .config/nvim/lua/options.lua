@@ -1,12 +1,10 @@
 local opt = vim.opt
 vim.g.mapleader    = ' '
 opt.completeopt    = 'menu,menuone,noselect'
-opt.hidden         = true
 opt.wrap           = false
 opt.encoding       = 'utf-8'
 opt.pumheight      = 10
 opt.fileencoding   = 'utf-8'
-opt.ruler          = true
 opt.cmdheight      = 2
 opt.mouse          = 'a'
 opt.splitbelow     = true
