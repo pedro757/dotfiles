@@ -1,5 +1,5 @@
-local nvim_lsp = require('lspconfig')
-local configs = require'lspconfig/configs'
+local nvim_lsp = require'lspconfig'
+local configs = require'lspconfig.configs'
 local update_capabilities = require'cmp_nvim_lsp'.update_capabilities
 
 require"lspsaga".init_lsp_saga({
@@ -48,7 +48,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-if not nvim_lsp.ls_emmet then
+if not configs.ls_emmet then
   configs.ls_emmet = {
     default_config = {
       cmd = {'ls_emmet', '--stdio'};
@@ -100,15 +100,13 @@ nvim_lsp.sumneko_lua.setup{
   },
   on_attach = on_attach,
 }
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = false,
-    underline = true,
-    virtual_text = {
-      spacing = 4,
-      prefix = '●',
-    },
-    update_in_insert = true,
-  }
-)
+vim.diagnostic.config({
+  signs = false,
+  virtual_text = {
+    prefix = '●',
+  },
+  update_in_insert = true,
+  float = {
+    source = 'if_many',
+  },
+})
