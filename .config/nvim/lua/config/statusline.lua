@@ -1,4 +1,5 @@
 local gl = require('galaxyline')
+local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local fileinfo = require('galaxyline.provider_fileinfo')
 local gls = gl.section
@@ -14,13 +15,25 @@ local mycolors = {
 
 local mode_color = {
   n = mycolors.fg,
-  i = mycolors.aqua,
+  i=mycolors.aqua,
   v=mycolors.yellow,
-  [''] = mycolors.yellow,
+  [''] = colors.blue,
   V=mycolors.yellow,
   c = mycolors.fg,
+  no = colors.red,
   s = mycolors.yellow,
-  S = mycolors.yellow,
+  S=mycolors.yellow,
+  [''] = colors.orange,
+  ic = mycolors.aqua,
+  R = colors.violet,
+  Rv = colors.violet,
+  cv = colors.red,
+  ce=colors.red,
+  r = colors.cyan,
+  rm = colors.cyan,
+  ['r?'] = colors.cyan,
+  ['!']  = colors.red,
+  t = colors.red,
 }
 
 gls.left[2] = {
@@ -55,6 +68,7 @@ gls.left[5] = {
     provider = function()
       local file = ''
       local cwd = vim.loop.cwd()
+      if not cwd then return '' end
       local absolute_path = vim.api.nvim_buf_get_name(0)
       local rel_path = absolute_path:gsub(cwd .. '/', '')
       local filename = absolute_path:match("^.+/(.+)$")
