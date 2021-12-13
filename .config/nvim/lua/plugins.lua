@@ -34,7 +34,9 @@ return require('packer').startup{function(use)
   use 'ahmedkhalf/project.nvim'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ThePrimeagen/git-worktree.nvim'
-  use 'b3nj5m1n/kommentary'
+  use {
+    'numToStr/Comment.nvim',
+  }
   -- DEBUG
   -- use { 'michaelb/sniprun', run = 'install.sh'}
   use 'Iron-E/nvim-cartographer'
