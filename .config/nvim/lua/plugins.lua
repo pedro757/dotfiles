@@ -193,6 +193,13 @@ return require('packer').startup{function(use)
     cmd = 'StartupTime'
   }
   use 'nathom/filetype.nvim'
+  use {
+    'sQVe/sort.nvim',
+    cmd = 'Sort',
+    config = function()
+      require("sort").setup{}
+    end,
+  }
 end,
   config = {
     display = {
