@@ -111,7 +111,7 @@ return require('packer').startup{function(use)
   -- Theme
   use 'morhetz/gruvbox'
   use {
-    'glepnir/galaxyline.nvim',
+    'NTBBloodbath/galaxyline.nvim',
     branch = 'main',
   }
   use 'tpope/vim-eunuch'

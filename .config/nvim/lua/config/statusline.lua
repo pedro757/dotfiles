@@ -1,7 +1,7 @@
 local gl = require('galaxyline')
-local colors = require('galaxyline.theme').default
+local colors = require('galaxyline.themes.colors').default
 local condition = require('galaxyline.condition')
-local fileinfo = require('galaxyline.provider_fileinfo')
+local fileinfo = require('galaxyline.providers.fileinfo')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
 local mycolors = {
@@ -59,7 +59,7 @@ gls.left[4] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,mycolors.bg},
+    highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,mycolors.bg},
   },
 }
 
