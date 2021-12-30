@@ -1,6 +1,7 @@
 local nvim_lsp = require'lspconfig'
 local configs = require'lspconfig.configs'
 local update_capabilities = require'cmp_nvim_lsp'.update_capabilities
+local null_ls = require"null-ls"
 
 require"lspsaga".init_lsp_saga({
   code_action_keys = {
@@ -108,5 +109,20 @@ vim.diagnostic.config({
   update_in_insert = true,
   float = {
     source = 'if_many',
+  },
+})
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.diagnostics.luacheck.with({
+      extra_args = {"--globals", "vim"}
+    }),
+    -- null_ls.builtins.diagnostics.pylint,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.code_actions.refactoring,
   },
 })
