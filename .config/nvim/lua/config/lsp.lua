@@ -38,7 +38,7 @@ end
 
 local capabilities = update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = { "pyright", "vimls", "jsonls", "cssls", "html", "sqlls", "intelephense", "dockerls", "bashls", "yamlls", "graphql", "gopls", "svelte", "tsserver" }
+local servers = { "pyright", "vimls", "cssls", "html", "sqlls", "intelephense", "dockerls", "bashls", "yamlls", "graphql", "gopls", "svelte", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
@@ -61,6 +61,19 @@ if not configs.ls_emmet then
     };
   }
 end
+
+nvim_lsp.jsonls.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+    },
+  },
+  on_attach = on_attach,
+}
 
 nvim_lsp.ls_emmet.setup{ capabilities = capabilities }
 
@@ -90,7 +103,7 @@ nvim_lsp.sumneko_lua.setup{
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        preloadFileSize = 130,
+        preloadFileSize = 135,
         library = vim.api.nvim_get_runtime_file("", true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
