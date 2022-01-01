@@ -39,7 +39,10 @@ local mode_color = {
 gls.left[2] = {
   ViMode = {
     provider = function()
-      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.api.nvim_get_mode().mode] .. ' guibg='..mycolors.bg)
+      local color = mode_color[vim.api.nvim_get_mode().mode]
+      if color then
+        vim.api.nvim_command('hi GalaxyViMode guifg='.. color .. ' guibg='..mycolors.bg)
+      end
       return '▊   '
     end,
     separator = ' ',
