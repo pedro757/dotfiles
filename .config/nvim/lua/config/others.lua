@@ -52,3 +52,4 @@ require("luasnip/loaders/from_vscode").lazy_load()
 require("refactoring").setup {}
 require('numb').setup()
 require("mkdir")
+require("gomove").setup {}
