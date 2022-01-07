@@ -15,14 +15,14 @@ local mycolors = {
 
 local mode_color = {
   n = mycolors.fg,
-  i=mycolors.aqua,
-  v=mycolors.yellow,
+  i = mycolors.aqua,
+  v = mycolors.yellow,
   [''] = colors.blue,
   V=mycolors.yellow,
   c = mycolors.fg,
   no = colors.red,
   s = mycolors.yellow,
-  S=mycolors.yellow,
+  S = mycolors.yellow,
   [''] = mycolors.yellow,
   ic = mycolors.aqua,
   R = colors.violet,
@@ -69,11 +69,11 @@ gls.left[4] ={
 gls.left[5] = {
   FilePath = {
     provider = function()
-      local file = ''
+      local file
       local cwd = vim.loop.cwd()
       if not cwd then return '' end
       local absolute_path = vim.api.nvim_buf_get_name(0)
-      local rel_path = absolute_path:gsub(cwd .. '/', '')
+      local rel_path = absolute_path:gsub(cwd:gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1") .. '/', '')
       local filename = absolute_path:match("^.+/(.+)$")
       if absolute_path ~= '' and filename ~= nil then
         file = rel_path:gsub(filename:gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1"),'')
