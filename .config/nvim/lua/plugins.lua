@@ -201,6 +201,7 @@ return require('packer').startup{function(use)
       require("sort").setup{}
     end,
   }
+  use 'b0o/schemastore.nvim'
   use 'booperlv/nvim-gomove'
 end,
   config = {
