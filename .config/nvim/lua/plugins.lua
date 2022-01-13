@@ -110,7 +110,6 @@ return require('packer').startup{function(use)
   use 'sjl/gundo.vim'
 
   -- Theme
-  use 'morhetz/gruvbox'
   use {
     'NTBBloodbath/galaxyline.nvim',
     branch = 'main',
