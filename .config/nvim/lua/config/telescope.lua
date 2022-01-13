@@ -14,8 +14,9 @@ require('telescope').setup{
         ["<C-l>"] = actions.select_default + actions.center,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-        ["<C-m>"] = "which_key",
+        ["<C-g>"] = "which_key",
         ["<C-p>"] = action_layout.toggle_preview,
+        ["<C-h>"] = actions.file_split,
       },
       n = {
         ["<C-c>"] = actions.close,
