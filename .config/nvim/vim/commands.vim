@@ -53,7 +53,7 @@ augroup HelpMappings
   au FileType help nnoremap <buffer> O ?'\l\{2,\}'<CR>
   au FileType help nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
   au FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
-  au FileType help nnoremap <silent> <buffer> gq :q<cr>
+  au FileType help,startuptime,checkhealth nnoremap <silent> <buffer> gq :bd<cr>
 augroup END
 command Worktree lua require("telescope").extensions.git_worktree.git_worktrees()
 command WW SudaWrite

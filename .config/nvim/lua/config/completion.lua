@@ -56,7 +56,7 @@ local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-M = {}
+local M = {}
 
 M.tab_complete = function()
   if cmp and cmp.visible() then
