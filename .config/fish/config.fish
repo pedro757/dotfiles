@@ -1,4 +1,5 @@
 set fish_greeting
+source /opt/asdf-vm/asdf.fish
 
 alias vim="nvim"
 alias old_vim="\vim"
