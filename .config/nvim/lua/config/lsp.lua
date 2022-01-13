@@ -36,10 +36,12 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities =
+  update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = { "pyright", "vimls", "cssls", "html", "sqlls", "intelephense", "dockerls",
-  "bashls", "yamlls", "graphql", "gopls", "svelte", "tsserver" }
+local servers = { "pyright", "vimls", "cssls", "html", "sqlls", "intelephense",
+  "dockerls", "bashls", "yamlls", "graphql", "gopls", "svelte", "tsserver",
+  "solc", "cssmodules_ls", "vuels" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
