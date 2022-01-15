@@ -12,11 +12,6 @@ local cmp      = require'cmp'
 local comple   = require'config.completion'
 local dap      = require'config.dap'
 
--- " move to text buffer
-nnoremap['<F3>'] = ':bnext<CR>'
-nnoremap['<F2>'] = ':bprevious<CR>'
-nnoremap['<F4>'] = ':bd<CR>'
-
 -- " Better tabbing
 vnoremap['<'] = '<gv'
 vnoremap['>'] = '>gv'
@@ -50,8 +45,8 @@ nnoremap['<leader>f']  = require"telescope.builtin".find_files
 vnoremap['<leader>r']  = require('telescope').extensions.refactoring.refactors
 
 -- " Snippets And Completion
-imap.expr['<Tab>']       = 'pumvisible()                 ? "\\<C-n>"                      : luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "\\<TAB>"'
-smap.expr['<Tab>']       = 'luasnip#expand_or_jumpable() ? "<Plug>luasnip-expand-or-jump" : "<Tab>"'
+imap['<Tab>']            = comple.tab_complete
+smap['<Tab>']            = comple.tab_complete
 imap['<S-Tab>']          = comple.s_tab_complete
 smap['<S-Tab>']          = comple.s_tab_complete
 imap['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
@@ -60,7 +55,7 @@ inoremap['<c-h>']        = "<left>"
 inoremap.c['<c-k>']      = comple.prev
 inoremap.c['<c-j>']      = comple.next
 inoremap.c['<c-l>']      = comple.ctrl_l
-inoremap.expr['<CR>']    = comple.enter
+-- inoremap['<CR>']         = comple.enter
 inoremap.c.expr['<C-u>'] = comple.scroll_up
 inoremap.c.expr['<C-d>'] = comple.scroll_down
 inoremap.c['<C-Space>']  = cmp.complete
@@ -105,3 +100,10 @@ nnoremap['<leader>dc']  = require"dap".continue
 nnoremap['<leader>ds']  = require"dap".step_over
 nnoremap['<leader>di']  = require"dap".step_into
 nnoremap['<leader>do']  = require"dap".step_out
+
+nnoremap['<leader>g']   = require"harpoon.ui".toggle_quick_menu
+nnoremap['<leader>ga']  = require"harpoon.mark".add_file
+
+nnoremap['<leader>t']   = ":UltestNearest<CR>"
+nnoremap['<leader>tt']  = ":Ultest<CR>"
+nnoremap['<leader>to']  = ":UltestOutput<CR>"
