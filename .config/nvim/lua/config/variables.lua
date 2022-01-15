@@ -12,3 +12,4 @@ vim.g.loaded_matchit = 1
 vim.g.matchup_delim_start_plaintext = 0
 vim.g.python_host_prog = vim.fn.expand("~/.virtualenvs/pynvim2/bin/python")
 vim.g.python3_host_prog = vim.fn.expand("~/.virtualenvs/pynvim3/bin/python")
+vim.g.ultest_output_on_line = 0
