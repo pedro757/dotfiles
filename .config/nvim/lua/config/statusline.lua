@@ -4,8 +4,9 @@ local condition = require('galaxyline.condition')
 local fileinfo = require('galaxyline.providers.fileinfo')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
+
 local mycolors = {
-  bg = '#3c3836',
+  bg = '#3a3735',
   fg = '#a89984',
   yellow = '#fabd2f',
   aqua = '#83a598',
@@ -238,7 +239,10 @@ gls.right[8] = {
 gls.right[9] = {
   RainbowBlue = {
     provider = function()
-      vim.api.nvim_command('hi RainbowBlue guifg='..mode_color[vim.api.nvim_get_mode().mode] .. ' guibg='..mycolors.bg)
+      local color = mode_color[vim.api.nvim_get_mode().mode]
+      if color then
+        vim.api.nvim_command('hi RainbowBlue guifg='.. color .. ' guibg='..mycolors.bg)
+      end
       return ' ▊'
     end,
     highlight = {mycolors.fg,mycolors.bg},

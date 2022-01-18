@@ -391,9 +391,9 @@ hi! link TelescopeBorder Grey
 hi! link TelescopePromptPrefix Orange
 hi! link TelescopeSelection CursorLine
 
-hi! GitSignsChange guifg=#587c0c guibg=#32302f
+hi! GitSignsChange guifg=#0c7d9d guibg=#32302f
 hi! GitSignsDelete guifg=#94151b guibg=#32302f
-hi! GitSignsAdd guifg=#0c7d9d guibg=#32302f
+hi! GitSignsAdd guifg=#587c0c guibg=#32302f
 hi! link GitSignsAddNr Green
 hi! link GitSignsChangeNr Blue
 hi! link GitSignsDeleteNr Red
