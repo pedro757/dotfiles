@@ -7,6 +7,7 @@ cnoreabbrev Wq wq
 cnoreabbrev Qa qa
 cnoreabbrev Qa1 qa!
 cnoreabbrev QA qa
+cnoreabbrev QA! qa
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
 cnoreabbrev qw wq
@@ -16,3 +17,4 @@ cnoreabbrev qW wq
 cnoreabbrev WQa wqa
 cnoreabbrev wQa wqa
 cnoreabbrev WQA wqa
+cnoreabbrev puhs push

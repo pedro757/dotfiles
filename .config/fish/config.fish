@@ -46,3 +46,8 @@ set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
 set --global tide_character_icon " ➜"
 set --global tide_prompt_add_newline_before false
 set --global tide_left_prompt_suffix
+
+if status --is-interactive
+  abbr --add --global celar clear
+  abbr --add --global clar clear
+end
