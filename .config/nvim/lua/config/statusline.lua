@@ -5,6 +5,13 @@ local fileinfo = require('galaxyline.providers.fileinfo')
 local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
 
+local function exist_file()
+  if vim.api.nvim_buf_get_name(0) == "" then
+    return false
+  end
+  return true
+end
+
 local mycolors = {
   bg = '#3a3735',
   fg = '#a89984',
@@ -53,7 +60,7 @@ gls.left[2] = {
 gls.left[3] = {
   FileSize = {
     provider = 'FileSize',
-    condition = condition.buffer_not_empty,
+    condition = exist_file,
     highlight = {mycolors.fg,mycolors.bg},
     separator = ' ',
     separator_highlight = {'NONE',mycolors.bg},
@@ -62,7 +69,7 @@ gls.left[3] = {
 gls.left[4] ={
   FileIcon = {
     provider = 'FileIcon',
-    condition = condition.buffer_not_empty,
+    condition = exist_file,
     highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,mycolors.bg},
   },
 }
@@ -95,7 +102,7 @@ gls.left[6] = {
     provider = function ()
       return fileinfo.get_current_file_name('✚') .. ' '
     end,
-    condition = condition.buffer_not_empty,
+    condition = exist_file,
     highlight = {mycolors.fg,mycolors.bg,'bold'},
   }
 }
