@@ -202,6 +202,7 @@ return require('packer').startup{function(use)
   }
   use 'b0o/schemastore.nvim'
   use 'booperlv/nvim-gomove'
+  use 'folke/which-key.nvim'
 end,
   config = {
     display = {

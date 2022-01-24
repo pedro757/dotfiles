@@ -53,3 +53,16 @@ require("refactoring").setup {}
 require('numb').setup()
 require("mkdir")
 require("gomove").setup {}
+require("which-key").setup {
+  plugins = {
+    presets = {
+      operators = false,
+      motions = false,
+      text_objects = false,
+      windows = true,
+      nav = true,
+      z = true,
+      g = true,
+    }
+  }
+}
