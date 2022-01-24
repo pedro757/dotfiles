@@ -19,6 +19,7 @@ opt.relativenumber = true
 opt.cursorline     = true
 opt.background     = 'dark'
 opt.showmode       = false
+opt.showtabline    = 0
 opt.backup         = false
 opt.writebackup    = false
 opt.updatetime     = 300
