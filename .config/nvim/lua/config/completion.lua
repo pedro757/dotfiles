@@ -1,9 +1,6 @@
-local function prequire(...)
-  local status, lib = pcall(require, ...)
-  if (status) then return lib end
-  return nil
-end
-
+local utils = require"utils"
+local prequire = utils.prequire
+local t = utils.t
 local npairs = prequire'nvim-autopairs'
 local luasnip = prequire'luasnip'
 local cmp_autopairs = prequire'nvim-autopairs.completion.cmp'
@@ -17,21 +14,87 @@ npairs.setup({
 
 cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+    :sub(col, col):match("%s") == nil
+end
+
 cmp.setup{
   snippet = {
     expand = function(args)
-      require'luasnip'.lsp_expand(args.body)
+      vim.fn["vsnip#anonymous"](args.body)
+      -- require'luasnip'.lsp_expand(args.body)
     end
   },
   formatting = {
     format = lspkind.cmp_format(),
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+  }, {
+    { name = 'vsnip' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'luasnip' },
-    { name = 'rg' }
+  },
+  {
+    { name = 'rg' },
+  }),
+  mapping = {
+    ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-x>'] = cmp.mapping(cmp.mapping.close(), {'i', 'c'}),
+    ['<C-j>'] = cmp.mapping(
+      cmp.mapping.select_next_item(cmp.SelectBehavior.Insert),
+      {"i", "c"}
+    ),
+    ['<C-k>'] = cmp.mapping(
+      cmp.mapping.select_prev_item(cmp.SelectBehavior.Insert),
+      {"i", "c"}
+    ),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<C-l>"] = cmp.mapping({
+      i = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true
+      }),
+      c = function(fallback)
+        if cmp.visible() then
+          cmp.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
+          }, function()
+            return vim.api.nvim_feedkeys(t"<CR>", "c", true)
+          end)
+        else
+          fallback()
+        end
+      end
+    }),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true
+    })
   },
 }
 cmp.setup.cmdline('?', {
@@ -51,90 +114,3 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   })
 })
-
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local M = {}
-
-M.tab_complete = function()
-  if cmp and cmp.visible() then
-    return cmp.select_next_item()
-  elseif luasnip and luasnip.expand_or_jumpable() then
-    return luasnip.expand_or_jump()
-  end
-  return vim.api.nvim_feedkeys(t"<c-t>", "", true)
-end
-M.s_tab_complete = function()
-  if cmp and cmp.visible() then
-    return cmp.select_prev_item()
-  elseif luasnip and luasnip.jumpable(-1) then
-    return luasnip.jump(-1)
-  end
-  return vim.api.nvim_feedkeys(t"<c-d>", "", true)
-end
-
-M.ctrl_l = function()
-  local mode = vim.api.nvim_get_mode()
-  if cmp.visible() then
-    return cmp.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-      function()
-        if mode.mode == "c" then
-          return vim.api.nvim_feedkeys(t'<CR>', "i", true)
-	end
-      end)
-  else
-    if mode.mode == "c" then
-      return vim.api.nvim_feedkeys(t'<CR>', "i", true)
-    end
-    return vim.api.nvim_feedkeys(t'<right>', "i", true)
-  end
-end
-
-M.enter = function()
-  if cmp.visible() then
-    return cmp.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    })
-  else
-    return npairs.autopairs_cr()
-  end
-end
-M.scroll_down = function()
-  if cmp.visible() then
-    return cmp.scroll_docs(-4)
-  else
-    return t'<C-d>'
-  end
-end
-
-M.scroll_up = function()
-  if cmp.visible() then
-    return cmp.scroll_docs(4)
-  else
-    return t'<C-u>'
-  end
-end
-
-M.next = function()
-  if cmp.visible() then
-    cmp.select_next_item(cmp.SelectBehavior.Insert)
-  else
-    return vim.api.nvim_feedkeys(t'<down>', "", true)
-  end
-end
-
-M.prev = function()
-  if cmp.visible() then
-    cmp.select_prev_item(cmp.SelectBehavior.Insert)
-  else
-    return vim.api.nvim_feedkeys(t'<up>', "", true)
-  end
-end
-
-return M

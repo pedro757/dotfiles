@@ -8,9 +8,8 @@ local inoremap = require'cartographer'.i.nore.silent
 local vnoremap = require'cartographer'.v.nore.silent
 local xnoremap = require'cartographer'.x.nore.silent
 local cnoremap = require'cartographer'.c.nore
-local cmp      = require'cmp'
-local comple   = require'config.completion'
 local dap      = require'config.dap'
+local m = vim.keymap.set
 
 -- " Better tabbing
 vnoremap['<'] = '<gv'
@@ -45,22 +44,13 @@ nnoremap['<leader>f']  = require"telescope.builtin".find_files
 vnoremap['<leader>r']  = require('telescope').extensions.refactoring.refactors
 
 -- " Snippets And Completion
-imap['<Tab>']            = comple.tab_complete
-smap['<Tab>']            = comple.tab_complete
-imap['<S-Tab>']          = comple.s_tab_complete
-smap['<S-Tab>']          = comple.s_tab_complete
-imap['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
-smap['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
-inoremap['<c-h>']        = "<left>"
-inoremap.c['<c-k>']      = comple.prev
-inoremap.c['<c-j>']      = comple.next
-inoremap.c['<c-l>']      = comple.ctrl_l
--- inoremap['<CR>']         = comple.enter
-inoremap.c.expr['<C-u>'] = comple.scroll_up
-inoremap.c.expr['<C-d>'] = comple.scroll_down
-inoremap.c['<C-Space>']  = cmp.complete
-inoremap.c['<C-e>']      = cmp.close
-inoremap.c['<C-x>']      = cmp.close
+imap.expr['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
+smap.expr['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
+m({"i", "c"}, "<c-h>", "<left>")
+m("i", "<c-l>", "<right>")
+m({"i", "c"}, "<c-j>", "<down>")
+m({"i", "c"}, "<c-k>", "<up>")
+m("c", "<c-l>", "<CR>")
 
 -- " QuickFixList
 nnoremap['<C-q>']      = ":call ToggleList('Location List', 'l')<CR>"
