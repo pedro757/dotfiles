@@ -62,23 +62,51 @@ map['g*']  = '<Plug>(asterisk-gz*)<Plug>(is-nohl-1)'
 map['g#']  = '<Plug>(asterisk-gz#)<Plug>(is-nohl-1)'
 
 -- " LSP
-nnoremap['gD']         = vim.lsp.buf.declaration
-nnoremap['gd']         = vim.lsp.buf.definition
-nnoremap['gh']         = vim.lsp.buf.hover
-nnoremap['gr']         = vim.lsp.buf.references
-nnoremap['<leader>i']  = vim.lsp.buf.implementation
-nnoremap['<leader>D']  = vim.lsp.buf.type_definition
-nnoremap['<leader>r']  = vim.lsp.buf.rename
-nnoremap['<leader>d']  = vim.diagnostic.open_float
-nnoremap['<leader>dn'] = vim.diagnostic.goto_next
-nnoremap['<leader>dN'] = vim.diagnostic.goto_prev
-nnoremap['<leader>dq'] = vim.diagnostic.setloclist
-nnoremap['<leader>=']  = vim.lsp.buf.formatting
-nnoremap['<leader>a']  = require'lspsaga.codeaction'.code_action
-vnoremap['<leader>a']  = require'lspsaga.codeaction'.range_code_action
-nnoremap['<leader>hn'] = require'gitsigns.actions'.next_hunk
-nnoremap['<leader>hN'] = require'gitsigns.actions'.prev_hunk
-nnoremap['<Leader>hm'] = '<Plug>(git-messenger)'
+m('n', "gD", vim.lsp.buf.declaration,
+  { desc = "Declaration", silent = true  })
+m('n', "gh", vim.lsp.buf.hover,
+  { desc = "Hover", silent = true  })
+m('n', "gr", vim.lsp.buf.references,
+  { desc = "References", silent = true  })
+m('n', "gD", vim.lsp.buf.declaration,
+  { desc = "Declaration", silent = true  })
+m('n', "<leader>i", vim.lsp.buf.implementation,
+  { desc = "Implementation", silent = true  })
+m('n', "<leader>D", vim.lsp.buf.type_definition,
+  { desc = "Type Definition", silent = true  })
+m('n', "<leader>r", vim.lsp.buf.rename,
+  { desc = "Rename", silent = true  })
+m('n', "<leader>d", vim.diagnostic.open_float,
+  { desc = "Diagnostic", silent = true  })
+m('n', "<leader>dn", vim.diagnostic.goto_next,
+  { desc = "Next Diagnostic", silent = true  })
+m('n', "<leader>dN", vim.diagnostic.goto_prev,
+  { desc = "Previous Diagnostic", silent = true  })
+m('n', "<leader>dq", vim.diagnostic.setloclist,
+  { desc = "Send to LocList", silent = true })
+m('n', "<leader>=", vim.lsp.buf.formatting,
+  { desc = "Format file", silent = true  })
+m('n', "<leader>a", ":Lspsaga code_action<cr>",
+  { desc = "Action", silent = true  })
+m('v', "<leader>a", ":<c-u>Lspsaga range_code_action<cr>",
+  { desc = "Action", silent = true  })
+
+m('n', "<leader>hn", require'gitsigns.actions'.next_hunk,
+  { desc = "Next Hunk", silent = true  })
+m('n', "<leader>hN", require'gitsigns.actions'.prev_hunk,
+  { desc = "Previous Hunk", silent = true  })
+m({'n', 'v'}, "<leader>hs", ":Gitsigns stage_hunk<CR>",
+  { desc = "Stage Hunk", silent = true })
+m({'n', 'v'}, "<leader>hr", ":Gitsigns reset_hunk<CR>",
+  { desc = "Stage Hunk", silent = true })
+m({'n', 'v'}, "<leader>hu", ":Gitsigns undo_stage_hunk<CR>",
+  { desc = "Stage Hunk", silent = true })
+m('n', "<leader>hp", ":Gitsigns preview_hunk<CR>",
+  { desc = "Stage Hunk", silent = true })
+m('n', "<leader>hb", function() require"gitsigns".blame_line{full=true} end,
+  { desc = "Stage Hunk", silent = true })
+m('n', "<Leader>hm", '<Plug>(git-messenger)',
+  { desc = "Commit Message", silent = true  })
 
 nmap['gs']  = "<plug>(GrepperOperator)"
 xmap['gs']  = "<plug>(GrepperOperator)"
