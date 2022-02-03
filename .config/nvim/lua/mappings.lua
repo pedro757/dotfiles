@@ -122,6 +122,6 @@ nnoremap['<leader>do']  = require"dap".step_out
 nnoremap['<leader>g']   = require"harpoon.ui".toggle_quick_menu
 nnoremap['<leader>ga']  = require"harpoon.mark".add_file
 
-nnoremap['<leader>t']   = ":UltestNearest<CR>"
-nnoremap['<leader>tt']  = ":Ultest<CR>"
-nnoremap['<leader>to']  = ":UltestOutput<CR>"
+m("n", "<leader>t", ":UltestNearest<CR>", { desc = "Test Nearest", silent = true  })
+m("n", "<leader>tt", ":Ultest<CR>", { desc = "Test File", silent = true  })
+m("n", "<leader>to", "<Plug>(ultest-output-jump)", { desc = "Test Output", silent = true  })
