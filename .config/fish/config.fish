@@ -50,4 +50,6 @@ set --global tide_left_prompt_suffix
 if status --is-interactive
   abbr --add --global celar clear
   abbr --add --global clar clear
+  abbr --add --global cñear clear
+  abbr --add --global cñaer clear
 end
