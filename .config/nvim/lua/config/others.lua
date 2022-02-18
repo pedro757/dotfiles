@@ -31,7 +31,7 @@ require("tmux").setup({
     persist_zoom = false,
   },
 })
-require('Comment').setup{
+require('Comment').setup {
   pre_hook = function(ctx)
     local U = require 'Comment.utils'
 
@@ -65,4 +65,8 @@ require("which-key").setup {
       g = true,
     }
   }
+}
+require("tabout").setup {
+  tabkey = "",
+  backwards_tabkey = "",
 }

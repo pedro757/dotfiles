@@ -22,13 +22,17 @@ augroup END
 augroup luaSources
   autocmd!
   autocmd FileType lua lua require'cmp'.setup.buffer {
-\   sources = {
-\     { name = 'nvim_lua' },
-\     { name = 'buffer' },
-\     { name = 'path' },
-\     { name = 'luasnip' },
-\     { name = 'rg' }
+\   sources = require'cmp'.config.sources({
+\    { name = 'nvim_lsp' },
+\   }, {
+\    { name = 'luasnip' },
+\    { name = 'nvim_lua' },
+\    { name = 'buffer' },
+\    { name = 'path' },
 \   },
+\   {
+\    { name = 'rg' },
+\   }),
 \ }
 augroup END
 
@@ -53,7 +57,12 @@ augroup HelpMappings
   au FileType help nnoremap <buffer> O ?'\l\{2,\}'<CR>
   au FileType help nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
   au FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
-  au FileType help,startuptime,checkhealth nnoremap <silent> <buffer> gq :bd<cr>
+  au FileType help,startuptime,checkhealth,harpoon,null-ls-info nnoremap <silent> <buffer> gq :bd<cr>
+  au FileType help,startuptime,checkhealth,harpoon nnoremap <silent> <buffer> <c-x> :bd<cr>
+  au FileType help,startuptime,checkhealth,harpoon nnoremap <silent> <buffer> <c-c> :bd<cr>
+  au FileType harpoon nnoremap <silent> <buffer> <c-j> <down>
+  au FileType harpoon nnoremap <silent> <buffer> <c-k> <up>
+  au FileType harpoon nnoremap <silent> <buffer> <c-l> :lua require('harpoon.ui').select_menu_item()<CR>
 augroup END
 command Worktree lua require("telescope").extensions.git_worktree.git_worktrees()
 command WW SudaWrite

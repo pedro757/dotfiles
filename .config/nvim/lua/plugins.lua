@@ -35,29 +35,21 @@ return require('packer').startup{function(use)
   use 'ahmedkhalf/project.nvim'
   use 'ThePrimeagen/refactoring.nvim'
   use 'ThePrimeagen/git-worktree.nvim'
+  use 'ThePrimeagen/harpoon'
   use {
     'numToStr/Comment.nvim',
   }
   -- DEBUG
-  -- use { 'michaelb/sniprun', run = 'install.sh'}
-  use 'Iron-E/nvim-cartographer'
-  use {
-    "vim-test/vim-test",
-    keys = { '<space>tt', '<space>tf', '<space>tl', '<space>ts', '<space>tv'},
-    cond = function()
-      return vim.fn.has "python3" == 1
-    end,
-  }
+  use { 'michaelb/sniprun', run = 'bash ./install.sh' }
   use {
     "rcarriga/vim-ultest",
-    keys = { '<space>tt', '<space>tf', '<space>tl', '<space>ts', '<space>tv'},
     run = ":UpdateRemotePlugins",
-    cond = function()
-      return vim.fn.has "python3" == 1
-    end,
+    requires = {
+      "vim-test/vim-test",
+    },
   }
   use 'mfussenegger/nvim-dap'
-  use 'Pocco81/DAPInstall.nvim'
+  -- use 'Pocco81/DAPInstall.nvim'
   use 'rcarriga/nvim-dap-ui'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'tami5/lspsaga.nvim'
@@ -69,6 +61,9 @@ return require('packer').startup{function(use)
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'lukas-reineke/cmp-rg'
+  -- use 'hrsh7th/vim-vsnip'
+  -- use 'hrsh7th/vim-vsnip-integ'
+  -- use 'hrsh7th/cmp-vsnip'
   -- use 'hrsh7th/cmp-emoji'
   use 'saadparwaiz1/cmp_luasnip'
   use 'onsails/lspkind-nvim'
@@ -203,6 +198,9 @@ return require('packer').startup{function(use)
   use 'b0o/schemastore.nvim'
   use 'booperlv/nvim-gomove'
   use 'folke/which-key.nvim'
+  use 'abecodes/tabout.nvim'
+  use 'tpope/vim-projectionist'
+  use 'nyngwang/NeoZoom.lua'
 end,
   config = {
     display = {

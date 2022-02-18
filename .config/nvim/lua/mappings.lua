@@ -1,51 +1,41 @@
-local map      = require'cartographer'
-local nmap     = require'cartographer'.n.silent
-local smap     = require'cartographer'.s.silent
-local imap     = require'cartographer'.i.silent
-local xmap     = require'cartographer'.x.silent
-local nnoremap = require'cartographer'.n.nore.silent
-local inoremap = require'cartographer'.i.nore.silent
-local vnoremap = require'cartographer'.v.nore.silent
-local xnoremap = require'cartographer'.x.nore.silent
-local cnoremap = require'cartographer'.c.nore
 local dap      = require'config.dap'
 local m = vim.keymap.set
 
 -- " Better tabbing
-vnoremap['<'] = '<gv'
-vnoremap['>'] = '>gv'
+m("v", "<", '<gv')
+m("v", ">",'>gv')
 
-xnoremap['p'] = '"_dP'
-
--- " Ranger
-nmap['<leader>e']  = ":NvimTreeToggle<CR>"
+m("n", "<leader>e", ":NvimTreeToggle<CR>")
 
 -- " New Line Pressing Enter
-nmap['<S-Enter>']  = ":call AddEmptyLineAbove()<CR>"
-nmap['<CR>']       = ":call AddEmptyLineBelow()<CR>"
+m('n', '<S-Enter>', ":call AddEmptyLineAbove()<CR>", { silent = true })
+m('n', '<CR>', ":call AddEmptyLineBelow()<CR>", { silent = true })
 
-cnoremap['<C-A>']       = '<Home>'
-map.n.nore['<leader>c'] = ':<BS>'
+m("c", "<c-a>", '<Home>')
+m("n", "<leader>c", ':<BS>')
 -- Vim Defaults
-inoremap['<C-c>']  = "<Esc>"
-nnoremap.expr['j'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'j'"
-nnoremap.expr['k'] = "(v:count > 5 ? \"m'\" . v:count : \"\") . 'k'"
-nmap['n']          = "<Plug>(is-n)zz"
-nmap['N']          = "<Plug>(is-N)zz"
-map['H']           = '^'
-map['L']           = 'g_'
-inoremap[',']      = ',<c-g>u'
-inoremap['.']      = '.<c-g>u'
-inoremap['!']      = '!<c-g>u'
-inoremap['?']      = '?<c-g>u'
+m('i', '<c-c>', "<Esc>")
+m('n', '<leader>o', ':NeoZoomToggle<CR>')
+m('n', 'j', "(v:count > 5 ? \"m'\" . v:count : \"\") . 'j'", { expr = true })
+m('n', 'k', "(v:count > 5 ? \"m'\" . v:count : \"\") . 'k'", { expr = true })
+m('n', 'n', "<Plug>(is-n)zz", { remap = true })
+m('n', 'N', "<Plug>(is-N)zz", { remap = true })
+m("", "H", '^', { remap = true })
+m("", "L", 'g_', { remap = true })
+m("i", ",", ',<c-g>u')
+m("i", ".", '.<c-g>u')
+m("i", "!", '!<c-g>u')
+m("i", "?", '?<c-g>u')
 
 -- " Telescope
-nnoremap['<leader>f']  = require"telescope.builtin".find_files
-vnoremap['<leader>r']  = require('telescope').extensions.refactoring.refactors
+m("n", "<leader>f", require"telescope.builtin".find_files)
+m("v", "<leader>r", require('telescope').extensions.refactoring.refactors)
 
 -- " Snippets And Completion
-imap.expr['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
-smap.expr['<c-e>']            = "luasnip#choice_active()      ? '<Plug>luasnip-next-choice'    : '<C-E>'"
+m("i", "<c-e>", "luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'",
+  { expr = true, remap = true })
+m("s", "<c-e>", "luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'",
+  { expr = true, remap = true })
 m({"i", "c"}, "<c-h>", "<left>")
 m("i", "<c-l>", "<right>")
 m({"i", "c"}, "<c-j>", "<down>")
@@ -53,13 +43,13 @@ m({"i", "c"}, "<c-k>", "<up>")
 m("c", "<c-l>", "<CR>")
 
 -- " QuickFixList
-nnoremap['<C-q>']      = ":call ToggleList('Location List', 'l')<CR>"
-nnoremap['<leader>q']  = ":call ToggleList('Quickfix List', 'c')<CR>"
+m("n", "<C-q>", ":call ToggleList('Location List', 'l')<CR>", { silent = true })
+m("n", "<leader>q", ":call ToggleList('Quickfix List', 'c')<CR>", { silent = true })
 
-map['*']   = '<Plug>(asterisk-z*)<Plug>(is-nohl-1)'
-map['#']   = '<Plug>(asterisk-z#)<Plug>(is-nohl-1)'
-map['g*']  = '<Plug>(asterisk-gz*)<Plug>(is-nohl-1)'
-map['g#']  = '<Plug>(asterisk-gz#)<Plug>(is-nohl-1)'
+m("", "*", '<Plug>(asterisk-z*)<Plug>(is-nohl-1)', { remap = true })
+m("", "#", '<Plug>(asterisk-z#)<Plug>(is-nohl-1)', { remap = true })
+m("", "g*", '<Plug>(asterisk-gz*)<Plug>(is-nohl-1)', { remap = true })
+m("", "g#", '<Plug>(asterisk-gz#)<Plug>(is-nohl-1)', { remap = true })
 
 -- " LSP
 m('n', "gD", vim.lsp.buf.declaration,
@@ -108,20 +98,20 @@ m('n', "<leader>hb", function() require"gitsigns".blame_line{full=true} end,
 m('n', "<Leader>hm", '<Plug>(git-messenger)',
   { desc = "Commit Message", silent = true  })
 
-nmap['gs']  = "<plug>(GrepperOperator)"
-xmap['gs']  = "<plug>(GrepperOperator)"
+m("n", "gs", "<plug>(GrepperOperator)", { remap = true })
+m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
 
-nnoremap['<leader>dd']  = require'dapui'.toggle
-nnoremap['<leader>db']  = require'dap'.toggle_breakpoint
-nnoremap['<leader>da']  = dap.attach
-nnoremap['<leader>dc']  = require"dap".continue
-nnoremap['<leader>ds']  = require"dap".step_over
-nnoremap['<leader>di']  = require"dap".step_into
-nnoremap['<leader>do']  = require"dap".step_out
+m("n", "<leader>dd", require'dapui'.toggle)
+m("n", "<leader>db", require'dap'.toggle_breakpoint)
+m("n", "<leader>da", dap.attach)
+m("n", "<leader>dc", require"dap".continue)
+m("n", "<leader>ds", require"dap".step_over)
+m("n", "<leader>di", require"dap".step_into)
+m("n", "<leader>do", require"dap".step_out)
 
-nnoremap['<leader>g']   = require"harpoon.ui".toggle_quick_menu
-nnoremap['<leader>ga']  = require"harpoon.mark".add_file
+m("n", "<leader>g", require"harpoon.ui".toggle_quick_menu)
+m("n", "<leader>ga", require"harpoon.mark".add_file)
 
-m("n", "<leader>t", ":UltestNearest<CR>", { desc = "Test Nearest", silent = true  })
-m("n", "<leader>tt", ":Ultest<CR>", { desc = "Test File", silent = true  })
-m("n", "<leader>to", "<Plug>(ultest-output-jump)", { desc = "Test Output", silent = true  })
+m("n", "<leader>t", ":UltestNearest<CR>", { desc = "Test Nearest", silent = true })
+m("n", "<leader>tt", ":Ultest<CR>", { desc = "Test File", silent = true })
+m("n", "<leader>to", "<Plug>(ultest-output-jump)", { desc = "Test Output", silent = true })
