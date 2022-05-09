@@ -43,7 +43,7 @@ bind '$' __history_previous_command_arguments
 set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
 
-set --global tide_character_icon " ➜"
+set --global tide_character_icon "➜"
 set --global tide_prompt_add_newline_before false
 set --global tide_left_prompt_suffix
 
@@ -51,5 +51,14 @@ if status --is-interactive
   abbr --add --global celar clear
   abbr --add --global clar clear
   abbr --add --global cñear clear
-  abbr --add --global cñaer clear
+  abbr --add --global cleara clear
+  abbr --add --global clra clear
+  abbr --add --global clare clear
+  abbr --add --global clera clear
+  abbr --add --global clrea clear
+  abbr --add --global clre clear
+  abbr --add --global pnpn pnpm
 end
+
+# Created by `pipx` on 2022-02-23 01:40:52
+set PATH $PATH /home/pedro/.local/bin

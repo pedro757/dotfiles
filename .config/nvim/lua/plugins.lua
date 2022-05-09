@@ -20,7 +20,8 @@ return require('packer').startup{function(use)
   use 'nvim-telescope/telescope.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'norcalli/nvim-colorizer.lua'
-  -- use 'karb94/neoscroll.nvim'
+  use 'karb94/neoscroll.nvim'
+  use "b0o/incline.nvim"
   use {
     'sbdchd/neoformat',
     cmd = { 'Neoformat' }
@@ -40,7 +41,18 @@ return require('packer').startup{function(use)
     'numToStr/Comment.nvim',
   }
   -- DEBUG
-  use { 'michaelb/sniprun', run = 'bash ./install.sh' }
+  use {
+    'michaelb/sniprun',
+    run = 'bash ./install.sh',
+    cmd = {
+      "SnipRun",
+      "SnipInfo",
+      "SnipClose",
+      "SnipReset",
+      "SnipTerminate",
+      "SnipReplMemoryClean",
+    }
+  }
   use {
     "rcarriga/vim-ultest",
     run = ":UpdateRemotePlugins",
@@ -60,11 +72,13 @@ return require('packer').startup{function(use)
   use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lsp-signature-help'
   use 'lukas-reineke/cmp-rg'
-  -- use 'hrsh7th/vim-vsnip'
-  -- use 'hrsh7th/vim-vsnip-integ'
-  -- use 'hrsh7th/cmp-vsnip'
-  -- use 'hrsh7th/cmp-emoji'
+  use {
+    'petertriho/cmp-git',
+    ft = 'gitcommit',
+    config = function () require'cmp_git'.setup() end
+  }
   use 'saadparwaiz1/cmp_luasnip'
   use 'onsails/lspkind-nvim'
   use 'L3MON4D3/LuaSnip'
@@ -102,6 +116,7 @@ return require('packer').startup{function(use)
 
   use 'kyazdani42/nvim-tree.lua'
   use 'kevinhwang91/nvim-bqf'
+  -- use 'https://gitlab.com/yorickpeterse/nvim-pqf.git'
   use 'sjl/gundo.vim'
 
   -- Theme
@@ -200,7 +215,8 @@ return require('packer').startup{function(use)
   use 'folke/which-key.nvim'
   use 'abecodes/tabout.nvim'
   use 'tpope/vim-projectionist'
-  use 'nyngwang/NeoZoom.lua'
+  use {'nyngwang/NeoZoom.lua', branch = 'neo-zoom-original'}
+  use 'inkarkat/vim-ReplaceWithRegister'
 end,
   config = {
     display = {

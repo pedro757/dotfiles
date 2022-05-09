@@ -81,10 +81,10 @@ gls.left[5] = {
       local cwd = vim.loop.cwd()
       if not cwd then return '' end
       local absolute_path = vim.api.nvim_buf_get_name(0)
-      local rel_path = absolute_path:gsub(cwd:gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1") .. '/', '')
+      local rel_path = absolute_path:gsub(vim.pesc(cwd .. '/'), '')
       local filename = absolute_path:match("^.+/(.+)$")
       if absolute_path ~= '' and filename ~= nil then
-        file = rel_path:gsub(filename:gsub("[%(%)%.%+%-%*%?%[%]%^%$%%]", "%%%1"),'')
+        file = rel_path:gsub(vim.pesc(filename),'')
       else
         file = cwd .. ' '
         if vim.bo.modified then

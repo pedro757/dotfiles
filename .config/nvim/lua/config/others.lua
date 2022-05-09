@@ -7,11 +7,16 @@ require'nvim-tree'.setup{
     enable = true,
     update_cwd = true
   },
+  -- actions = {
+  --   open_file = {
+  --     quit_on_open = true
+  --   }
+  -- },
   view = {
     mappings = {
       list = {
-	{ key = { 'l' }, cb = require'nvim-tree.config'.nvim_tree_callback("edit") },
-	{ key = { 'h' }, cb = require'nvim-tree.config'.nvim_tree_callback('close_node')}
+	{ key = { 'l' }, action = "edit" },
+	{ key = { 'h' }, action = "close_node" },
       }
     }
   }
@@ -69,4 +74,10 @@ require("which-key").setup {
 require("tabout").setup {
   tabkey = "",
   backwards_tabkey = "",
+}
+require('neoscroll').setup()
+require('incline').setup{
+  hide = {
+    focused_win = true,
+  }
 }

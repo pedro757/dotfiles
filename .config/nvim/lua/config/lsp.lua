@@ -22,9 +22,8 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
   option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
       hi LspReferenceRead cterm=bold ctermbg=239 guibg=#504945
@@ -91,6 +90,8 @@ if not configs.ls_emmet then
         "markdown",
         "handlebars",
         "hbs",
+        "vue",
+        "php"
       },
       root_dir = function()
         return vim.loop.cwd()
@@ -115,8 +116,8 @@ nvim_lsp.jsonls.setup {
 
 nvim_lsp.ls_emmet.setup { capabilities = capabilities }
 
-local sumneko_root_path = "/home/pedro/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
+local sumneko_root_path = "/home/pedro/Documents/lua-language-server"
+local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
