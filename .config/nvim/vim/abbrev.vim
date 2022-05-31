@@ -18,4 +18,11 @@ cnoreabbrev qW wq
 cnoreabbrev WQa wqa
 cnoreabbrev wQa wqa
 cnoreabbrev WQA wqa
+cnoreabbrev Wqa wqa
 cnoreabbrev puhs push
+
+inoreabbrev reutnr return
+inoreabbrev rutnr return
+inoreabbrev retunr return
+
+inoreabbrev treu true

@@ -3,3 +3,4 @@ plugin/
 stable/
 :w
 .netrwhist
+packer_compiled.lua

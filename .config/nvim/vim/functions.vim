@@ -1,11 +1,11 @@
-function! s:DiffWithSaved()
+function! DiffWithSaved()
   let filetype=&ft
   diffthis
   vnew | r # | normal! 1Gdd
   diffthis
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
-com! DiffSaved call s:DiffWithSaved()
+" com! DiffSaved call s:DiffWithSaved()
 
 function! AddEmptyLineBelow()
   call append(line("."), "")
@@ -20,12 +20,6 @@ function! AddEmptyLineAbove()
     silent normal! <C-e>
   end
   let &scrolloff = l:scrolloffsave
-endfunction
-
-function! TrimWhitespace()
-  let l:save = winsaveview()
-  keeppatterns %s/\s\+$//e
-  call winrestview(l:save)
 endfunction
 
 function! GetBufferList()

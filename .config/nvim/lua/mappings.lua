@@ -5,17 +5,17 @@ local m = vim.keymap.set
 m("v", "<", "<gv")
 m("v", ">", ">gv")
 
-m("n", "<leader>e", ":NvimTreeToggle<CR>")
+m("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "File Explorer" })
 
 -- " New Line Pressing Enter
 m("n", "<S-Enter>", ":call AddEmptyLineAbove()<CR>", { silent = true })
 m("n", "<CR>", ":call AddEmptyLineBelow()<CR>", { silent = true })
 
 m("c", "<c-a>", "<Home>")
-m("n", "<leader>c", ":<BS>")
+m("n", "<leader>c", ":<BS>", { desc = "Clear" })
 -- Vim Defaults
 m("i", "<c-c>", "<Esc>")
-m("n", "<leader>o", ":NeoZoomToggle<CR>zz", { silent = true })
+m("n", "<leader>o", ":NeoZoomToggle<CR>zz", { desc = "Zoom", silent = true })
 m("n", "j", '(v:count > 5 ? "m\'" . v:count : "") . \'j\'', { expr = true })
 m("n", "k", '(v:count > 5 ? "m\'" . v:count : "") . \'k\'', { expr = true })
 m("n", "n", "<Plug>(is-n)zz", { remap = true })
@@ -28,7 +28,12 @@ m("i", "!", "!<c-g>u")
 m("i", "?", "?<c-g>u")
 
 -- " Telescope
-m("n", "<leader>f", require("telescope.builtin").find_files)
+m(
+  "n",
+  "<leader>f",
+  require("telescope.builtin").find_files,
+  { desc = "Find File" }
+)
 m("n", "<leader><leader>", ":Telescope<CR>")
 m("v", "<leader>r", require("telescope").extensions.refactoring.refactors)
 
@@ -57,7 +62,7 @@ m(
   "n",
   "<leader>q",
   ":call ToggleList('Quickfix List', 'c')<CR>",
-  { silent = true }
+  { silent = true, desc = "Quickfix List" }
 )
 
 m("", "*", "<Plug>(asterisk-z*)<Plug>(is-nohl-1)", { remap = true })
@@ -114,13 +119,13 @@ m(
   "n",
   "<leader>a",
   ":Lspsaga code_action<cr>",
-  { desc = "Action", silent = true }
+  { desc = "Code Action", silent = true }
 )
 m(
   "v",
   "<leader>a",
   ":<c-u>Lspsaga range_code_action<cr>",
-  { desc = "Action", silent = true }
+  { desc = "Code Action", silent = true }
 )
 
 m(
@@ -180,16 +185,24 @@ m("n", "<leader>ds", require("dap").step_over)
 m("n", "<leader>di", require("dap").step_into)
 m("n", "<leader>do", require("dap").step_out)
 
-m("n", "<leader>g", require("harpoon.ui").toggle_quick_menu)
+m(
+  "n",
+  "<leader>gg",
+  require("harpoon.ui").toggle_quick_menu,
+  { desc = "Harpoon" }
+)
 m("n", "<leader>ga", require("harpoon.mark").add_file)
 
 m(
   "n",
-  "<leader>t",
-  ":UltestNearest<CR>",
+  "<leader>tt",
+  "<Plug>(ultest-run-nearest)",
   { desc = "Test Nearest", silent = true }
 )
-m("n", "<leader>tt", ":Ultest<CR>", { desc = "Test File", silent = true })
+m("n", "<leader>ta", "<Plug>(ultest-run-file)", {
+  desc = "Test File",
+  silent = true,
+})
 m(
   "n",
   "<leader>to",
@@ -197,4 +210,4 @@ m(
   { desc = "Test Output", silent = true }
 )
 
-m("n", "<leader>p", "<Plug>ReplaceWithRegisterOperator")
+m("n", "<leader>p", "<Plug>ReplaceWithRegisterOperator", { desc = "Paste in" })

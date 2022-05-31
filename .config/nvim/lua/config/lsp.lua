@@ -26,9 +26,6 @@ local on_attach = function(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
-      hi LspReferenceRead cterm=bold ctermbg=239 guibg=#504945
-      hi LspReferenceText cterm=bold ctermbg=239 guibg=#504945
-      hi LspReferenceWrite cterm=bold ctermbg=239 guibg=#504945
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -93,13 +90,13 @@ if not configs.ls_emmet then
         "vue",
         "php"
       },
-      root_dir = function()
-        return vim.loop.cwd()
-      end,
+      root_dir = vim.loop.cwd,
       settings = {},
     },
   }
 end
+
+nvim_lsp.ls_emmet.setup { capabilities = capabilities }
 
 nvim_lsp.jsonls.setup {
   capabilities = capabilities,
@@ -109,12 +106,11 @@ nvim_lsp.jsonls.setup {
   settings = {
     json = {
       schemas = require"schemastore".json.schemas(),
+      validate = { enable = true },
     },
   },
   on_attach = on_attach,
 }
-
-nvim_lsp.ls_emmet.setup { capabilities = capabilities }
 
 local sumneko_root_path = "/home/pedro/Documents/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
@@ -132,7 +128,12 @@ nvim_lsp.sumneko_lua.setup {
         path = runtime_path,
       },
       diagnostics = {
+        enable = false,
         globals = { "vim" },
+      },
+      completion = {
+        keywordSnippet="Replace",
+        callSnippet="Replace"
       },
       workspace = {
         preloadFileSize = 145,
@@ -160,11 +161,11 @@ vim.diagnostic.config {
 
 null_ls.setup {
   sources = {
-    null_ls.builtins.diagnostics.luacheck,
+    null_ls.builtins.diagnostics.selene,
     null_ls.builtins.diagnostics.eslint_d,
-    -- null_ls.builtins.diagnostics.pylint,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.yapf,
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.refactoring,

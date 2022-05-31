@@ -1,6 +1,6 @@
 local dap = require'dap'
--- local dap_install = require("dap-install")
--- local di_api = require("dap-install.api.debuggers")
+-- local dap_install = require("dap-buddy")
+-- local di_api = require("dap-install.debuggers")
 -- local dbg_list = di_api.get_installed_debuggers()
 dap.adapters.node2 = {
 	command = "node",
