@@ -1,9 +1,5 @@
-local dap = require "config.dap"
+-- local dap = require "config.dap"
 local m = vim.keymap.set
-
--- " Better tabbing
-m("v", "<", "<gv")
-m("v", ">", ">gv")
 
 m("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "File Explorer" })
 
@@ -34,7 +30,7 @@ m(
   require("telescope.builtin").find_files,
   { desc = "Find File" }
 )
-m("n", "<leader><leader>", ":Telescope<CR>")
+m("n", "<leader><leader>", ":<C-u>Telescope<CR>")
 m("v", "<leader>r", require("telescope").extensions.refactoring.refactors)
 
 -- " Snippets And Completion
@@ -71,7 +67,7 @@ m("", "g*", "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)", { remap = true })
 m("", "g#", "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)", { remap = true })
 
 -- " LSP
-m("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", silent = true })
+m("n", "gd", vim.lsp.buf.definition, { desc = "Declaration", silent = true })
 m("n", "gh", vim.lsp.buf.hover, { desc = "Hover", silent = true })
 m("n", "gr", vim.lsp.buf.references, { desc = "References", silent = true })
 m("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", silent = true })
@@ -128,45 +124,45 @@ m(
   { desc = "Code Action", silent = true }
 )
 
-m(
-  "n",
-  "<leader>hn",
-  require("gitsigns.actions").next_hunk,
-  { desc = "Next Hunk", silent = true }
-)
-m(
-  "n",
-  "<leader>hN",
-  require("gitsigns.actions").prev_hunk,
-  { desc = "Previous Hunk", silent = true }
-)
-m(
-  { "n", "v" },
-  "<leader>hs",
-  ":Gitsigns stage_hunk<CR>",
-  { desc = "Stage Hunk", silent = true }
-)
-m(
-  { "n", "v" },
-  "<leader>hr",
-  ":Gitsigns reset_hunk<CR>",
-  { desc = "Stage Hunk", silent = true }
-)
-m(
-  { "n", "v" },
-  "<leader>hu",
-  ":Gitsigns undo_stage_hunk<CR>",
-  { desc = "Stage Hunk", silent = true }
-)
-m(
-  "n",
-  "<leader>hp",
-  ":Gitsigns preview_hunk<CR>",
-  { desc = "Stage Hunk", silent = true }
-)
-m("n", "<leader>hb", function()
-  require("gitsigns").blame_line { full = true }
-end, { desc = "Stage Hunk", silent = true })
+-- m(
+--   "n",
+--   "<leader>hn",
+--   require("gitsigns.actions").next_hunk,
+--   { desc = "Next Hunk", silent = true }
+-- )
+-- m(
+--   "n",
+--   "<leader>hN",
+--   require("gitsigns.actions").prev_hunk,
+--   { desc = "Previous Hunk", silent = true }
+-- )
+-- m(
+--   { "n", "v" },
+--   "<leader>hs",
+--   ":Gitsigns stage_hunk<CR>",
+--   { desc = "Stage Hunk", silent = true }
+-- )
+-- m(
+--   { "n", "v" },
+--   "<leader>hr",
+--   ":Gitsigns reset_hunk<CR>",
+--   { desc = "Stage Hunk", silent = true }
+-- )
+-- m(
+--   { "n", "v" },
+--   "<leader>hu",
+--   ":Gitsigns undo_stage_hunk<CR>",
+--   { desc = "Stage Hunk", silent = true }
+-- )
+-- m(
+--   "n",
+--   "<leader>hp",
+--   ":Gitsigns preview_hunk<CR>",
+--   { desc = "Stage Hunk", silent = true }
+-- )
+-- m("n", "<leader>hb", function()
+--   require("gitsigns").blame_line { full = true }
+-- end, { desc = "Stage Hunk", silent = true })
 m(
   "n",
   "<Leader>hm",
@@ -177,13 +173,13 @@ m(
 m("n", "gs", "<plug>(GrepperOperator)", { remap = true })
 m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
 
-m("n", "<leader>dd", require("dapui").toggle)
-m("n", "<leader>db", require("dap").toggle_breakpoint)
-m("n", "<leader>da", dap.attach)
-m("n", "<leader>dc", require("dap").continue)
-m("n", "<leader>ds", require("dap").step_over)
-m("n", "<leader>di", require("dap").step_into)
-m("n", "<leader>do", require("dap").step_out)
+-- m("n", "<leader>dd", require("dapui").toggle)
+-- m("n", "<leader>db", require("dap").toggle_breakpoint)
+-- m("n", "<leader>da", dap.attach)
+-- m("n", "<leader>dc", require("dap").continue)
+-- m("n", "<leader>ds", require("dap").step_over)
+-- m("n", "<leader>di", require("dap").step_into)
+-- m("n", "<leader>do", require("dap").step_out)
 
 m(
   "n",
@@ -193,21 +189,29 @@ m(
 )
 m("n", "<leader>ga", require("harpoon.mark").add_file)
 
-m(
-  "n",
-  "<leader>tt",
-  "<Plug>(ultest-run-nearest)",
-  { desc = "Test Nearest", silent = true }
-)
-m("n", "<leader>ta", "<Plug>(ultest-run-file)", {
-  desc = "Test File",
-  silent = true,
-})
-m(
-  "n",
-  "<leader>to",
-  "<Plug>(ultest-output-jump)",
-  { desc = "Test Output", silent = true }
-)
+-- m(
+--   "n",
+--   "<leader>tt",
+--   require("neotest").run.run,
+--   { desc = "Test Nearest", silent = true }
+-- )
+-- m(
+--   "n",
+--   "<leader>ta",
+--   function() require("neotest").run.run(vim.fn.expand("%")) end,
+--   {
+--     desc = "Test File",
+--     silent = true,
+--   }
+-- )
+-- m(
+--   "n",
+--   "<leader>to",
+--   function() require("neotest").output.open({ enter = true }) end,
+--   {
+--     desc = "Test Output",
+--     silent = true,
+--   }
+-- )
 
 m("n", "<leader>p", "<Plug>ReplaceWithRegisterOperator", { desc = "Paste in" })

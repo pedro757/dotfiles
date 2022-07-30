@@ -141,7 +141,10 @@ gls.left[10] = {
 gls.left[10] = {
   PackageInfoStatus = {
     provider = function()
-      return require("package-info").get_status()
+      local p_info = require("utils").prequire("package-info")
+      if p_info then
+        return p_info.get_status()
+      end
     end,
     condition = function()
       local filename = vim.api.nvim_buf_get_name(0):match("^.+/(.+)$")

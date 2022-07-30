@@ -381,9 +381,10 @@ local highlight_groups = {
   helpSpecial        = { link = 'Blue' },
   helpSectionDelim   = { link = 'Grey' },
 
-  UltestPass    = { fg = p.green, bg = p.bg1 },
-  UltestFail    = { fg = p.red, bg = p.bg1 },
-  UltestRunning = { fg = p.yellow, bg = p.bg1 },
+  NeotestPassed    = { fg = p.green, bg = p.bg1 },
+  NeotestFailed    = { fg = p.red, bg = p.bg1 },
+  NeotestRunning   = { fg = p.yellow, bg = p.bg1 },
+  NeotestSkipped   = { bg = p.bg1 },
 
   LspSagaCodeActionTitle        = { fg = p.green, bg = p.bg1 },
   LspSagaCodeActionBorder       = { fg = p.green, bg = p.bg1 },

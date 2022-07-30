@@ -6,8 +6,8 @@ end
 
 M.prequire = function(...)
     local status, lib = pcall(require, ...)
-    if not status then return lib end
-    return nil
+    if not status then return nil, lib end
+    return lib
 end
 
 M.executable = function (command)

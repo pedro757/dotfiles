@@ -56,11 +56,17 @@ local servers = {
   "graphql",
   "gopls",
   "svelte",
-  "tsserver",
   "solc",
   "cssmodules_ls",
   "vuels",
+  "marksman",
+  "tailwindcss",
 }
+
+-- nvim_lsp.emmet_ls.setup({
+--   capabilities = capabilities,
+--   filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+-- })
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -97,6 +103,24 @@ if not configs.ls_emmet then
 end
 
 nvim_lsp.ls_emmet.setup { capabilities = capabilities }
+
+nvim_lsp.tsserver.setup {
+  init_options = require("nvim-lsp-ts-utils").init_options,
+  capabilities = capabilities,
+  on_attach = function (client, bufnr)
+    on_attach(client, bufnr)
+    local ts_utils = require("nvim-lsp-ts-utils")
+
+    ts_utils.setup({
+      enable_import_on_completion = true,
+      update_imports_on_move = true,
+      require_confirmation_on_move = true,
+      auto_inlay_hints = false,
+    })
+
+    ts_utils.setup_client(client)
+  end,
+}
 
 nvim_lsp.jsonls.setup {
   capabilities = capabilities,

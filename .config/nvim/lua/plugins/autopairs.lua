@@ -4,9 +4,10 @@ local cmp = require "cmp"
 
 npairs.setup {
   check_ts = true,
+  break_undo = false,
 }
 
 cmp.event:on(
   "confirm_done",
-  cmp_autopairs.on_confirm_done { map_char = { tex = "" } }
+  cmp_autopairs.on_confirm_done()
 )

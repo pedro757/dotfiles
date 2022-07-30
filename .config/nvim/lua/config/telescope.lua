@@ -30,12 +30,12 @@ require('telescope').setup{
       }
     },
     file_ignore_patterns = { "plugged", "cache", "venv", ".venv",
-      "node_modules", ".git/", "packer_compiled.lua" },
+      "node_modules", ".git/", "packer_compiled.lua", ".next/" },
     set_env = { ['COLORTERM'] = 'truecolor' },
   },
   pickers = {
     find_files = {
-      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+      find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--no-ignore-vcs" },
       hidden = true,
     },
   },

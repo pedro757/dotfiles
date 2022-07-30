@@ -63,6 +63,7 @@ au("Filetype", {
     [[null-ls-info]],
     "lspinfo",
     "UltestSummary",
+    "git"
   },
   callback = function()
     map("n", "gq", ":bd<cr>", buf_opts)
@@ -179,7 +180,7 @@ au("User", {
 local NvimConfig = aug("NvimConfig", clear)
 
 au("BufWritePost", {
-  pattern = "plugins.lua",
+  pattern = "init.lua",
   callback = function()
     if vim.loop.cwd() == "/home/pedro/.config/nvim" then
       vim.cmd [[source <afile> | PackerCompile]]
@@ -226,7 +227,7 @@ au("BufWritePre", {
 })
 
 cmd("Worktree", require("telescope").extensions.git_worktree.git_worktrees, {})
-cmd("WW", "SudaWrite", {})
+cmd("WW", "SudoWrite", {})
 cmd("DiffSaved", function ()
   vim.fn.DiffWithSaved()
 end, {})

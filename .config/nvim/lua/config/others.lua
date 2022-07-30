@@ -23,6 +23,9 @@ require("nvim-tree").setup {
       }
     }
   },
+  git = {
+    ignore = false,
+  },
   -- actions = {
   --   open_file = {
   --     quit_on_open = true
@@ -53,8 +56,6 @@ require("tmux").setup {
   },
 }
 require("refactoring").setup {}
-require("numb").setup()
-require("gomove").setup {}
 require("which-key").setup {
   plugins = {
     presets = {
@@ -67,10 +68,6 @@ require("which-key").setup {
       g = true,
     },
   },
-}
-require("tabout").setup {
-  tabkey = "",
-  backwards_tabkey = "",
 }
 require("neoscroll").setup {
   mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
