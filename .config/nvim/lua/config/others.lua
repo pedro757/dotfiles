@@ -3,11 +3,12 @@ require("colorizer").setup()
 require("nvim-web-devicons").setup()
 require("nvim-tree").setup {
   update_cwd = true,
+  respect_buf_cwd = true,
+  sync_root_with_cwd = true,
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_root = true
   },
-  respect_buf_cwd = true,
   renderer = {
     icons = {
       git_placement = "after",
@@ -26,11 +27,11 @@ require("nvim-tree").setup {
   git = {
     ignore = false,
   },
-  -- actions = {
-  --   open_file = {
-  --     quit_on_open = true
-  --   }
-  -- },
+  actions = {
+    open_file = {
+      quit_on_open = true
+    }
+  },
   view = {
     mappings = {
       list = {
@@ -45,16 +46,16 @@ require("indent_blankline").setup {
   show_current_context = true,
 }
 require("project_nvim").setup {}
-require("tmux").setup {
-  copy_sync = {
-    enable = false,
-  },
-  navigation = {
-    cycle_navigation = true,
-    enable_default_keybindings = true,
-    persist_zoom = false,
-  },
-}
+-- require("tmux").setup {
+--   copy_sync = {
+--     enable = false,
+--   },
+--   navigation = {
+--     cycle_navigation = true,
+--     enable_default_keybindings = true,
+--     persist_zoom = false,
+--   },
+-- }
 require("refactoring").setup {}
 require("which-key").setup {
   plugins = {

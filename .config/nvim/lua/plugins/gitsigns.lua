@@ -48,7 +48,7 @@ require("gitsigns").setup {
         gs.next_hunk()
       end)
       return "<Ignore>"
-    end, { expr = true })
+    end, { expr = true, desc = "Next Hunk" })
 
     map("n", "<leader>hN", function()
       if vim.wo.diff then
@@ -58,7 +58,13 @@ require("gitsigns").setup {
         gs.prev_hunk()
       end)
       return "<Ignore>"
-    end, { expr = true })
+    end, { expr = true, desc = "Previous Hunk" })
+    map(
+      "n",
+      "<Leader>hm",
+      "<Plug>(git-messenger)",
+      { desc = "Commit Message", silent = true }
+    )
 
     -- Actions
     map(

@@ -107,7 +107,13 @@ return require("packer").startup {
     --   end
     -- }
     use "antoinemadec/FixCursorHold.nvim"
-    -- use "mfussenegger/nvim-dap"
+    use {
+      "mfussenegger/nvim-dap",
+      config = function()
+        require "config.dap"
+        require "mappings".dap()
+      end,
+    }
     -- use "rcarriga/nvim-dap-ui"
     use "lukas-reineke/indent-blankline.nvim"
     use "tami5/lspsaga.nvim"
@@ -130,6 +136,14 @@ return require("packer").startup {
       config = function()
         require "plugins.cmp"
       end,
+    }
+    use {
+      "dcampos/cmp-emmet-vim",
+      after = "nvim-cmp",
+    }
+    use {
+      'mattn/emmet-vim',
+      after = "nvim-cmp",
     }
     use {
       "hrsh7th/cmp-cmdline",
@@ -308,8 +322,8 @@ return require("packer").startup {
       },
     }
 
-    -- TMUX
-    use "aserowy/tmux.nvim"
+    -- -- TMUX
+    -- use "aserowy/tmux.nvim"
 
     use {
       "AndrewRadev/splitjoin.vim",
@@ -378,6 +392,14 @@ return require("packer").startup {
       "gbprod/stay-in-place.nvim",
       config = function()
         require("stay-in-place").setup {}
+      end,
+    }
+    use {
+      "mrshmllow/document-color.nvim",
+      config = function()
+        require("document-color").setup {
+          mode = "foreground",
+        }
       end,
     }
   end,

@@ -28,6 +28,7 @@ cmp.setup {
     { name = "nvim_lsp" },
     { name = "luasnip" },
   }, {
+    { name = "emmet_vim" },
     { name = "buffer" },
     { name = "path" },
   }, {
@@ -39,11 +40,11 @@ cmp.setup {
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-x>"] = cmp.mapping(cmp.mapping.close(), { "i", "c" }),
     ["<C-j>"] = cmp.mapping(
-      cmp.mapping.select_next_item(cmp.SelectBehavior.Insert),
+      cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       { "i", "c" }
     ),
     ["<C-k>"] = cmp.mapping(
-      cmp.mapping.select_prev_item(cmp.SelectBehavior.Insert),
+      cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
       { "i", "c" }
     ),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -88,6 +89,10 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 }
 

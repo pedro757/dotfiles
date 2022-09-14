@@ -5,6 +5,8 @@ vim.g.matchup_matchparen_offscreen = {
   fullwidth = 1,
   highlight = "MatchParen",
 }
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_side = "right"
 vim.g.registers_window_border = "solid"
 vim.g.registers_hide_only_whitespace = 1

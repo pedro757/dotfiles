@@ -1,5 +1,4 @@
 local nvim_lsp = require"lspconfig"
-local configs = require"lspconfig.configs"
 local update_capabilities = require"cmp_nvim_lsp".update_capabilities
 local null_ls = require"null-ls"
 
@@ -22,7 +21,9 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
   option("omnifunc", "v:lua.vim.lsp.omnifunc")
-  -- Set autocommands conditional on server_capabilities
+  if client.server_capabilities.colorProvider then
+    require("document-color").buf_attach(bufnr, { mode = "background" })
+  end
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_exec(
       [[
@@ -54,19 +55,15 @@ local servers = {
   "bashls",
   "yamlls",
   "graphql",
-  "gopls",
   "svelte",
   "solc",
   "cssmodules_ls",
   "vuels",
   "marksman",
   "tailwindcss",
+  "solargraph",
+  "rust_analyzer",
 }
-
--- nvim_lsp.emmet_ls.setup({
---   capabilities = capabilities,
---   filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
--- })
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -77,32 +74,6 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
-
-if not configs.ls_emmet then
-  configs.ls_emmet = {
-    default_config = {
-      cmd = { "ls_emmet", "--inspect", "--stdio" },
-      filetypes = {
-        "html",
-        "css",
-        "scss",
-        "sass",
-        "javascript",
-        "javascriptreact",
-        "typescriptreact",
-        "markdown",
-        "handlebars",
-        "hbs",
-        "vue",
-        "php"
-      },
-      root_dir = vim.loop.cwd,
-      settings = {},
-    },
-  }
-end
-
-nvim_lsp.ls_emmet.setup { capabilities = capabilities }
 
 nvim_lsp.tsserver.setup {
   init_options = require("nvim-lsp-ts-utils").init_options,
@@ -136,6 +107,19 @@ nvim_lsp.jsonls.setup {
   on_attach = on_attach,
 }
 
+nvim_lsp.gopls.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    gopls = {
+      gofumpt = true,
+    }
+  },
+  on_attach = on_attach,
+}
+
 local sumneko_root_path = "/home/pedro/Documents/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 
@@ -160,7 +144,7 @@ nvim_lsp.sumneko_lua.setup {
         callSnippet="Replace"
       },
       workspace = {
-        preloadFileSize = 145,
+        -- preloadFileSize = 145,
         library = vim.api.nvim_get_runtime_file("", true),
       },
       telemetry = {
@@ -187,10 +171,12 @@ null_ls.setup {
   sources = {
     null_ls.builtins.diagnostics.selene,
     null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.diagnostics.revive,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.yapf,
+    null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.refactoring,
   },
