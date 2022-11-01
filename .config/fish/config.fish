@@ -43,6 +43,7 @@ set PATH $HOME/.cargo/bin $PATH
 
 set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
+set -gx GPG_TTY (tty)
 
 set --global tide_character_icon "➜"
 set --global tide_prompt_add_newline_before false
