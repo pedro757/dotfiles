@@ -1,25 +1,11 @@
-local nvim_lsp = require"lspconfig"
-local update_capabilities = require"cmp_nvim_lsp".update_capabilities
-local null_ls = require"null-ls"
-
-require"lspsaga".init_lsp_saga {
-  code_action_keys = {
-    quit = { "q", "<C-c>", "<esc>", "<C-x>" },
-    exec = { "<CR>", "<C-l>" },
-  },
-  use_saga_diagnostic_sign = false,
-  code_action_prompt = {
-    enable = true,
-    sign = false,
-    sign_priority = 20,
-    virtual_text = true,
-  },
-}
+local nvim_lsp = require "lspconfig"
+local null_ls = require "null-ls"
 
 local on_attach = function(client, bufnr)
   local function option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
+
   option("omnifunc", "v:lua.vim.lsp.omnifunc")
   if client.server_capabilities.colorProvider then
     require("document-color").buf_attach(bufnr, { mode = "background" })
@@ -40,9 +26,49 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+require("typescript").setup {
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = function(fname)
+      return require("lspconfig.util").root_pattern ".git/"(fname)
+        or require("lspconfig.util").root_pattern "tsconfig.json"(fname)
+        or require("lspconfig.util").root_pattern(
+          "package.json",
+          "jsconfig.json"
+        )(fname)
+    end,
+  },
+}
+
+-- nvim_lsp.tsserver.setup {
+--   init_options = require("nvim-lsp-ts-utils").init_options,
+--   capabilities = capabilities,
+--   root_dir = function(fname)
+--     return require("lspconfig.util").root_pattern ".git/"(fname)
+--       or require("lspconfig.util").root_pattern "tsconfig.json"
+--       or require("lspconfig.util").root_pattern(
+--         "package.json",
+--         "jsconfig.json",
+--         ".git"
+--       )(fname)
+--   end,
+--   on_attach = function(client, bufnr)
+--     on_attach(client, bufnr)
+--     local ts_utils = require "nvim-lsp-ts-utils"
+--
+--     ts_utils.setup {
+--       enable_import_on_completion = true,
+--       update_imports_on_move = true,
+--       require_confirmation_on_move = true,
+--       auto_inlay_hints = false,
+--     }
+--
+--     ts_utils.setup_client(client)
+--   end,
+-- }
 
 local servers = {
   "pyright",
@@ -75,24 +101,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-nvim_lsp.tsserver.setup {
-  init_options = require("nvim-lsp-ts-utils").init_options,
-  capabilities = capabilities,
-  on_attach = function (client, bufnr)
-    on_attach(client, bufnr)
-    local ts_utils = require("nvim-lsp-ts-utils")
-
-    ts_utils.setup({
-      enable_import_on_completion = true,
-      update_imports_on_move = true,
-      require_confirmation_on_move = true,
-      auto_inlay_hints = false,
-    })
-
-    ts_utils.setup_client(client)
-  end,
-}
-
 nvim_lsp.jsonls.setup {
   capabilities = capabilities,
   flags = {
@@ -100,7 +108,7 @@ nvim_lsp.jsonls.setup {
   },
   settings = {
     json = {
-      schemas = require"schemastore".json.schemas(),
+      schemas = require("schemastore").json.schemas(),
       validate = { enable = true },
     },
   },
@@ -115,7 +123,7 @@ nvim_lsp.gopls.setup {
   settings = {
     gopls = {
       gofumpt = true,
-    }
+    },
   },
   on_attach = on_attach,
 }
@@ -140,8 +148,8 @@ nvim_lsp.sumneko_lua.setup {
         globals = { "vim" },
       },
       completion = {
-        keywordSnippet="Replace",
-        callSnippet="Replace"
+        keywordSnippet = "Replace",
+        callSnippet = "Replace",
       },
       workspace = {
         -- preloadFileSize = 145,
@@ -180,4 +188,8 @@ null_ls.setup {
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.refactoring,
   },
+}
+
+return {
+  on_attach = on_attach,
 }

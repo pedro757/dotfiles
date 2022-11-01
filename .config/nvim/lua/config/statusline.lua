@@ -221,7 +221,7 @@ gls.right[5] = {
 gls.right[6] = {
   PerCent = {
     provider = function()
-      return fileinfo.current_line_percent() .. ' ' .. vim.fn.col(".") .. "  "
+      return fileinfo.current_line_percent() .. ' ' .. vim.fn.line(".") .. ":" .. vim.fn.col(".")
     end,
     highlight = {mycolors.fg,mycolors.bg,'bold'},
     separator = ' ',
@@ -229,24 +229,6 @@ gls.right[6] = {
   }
 }
 gls.right[7] = {
-  FileEncode = {
-    provider = 'FileEncode',
-    condition = condition.hide_in_width,
-    highlight = {mycolors.fg,mycolors.bg,'bold'}
-  }
-}
-
-gls.right[8] = {
-  FileFormat = {
-    provider = 'FileFormat',
-    condition = condition.hide_in_width,
-    separator = ' ',
-    separator_highlight = {'NONE',mycolors.bg},
-    highlight = {mycolors.fg,mycolors.bg,'bold'}
-  }
-}
-
-gls.right[9] = {
   RainbowBlue = {
     provider = function()
       local color = mode_color[vim.api.nvim_get_mode().mode]

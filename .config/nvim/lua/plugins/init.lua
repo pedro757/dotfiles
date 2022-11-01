@@ -1,26 +1,44 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system {
-    "git",
-    "clone",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  execute "packadd packer.nvim"
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath "data"
+      .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system {
+      "git",
+      "clone",
+      "--depth",
+      "1",
+      "https://github.com/wbthomason/packer.nvim",
+      install_path,
+    }
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
-vim.cmd "packadd packer.nvim"
+local packer_bootstrap = ensure_packer()
 
 return require("packer").startup {
   function(use)
     use "wbthomason/packer.nvim"
-    use "neovim/nvim-lspconfig"
-    use "jose-elias-alvarez/nvim-lsp-ts-utils"
-    use "jose-elias-alvarez/null-ls.nvim"
+    use {
+      "neovim/nvim-lspconfig",
+      after = "LuaSnip",
+      requires = {
+        {
+          "jose-elias-alvarez/null-ls.nvim",
+        },
+        {
+          "jose-elias-alvarez/typescript.nvim",
+        }
+      },
+      config = function()
+        require "plugins.lsp"
+      end,
+    }
+    -- use "jose-elias-alvarez/nvim-lsp-ts-utils"
+    -- use "jose-elias-alvarez/null-ls.nvim"
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use "nvim-telescope/telescope.nvim"
@@ -111,7 +129,7 @@ return require("packer").startup {
       "mfussenegger/nvim-dap",
       config = function()
         require "config.dap"
-        require "mappings".dap()
+        require("mappings").dap()
       end,
     }
     -- use "rcarriga/nvim-dap-ui"
@@ -142,7 +160,7 @@ return require("packer").startup {
       after = "nvim-cmp",
     }
     use {
-      'mattn/emmet-vim',
+      "mattn/emmet-vim",
       after = "nvim-cmp",
     }
     use {
@@ -155,7 +173,7 @@ return require("packer").startup {
     }
     use {
       "hrsh7th/cmp-nvim-lua",
-      ft = "lua",
+      -- ft = "lua",
       after = "nvim-cmp",
     }
     use {
@@ -284,22 +302,22 @@ return require("packer").startup {
       "junegunn/gv.vim",
       cmd = { "GV", "GV!", "GV?" },
     }
-    use {
-      "haya14busa/vim-asterisk",
-      requires = {
-        {
-          "haya14busa/is.vim",
-          -- keys = { "/", "n", "N", "*", "#" },
-          opt = false,
-        },
-      },
-      keys = {
-        "<Plug>(asterisk-z*)<Plug>(is-nohl-1)",
-        "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)",
-        "<Plug>(asterisk-z#)<Plug>(is-nohl-1)",
-        "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)",
-      },
-    }
+    -- use {
+    --   "haya14busa/vim-asterisk",
+    --   requires = {
+    --     {
+    --       "haya14busa/is.vim",
+    --       -- keys = { "/", "n", "N", "*", "#" },
+    --       opt = false,
+    --     },
+    --   },
+    --   keys = {
+    --     "<Plug>(asterisk-z*)<Plug>(is-nohl-1)",
+    --     "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)",
+    --     "<Plug>(asterisk-z#)<Plug>(is-nohl-1)",
+    --     "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)",
+    --   },
+    -- }
     use {
       "folke/zen-mode.nvim",
       requires = {
@@ -339,7 +357,7 @@ return require("packer").startup {
     }
     use "andymass/vim-matchup"
     use {
-      "~/Documents/package-info.nvim",
+      "vuki656/package-info.nvim",
       config = function()
         require("package-info").setup()
       end,
@@ -363,7 +381,6 @@ return require("packer").startup {
       "dstein64/vim-startuptime",
       cmd = "StartupTime",
     }
-    use "nathom/filetype.nvim"
     use {
       "sQVe/sort.nvim",
       cmd = "Sort",
@@ -402,6 +419,9 @@ return require("packer").startup {
         }
       end,
     }
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end,
   config = {
     display = {
