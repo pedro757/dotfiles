@@ -63,7 +63,7 @@ au("Filetype", {
     [[null-ls-info]],
     "lspinfo",
     "UltestSummary",
-    "git"
+    "git",
   },
   callback = function()
     map("n", "gq", ":bd<cr>", buf_opts)
@@ -191,7 +191,6 @@ au("BufWritePost", {
 
 local NvimRootGit = aug("NvimRootGit", clear)
 au("VimEnter", {
-  once = true,
   callback = function()
     if string.find(vim.loop.cwd(), "/home/pedro/.config/nvim") then
       vim.fn.FugitiveDetect(vim.fn.expand "~/.dotfiles")
@@ -201,11 +200,12 @@ au("VimEnter", {
 })
 au("Filetype", {
   pattern = { "lua", "vim", "toml" },
-  once = true,
   callback = function()
-    if string.find(vim.loop.cwd(), "/home/pedro/.config/nvim") then
-      if vim.opt.filetype:get() ~= "TelescopePrompt" then
-        vim.fn.FugitiveDetect(vim.fn.expand "~/.dotfiles")
+    if vim.fn.empty(vim.fn.FugitiveGitDir()) then
+      if string.find(vim.loop.cwd(), "/home/pedro/.config/nvim") then
+        if vim.opt.filetype:get() ~= "TelescopePrompt" then
+          vim.fn.FugitiveDetect(vim.fn.expand "~/.dotfiles")
+        end
       end
     end
   end,
@@ -215,10 +215,8 @@ au("Filetype", {
 local Mkdir = aug("Mkdir", clear)
 
 au("BufWritePre", {
-  callback = function ()
+  callback = function()
     local dir = vim.fn.expand "<afile>:p:h"
-
-    print(dir)
     if vim.fn.isdirectory(dir) == 0 then
       vim.fn.mkdir(dir, "p")
     end
@@ -228,7 +226,7 @@ au("BufWritePre", {
 
 cmd("Worktree", require("telescope").extensions.git_worktree.git_worktrees, {})
 cmd("WW", "SudoWrite", {})
-cmd("DiffSaved", function ()
+cmd("DiffSaved", function()
   vim.fn.DiffWithSaved()
 end, {})
 cmd("Dotfiles", "call FugitiveDetect(expand('~/.dotfiles'))", {})

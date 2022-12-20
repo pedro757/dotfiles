@@ -37,8 +37,6 @@ return require("packer").startup {
         require "plugins.lsp"
       end,
     }
-    -- use "jose-elias-alvarez/nvim-lsp-ts-utils"
-    -- use "jose-elias-alvarez/null-ls.nvim"
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use "nvim-telescope/telescope.nvim"
@@ -124,13 +122,8 @@ return require("packer").startup {
     --     })
     --   end
     -- }
-    use "antoinemadec/FixCursorHold.nvim"
     use {
-      "mfussenegger/nvim-dap",
-      config = function()
-        require "config.dap"
-        require("mappings").dap()
-      end,
+      "mfussenegger/nvim-dap"
     }
     -- use "rcarriga/nvim-dap-ui"
     use "lukas-reineke/indent-blankline.nvim"
@@ -154,6 +147,10 @@ return require("packer").startup {
       config = function()
         require "plugins.cmp"
       end,
+    }
+    use {
+      "jcha0713/cmp-tw2css",
+      after = "nvim-cmp",
     }
     use {
       "dcampos/cmp-emmet-vim",

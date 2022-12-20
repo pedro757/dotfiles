@@ -43,6 +43,15 @@ require("typescript").setup {
   },
 }
 
+nvim_lsp.denols.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+  on_attach = on_attach,
+}
+
 -- nvim_lsp.tsserver.setup {
 --   init_options = require("nvim-lsp-ts-utils").init_options,
 --   capabilities = capabilities,
@@ -189,6 +198,22 @@ null_ls.setup {
     null_ls.builtins.code_actions.refactoring,
   },
 }
+
+local null_ls_stop = function()
+    local null_ls_client
+    for _, client in ipairs(vim.lsp.get_active_clients()) do
+        if client.name == "null-ls" then
+            null_ls_client = client
+        end
+    end
+    if not null_ls_client then
+        return
+    end
+
+    null_ls_client.stop()
+end
+
+vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 
 return {
   on_attach = on_attach,

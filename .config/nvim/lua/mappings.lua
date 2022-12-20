@@ -1,7 +1,6 @@
--- local dap = require "config.dap"
 local m = vim.keymap.set
 
-m("n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true, desc = "File Explorer" })
+m("n", "<leader>e", vim.cmd.NvimTreeToggle, { silent = true, desc = "File Explorer" })
 
 -- " New Line Pressing Enter
 m("n", "<S-Enter>", ":call AddEmptyLineAbove()<CR>", { silent = true })
@@ -25,16 +24,6 @@ m("n", "<c-k>", "<c-w>k")
 m("n", "<c-j>", "<c-w>j")
 m("n", "<c-l>", "<c-w>l")
 m("n", "<c-h>", "<c-w>h")
-
--- " Telescope
-m(
-  "n",
-  "<leader>f",
-  require("telescope.builtin").find_files,
-  { desc = "Find File" }
-)
-m("n", "<leader><leader>", ":<C-u>Telescope<CR>", { silent = true })
-m("v", "<leader>r", require("telescope").extensions.refactoring.refactors)
 
 -- " Snippets And Completion
 m(
@@ -165,21 +154,6 @@ m(
 m("n", "gs", "<plug>(GrepperOperator)", { remap = true })
 m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
 
-local function dap()
-  -- m("n", "<leader>dd", require("dapui").toggle)
-  m(
-    "n",
-    "<leader>db",
-    require("dap").toggle_breakpoint,
-    { desc = "Toggle Breakpoint DAP" }
-  )
-  -- m("n", "<leader>da", dap.attach)
-  m("n", "<leader>dc", require("dap").continue, { desc = "Continue DAP" })
-  m("n", "<leader>do", require("dap").step_over, { desc = "Step Over DAP" })
-  m("n", "<leader>di", require("dap").step_into, { desc = "Step Into DAP" })
-  m("n", "<leader>dO", require("dap").step_out, { desc = "Step Out DAP" })
-  m("n", "<leader>db", require("dap").step_back, { desc = "Step Back DAP" })
-end
 
 m(
   "n",
@@ -220,7 +194,3 @@ m(
 -- )
 
 m("n", "<leader>p", "<Plug>ReplaceWithRegisterOperator", { desc = "Paste in" })
-
-return {
-  dap = dap,
-}

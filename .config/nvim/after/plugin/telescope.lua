@@ -1,3 +1,4 @@
+local m = vim.keymap.set
 local actions = require('telescope.actions')
 local action_layout = require("telescope.actions.layout")
 
@@ -47,3 +48,14 @@ require('telescope').setup{
 local refactoring = require("refactoring")
 refactoring.setup{}
 -- require("telescope").load_extension("refactoring")
+
+
+-- " Telescope
+m(
+  "n",
+  "<leader>f",
+  require("telescope.builtin").find_files,
+  { desc = "Find File" }
+)
+m("n", "<leader><leader>", vim.cmd.Telescope, { desc= "Telescope", silent = true })
+m("v", "<leader>r", require("telescope").extensions.refactoring.refactors)
