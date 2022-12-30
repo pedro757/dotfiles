@@ -224,6 +224,16 @@ au("BufWritePre", {
   group = Mkdir,
 })
 
+au({"BufNewFile", "BufRead"}, {
+  pattern = "/dev/shm/gopass*",
+  callback = function ()
+    vim.opt.swapfile = false
+    vim.opt.backup = false
+    vim.opt.undofile = false
+    vim.opt.shada = ""
+  end
+})
+
 cmd("Worktree", require("telescope").extensions.git_worktree.git_worktrees, {})
 cmd("WW", "SudoWrite", {})
 cmd("DiffSaved", function()
