@@ -1,18 +1,28 @@
+if
+  not pcall(require, "cmp")
+  or not pcall(require, "lspkind")
+  or not pcall(require, "luasnip")
+  or not pcall(require, "nvim-autopairs")
+then
+  return
+end
+
+local luasnip = require "luasnip"
+
+-- require("luasnip/loaders/from_vscode").lazy_load()
+luasnip.config.setup {
+  update_events = "TextChanged,TextChangedI",
+  region_check_events = "InsertEnter",
+}
+
+require("luasnip.loaders.from_lua").lazy_load {
+  paths = "~/Documents/snippets/",
+}
+
 local utils = require "utils"
 local t = utils.t
-local luasnip = require "luasnip"
 local lspkind = require "lspkind"
 local cmp = require "cmp"
-
--- local has_words_before = function()
---   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
---   return col ~= 0
---     and vim.api
---         .nvim_buf_get_lines(0, line - 1, line, true)[1]
---         :sub(col, col)
---         :match "%s"
---       == nil
--- end
 
 cmp.setup {
   snippet = {
@@ -47,13 +57,11 @@ cmp.setup {
       cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
       { "i", "c" }
     ),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+      else luasnip.locally_jumpable(-1)
         luasnip.jump(-1)
-      else
-        fallback()
       end
     end, { "i", "s" }),
     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -61,8 +69,6 @@ cmp.setup {
         cmp.select_next_item()
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
-      -- elseif has_words_before() then
-      --   cmp.complete()
       else
         fallback()
       end
@@ -137,10 +143,45 @@ cmp.setup.cmdline(":", {
     { name = "path" },
   }, {
     {
-      name = 'cmdline',
+      name = "cmdline",
       option = {
-        ignore_cmds = { 'Man', '!' }
-      }
-    }
+        ignore_cmds = { "Man", "!" },
+      },
+    },
   }),
 })
+
+local npairs = require "nvim-autopairs"
+local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+
+npairs.setup {
+  check_ts = true,
+  break_undo = false,
+}
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+local Rule   = require'nvim-autopairs.rule'
+
+local brackets = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+npairs.add_rules {
+  Rule(' ', ' ')
+    :with_pair(function (opts)
+      local pair = opts.line:sub(opts.col - 1, opts.col)
+      return vim.tbl_contains({
+        brackets[1][1]..brackets[1][2],
+        brackets[2][1]..brackets[2][2],
+        brackets[3][1]..brackets[3][2],
+      }, pair)
+    end)
+}
+for _,bracket in pairs(brackets) do
+  npairs.add_rules {
+    Rule(bracket[1]..' ', ' '..bracket[2])
+      :with_pair(function() return false end)
+      :with_move(function(opts)
+        return opts.prev_char:match('.%'..bracket[2]) ~= nil
+      end)
+      :use_key(bracket[2])
+  }
+end

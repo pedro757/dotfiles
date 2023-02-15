@@ -1,3 +1,6 @@
+if not pcall(require, "dap") then
+  return
+end
 local m = vim.keymap.set
 local dap = require "dap"
 

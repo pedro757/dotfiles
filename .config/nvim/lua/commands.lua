@@ -64,6 +64,7 @@ au("Filetype", {
     "lspinfo",
     "UltestSummary",
     "git",
+    "man",
   },
   callback = function()
     map("n", "gq", ":bd<cr>", buf_opts)
@@ -187,29 +188,6 @@ au("BufWritePost", {
     end
   end,
   group = NvimConfig,
-})
-
-local NvimRootGit = aug("NvimRootGit", clear)
-au("VimEnter", {
-  callback = function()
-    if string.find(vim.loop.cwd(), "/home/pedro/.config/nvim") then
-      vim.fn.FugitiveDetect(vim.fn.expand "~/.dotfiles")
-    end
-  end,
-  group = NvimRootGit,
-})
-au("Filetype", {
-  pattern = { "lua", "vim", "toml" },
-  callback = function()
-    if vim.fn.empty(vim.fn.FugitiveGitDir()) then
-      if string.find(vim.loop.cwd(), "/home/pedro/.config/nvim") then
-        if vim.opt.filetype:get() ~= "TelescopePrompt" then
-          vim.fn.FugitiveDetect(vim.fn.expand "~/.dotfiles")
-        end
-      end
-    end
-  end,
-  group = NvimRootGit,
 })
 
 local Mkdir = aug("Mkdir", clear)

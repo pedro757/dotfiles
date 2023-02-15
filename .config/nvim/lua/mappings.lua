@@ -27,17 +27,12 @@ m("n", "<c-h>", "<c-w>h")
 
 -- " Snippets And Completion
 m(
-  "i",
+  { "i", "s" },
   "<c-e>",
   "<Plug>luasnip-next-choice",
   { remap = true }
 )
-m(
-  "s",
-  "<c-e>",
-  "<Plug>luasnip-next-choice",
-  { remap = true }
-)
+
 m({ "i", "c" }, "<c-h>", "<left>")
 m("i", "<c-l>", "<right>")
 m({ "i", "c" }, "<c-j>", "<down>")
@@ -77,16 +72,41 @@ m(
   vim.diagnostic.open_float,
   { desc = "Diagnostic", silent = true }
 )
+
+local severity_levels = {
+  vim.diagnostic.severity.ERROR,
+  vim.diagnostic.severity.WARN,
+  vim.diagnostic.severity.INFO,
+  vim.diagnostic.severity.HINT,
+}
+
+local get_highest_error_severity = function()
+  for _, level in ipairs(severity_levels) do
+    local diags = vim.diagnostic.get(0, { severity = { min = level } })
+    if #diags > 0 then
+      return level, diags
+    end
+  end
+end
+
 m(
   "n",
   "<leader>dn",
-  vim.diagnostic.goto_next,
+  function ()
+    vim.diagnostic.goto_next{
+      severity = get_highest_error_severity(),
+    }
+  end,
   { desc = "Next Diagnostic", silent = true }
 )
 m(
   "n",
   "<leader>dN",
-  vim.diagnostic.goto_prev,
+  function ()
+    vim.diagnostic.goto_next{
+      severity = get_highest_error_severity(),
+    }
+  end,
   { desc = "Previous Diagnostic", silent = true }
 )
 m(
@@ -98,16 +118,11 @@ m(
 m("n", "<leader>=", function()
   vim.lsp.buf.format { async = true }
 end, { desc = "Format file", silent = true })
+
 m(
-  "n",
+  { "n", "v" },
   "<leader>a",
-  ":Lspsaga code_action<cr>",
-  { desc = "Code Action", silent = true }
-)
-m(
-  "v",
-  "<leader>a",
-  ":<c-u>Lspsaga range_code_action<cr>",
+  vim.lsp.buf.code_action,
   { desc = "Code Action", silent = true }
 )
 
@@ -157,7 +172,7 @@ m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
 
 m(
   "n",
-  "<leader>gg",
+  "<leader>g",
   require("harpoon.ui").toggle_quick_menu,
   { desc = "Harpoon" }
 )

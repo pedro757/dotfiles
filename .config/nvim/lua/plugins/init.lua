@@ -1,7 +1,7 @@
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath "data"
-      .. "/site/pack/packer/start/packer.nvim"
+    .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system {
       "git",
@@ -31,15 +31,16 @@ return require("packer").startup {
         },
         {
           "jose-elias-alvarez/typescript.nvim",
-        }
+        },
       },
-      config = function()
-        require "plugins.lsp"
-      end,
+    }
+    use {
+      "j-hui/fidget.nvim",
     }
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use "nvim-telescope/telescope.nvim"
+    use "nvim-telescope/telescope-ui-select.nvim"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
     use "karb94/neoscroll.nvim"
@@ -78,6 +79,7 @@ return require("packer").startup {
         "SnipReplMemoryClean",
       },
     }
+
     -- use {
     --   "nvim-neotest/neotest",
     --   requires = {
@@ -123,19 +125,15 @@ return require("packer").startup {
     --   end
     -- }
     use {
-      "mfussenegger/nvim-dap"
+      "mfussenegger/nvim-dap",
     }
     -- use "rcarriga/nvim-dap-ui"
     use "lukas-reineke/indent-blankline.nvim"
-    use "tami5/lspsaga.nvim"
 
     -- COMPLETION
     use {
       "L3MON4D3/LuaSnip",
       event = { "InsertEnter", "CmdlineEnter" },
-      config = function()
-        require "plugins.snippets"
-      end,
     }
     use {
       "onsails/lspkind-nvim",
@@ -144,9 +142,6 @@ return require("packer").startup {
     use {
       "hrsh7th/nvim-cmp",
       after = { "LuaSnip", "lspkind-nvim" },
-      config = function()
-        require "plugins.cmp"
-      end,
     }
     use {
       "jcha0713/cmp-tw2css",
@@ -170,7 +165,7 @@ return require("packer").startup {
     }
     use {
       "hrsh7th/cmp-nvim-lua",
-      -- ft = "lua",
+      ft = "lua",
       after = "nvim-cmp",
     }
     use {
@@ -214,9 +209,6 @@ return require("packer").startup {
     use {
       "windwp/nvim-autopairs",
       after = "nvim-cmp",
-      config = function()
-        require "plugins.autopairs"
-      end,
     }
     use {
       "iamcco/markdown-preview.nvim",
@@ -255,10 +247,11 @@ return require("packer").startup {
     }
 
     -- Theme
-    use {
-      "NTBBloodbath/galaxyline.nvim",
-      branch = "main",
-    }
+    -- use {
+    --   "NTBBloodbath/galaxyline.nvim",
+    --   branch = "main",
+    -- }
+    use 'nvim-lualine/lualine.nvim'
     use {
       "tpope/vim-eunuch",
       cmd = {
@@ -358,7 +351,6 @@ return require("packer").startup {
       config = function()
         require("package-info").setup()
       end,
-      -- after = "nui.nvim",
       ft = { "json" },
       cond = function()
         if vim.fn.expand "%" == "package.json" then
@@ -415,6 +407,21 @@ return require("packer").startup {
           mode = "foreground",
         }
       end,
+    }
+    -- use {
+    --   "https://git.sr.ht/~soywod/himalaya-vim",
+    -- }
+    use {
+      "ckolkey/ts-node-action",
+      requires = { "nvim-treesitter" },
+      disable = true,
+      config = function()
+        require("ts-node-action").setup {}
+      end,
+    }
+    use {
+      "jesseleite/nvim-noirbuddy",
+      requires = { "tjdevries/colorbuddy.nvim", branch = "dev" }
     }
     if packer_bootstrap then
       require("packer").sync()

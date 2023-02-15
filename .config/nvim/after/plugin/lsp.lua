@@ -1,3 +1,13 @@
+if not pcall(require, "lspconfig") then
+  return
+end
+if not pcall(require, "fidget") then
+  return
+end
+if not pcall(require, "null-ls") then
+  return
+end
+
 local nvim_lsp = require "lspconfig"
 local null_ls = require "null-ls"
 
@@ -52,33 +62,6 @@ nvim_lsp.denols.setup {
   on_attach = on_attach,
 }
 
--- nvim_lsp.tsserver.setup {
---   init_options = require("nvim-lsp-ts-utils").init_options,
---   capabilities = capabilities,
---   root_dir = function(fname)
---     return require("lspconfig.util").root_pattern ".git/"(fname)
---       or require("lspconfig.util").root_pattern "tsconfig.json"
---       or require("lspconfig.util").root_pattern(
---         "package.json",
---         "jsconfig.json",
---         ".git"
---       )(fname)
---   end,
---   on_attach = function(client, bufnr)
---     on_attach(client, bufnr)
---     local ts_utils = require "nvim-lsp-ts-utils"
---
---     ts_utils.setup {
---       enable_import_on_completion = true,
---       update_imports_on_move = true,
---       require_confirmation_on_move = true,
---       auto_inlay_hints = false,
---     }
---
---     ts_utils.setup_client(client)
---   end,
--- }
-
 local servers = {
   "pyright",
   "vimls",
@@ -124,6 +107,18 @@ nvim_lsp.jsonls.setup {
   on_attach = on_attach,
 }
 
+nvim_lsp.prismals.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  on_attach = on_attach,
+  root_dir = function(fname)
+    return require("lspconfig.util").root_pattern ".git/"(fname)
+      or require("lspconfig.util").root_pattern "package.json"(fname)
+  end,
+}
+
 nvim_lsp.gopls.setup {
   capabilities = capabilities,
   flags = {
@@ -137,15 +132,15 @@ nvim_lsp.gopls.setup {
   on_attach = on_attach,
 }
 
-local sumneko_root_path = "/home/pedro/Documents/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
+local lua_ls_root_path = "/home/pedro/Documents/lua-language-server"
+local lua_ls_binary = lua_ls_root_path .. "/bin/lua-language-server"
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-nvim_lsp.sumneko_lua.setup {
-  cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+nvim_lsp.lua_ls.setup {
+  cmd = { lua_ls_binary },
   settings = {
     Lua = {
       runtime = {
@@ -196,25 +191,29 @@ null_ls.setup {
     null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.refactoring,
+    null_ls.builtins.code_actions.gitsigns,
   },
 }
 
 local null_ls_stop = function()
-    local null_ls_client
-    for _, client in ipairs(vim.lsp.get_active_clients()) do
-        if client.name == "null-ls" then
-            null_ls_client = client
-        end
+  local null_ls_client
+  for _, client in ipairs(vim.lsp.get_active_clients()) do
+    if client.name == "null-ls" then
+      null_ls_client = client
     end
-    if not null_ls_client then
-        return
-    end
+  end
+  if not null_ls_client then
+    return
+  end
 
-    null_ls_client.stop()
+  null_ls_client.stop()
 end
 
 vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 
-return {
-  on_attach = on_attach,
+require"fidget".setup{
+  text = {
+    spinner = "dots",
+    done = " "
+  }
 }

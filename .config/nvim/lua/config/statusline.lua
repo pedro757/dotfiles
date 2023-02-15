@@ -156,20 +156,20 @@ gls.left[10] = {
   }
 }
 
-gls.mid[1] = {
-  ShowLspClient = {
-    provider = 'GetLspClient',
-    condition = function ()
-      local tbl = {['dashboard'] = true,['']=true}
-      if tbl[vim.bo.filetype] then
-        return false
-      end
-      return true
-    end,
-    -- icon = ' LSP: ',
-    highlight = {mycolors.fg,mycolors.bg}
-  }
-}
+-- gls.mid[1] = {
+--   ShowLspClient = {
+--     provider = 'GetLspClient',
+--     condition = function ()
+--       local tbl = {['dashboard'] = true,['']=true}
+--       if tbl[vim.bo.filetype] then
+--         return false
+--       end
+--       return true
+--     end,
+--     -- icon = ' LSP: ',
+--     highlight = {mycolors.fg,mycolors.bg}
+--   }
+-- }
 
 
 gls.right[1] = {

@@ -22,3 +22,10 @@ vim.g.grepper = {
   single_prompt = 1,
   quickfix = 1,
 }
+vim.g.himalaya_folder_picker = "telescope"
+vim.g.himalaya_folder_picker_telescope_preview = 1
+
+if vim.loop.cwd() == "/home/pedro/.config/nvim" then
+  vim.env.GIT_DIR = vim.fn.expand("~") .. "/.dotfiles/"
+  vim.env.GIT_WORK_TREE = vim.fn.expand("~")
+end

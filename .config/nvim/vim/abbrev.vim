@@ -20,9 +20,16 @@ cnoreabbrev wQa wqa
 cnoreabbrev WQA wqa
 cnoreabbrev Wqa wqa
 cnoreabbrev puhs push
+cnoreabbrev Gpush G push
+cnoreabbrev Push push
+cnoreabbrev psuh push
+cnoreabbrev Psuh push
 
 inoreabbrev reutnr return
+inoreabbrev reuntr return
+inoreabbrev ruetnr return
 inoreabbrev rutnr return
 inoreabbrev retunr return
+inoreabbrev reunt return
 
 inoreabbrev treu true
