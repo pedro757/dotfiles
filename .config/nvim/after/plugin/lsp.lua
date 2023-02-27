@@ -80,7 +80,6 @@ local servers = {
   "marksman",
   "tailwindcss",
   "solargraph",
-  "rust_analyzer",
 }
 
 for _, lsp in ipairs(servers) do
@@ -92,6 +91,15 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
+
+nvim_lsp.rust_analyzer.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  on_attach = on_attach,
+  cmd = { "rustup", "run", "stable", "rust-analyzer" },
+}
 
 nvim_lsp.jsonls.setup {
   capabilities = capabilities,
@@ -175,9 +183,14 @@ vim.diagnostic.config {
   },
   update_in_insert = true,
   float = {
+    border = 'rounded',
     source = "always",
   },
 }
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
 
 null_ls.setup {
   sources = {

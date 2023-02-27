@@ -195,6 +195,28 @@ return require("packer").startup {
       "saadparwaiz1/cmp_luasnip",
       after = "nvim-cmp",
     }
+    use {
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
+      config = function()
+        require("copilot").setup({
+          suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            debounce = 75,
+            keymap = {
+              accept = "<M-l>",
+              accept_word = "<C-n>",
+              accept_line = "<C-e>",
+              next = "<M-]>",
+              prev = "<M-[>",
+              dismiss = "<C-]>",
+            },
+          },
+        })
+      end,
+    }
     -- Treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     use {
@@ -356,6 +378,18 @@ return require("packer").startup {
         if vim.fn.expand "%" == "package.json" then
           return true
         end
+      end,
+    }
+    use {
+      'saecki/crates.nvim',
+      ft = "toml",
+      cond = function()
+        if vim.fn.expand "%" == "Cargo.toml" then
+          return true
+        end
+      end,
+      config = function()
+        require('crates').setup()
       end,
     }
     use {

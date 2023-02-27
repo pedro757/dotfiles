@@ -9,7 +9,8 @@ m("n", "<CR>", ":call AddEmptyLineBelow()<CR>", { silent = true })
 m("c", "<c-a>", "<Home>")
 m("n", "<leader>c", ":nohl<cr>:redraw<cr>:<BS>", { desc = "Clear" })
 -- Vim Defaults
-m("i", "<c-c>", "<Esc>")
+m("i", "<c-c>", "<Esc>", { remap = true })
+m("t", "<Esc>", [[<C-\><C-n>]])
 m("n", "<leader>o", ":NeoZoomToggle<CR>zz", { desc = "Zoom", silent = true })
 m("n", "j", '(v:count > 5 ? "m\'" . v:count : "") . \'j\'', { expr = true })
 m("n", "k", '(v:count > 5 ? "m\'" . v:count : "") . \'k\'', { expr = true })
@@ -26,12 +27,12 @@ m("n", "<c-l>", "<c-w>l")
 m("n", "<c-h>", "<c-w>h")
 
 -- " Snippets And Completion
-m(
-  { "i", "s" },
-  "<c-e>",
-  "<Plug>luasnip-next-choice",
-  { remap = true }
-)
+-- m(
+--   { "i", "s" },
+--   "<c-e>",
+--   "<Plug>luasnip-next-choice",
+--   { remap = true }
+-- )
 
 m({ "i", "c" }, "<c-h>", "<left>")
 m("i", "<c-l>", "<right>")
