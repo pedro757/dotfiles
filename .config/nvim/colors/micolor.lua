@@ -45,6 +45,8 @@ local highlight_groups = {
   Conceal                    = { fg = p.grey0 },
   Cursor                     = { reverse = true },
 
+  FloatBorder               = { fg = p.fg0, bg = p.bg0 },
+
   LspReferenceText           = { bg = p.bg3 },
   LspReferenceRead           = { bg = p.bg3 },
   LspReferenceWrite          = { bg = p.bg3 },
@@ -79,7 +81,7 @@ local highlight_groups = {
   WildMenu                   = { link = "PmenuSel" },
 
   PmenuThumb                 = { bg = p.grey0 },
-  NormalFloat                = { fg = p.fg1, bg = p.bg2 },
+  NormalFloat                = { fg = p.fg1, bg = p.bg0 },
   Question                   = { fg = p.yellow },
   SpellBad                   = { undercurl = true },
   SpellCap                   = { undercurl = true },

@@ -45,6 +45,7 @@ require("telescope").setup {
       ".git/",
       "packer_compiled.lua",
       ".next/",
+      "target/",
     },
     set_env = { ["COLORTERM"] = "truecolor" },
   },

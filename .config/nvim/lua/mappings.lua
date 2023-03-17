@@ -1,6 +1,11 @@
 local m = vim.keymap.set
 
-m("n", "<leader>e", vim.cmd.NvimTreeToggle, { silent = true, desc = "File Explorer" })
+m(
+  "n",
+  "<leader>e",
+  vim.cmd.NvimTreeToggle,
+  { silent = true, desc = "File Explorer" }
+)
 
 -- " New Line Pressing Enter
 m("n", "<S-Enter>", ":call AddEmptyLineAbove()<CR>", { silent = true })
@@ -90,26 +95,16 @@ local get_highest_error_severity = function()
   end
 end
 
-m(
-  "n",
-  "<leader>dn",
-  function ()
-    vim.diagnostic.goto_next{
-      severity = get_highest_error_severity(),
-    }
-  end,
-  { desc = "Next Diagnostic", silent = true }
-)
-m(
-  "n",
-  "<leader>dN",
-  function ()
-    vim.diagnostic.goto_next{
-      severity = get_highest_error_severity(),
-    }
-  end,
-  { desc = "Previous Diagnostic", silent = true }
-)
+m("n", "<leader>dn", function()
+  vim.diagnostic.goto_next {
+    severity = get_highest_error_severity(),
+  }
+end, { desc = "Next Diagnostic", silent = true })
+m("n", "<leader>dN", function()
+  vim.diagnostic.goto_next {
+    severity = get_highest_error_severity(),
+  }
+end, { desc = "Previous Diagnostic", silent = true })
 m(
   "n",
   "<leader>dq",
@@ -170,7 +165,6 @@ m(
 m("n", "gs", "<plug>(GrepperOperator)", { remap = true })
 m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
 
-
 m(
   "n",
   "<leader>g",
@@ -209,4 +203,21 @@ m(
 --   }
 -- )
 
-m("n", "<leader>p", "<Plug>ReplaceWithRegisterOperator", { desc = "Paste in" })
+m("n", "<leader>p", require("substitute").operator, { desc = "Paste in" })
+m("n", "<leader>pp", require("substitute").line, { desc = "Substitute Line" })
+m("n", "<leader>s", require('substitute.range').operator, { desc = "Substitute in Range" })
+m("x", "<leader>s", require('substitute.range').visual, { desc = "Substitute in Range" })
+m("n", "<leader>ss", require('substitute.range').word, { desc = "Substitute Curr. Word in Range" })
+m("n", "<leader>sx", "<cmd>lua require('substitute.exchange').operator()<cr>", { desc = "Substitute Exchange" })
+m("n", "<leader>sxx", "<cmd>lua require('substitute.exchange').line()<cr>", { desc = "Substitute Exchange" })
+m("x", "<leader>X", "<cmd>lua require('substitute.exchange').visual()<cr>", { desc = "Substitute Exchange" })
+m("n", "<leader>sxc", "<cmd>lua require('substitute.exchange').cancel()<cr>", { desc = "Substitute Exchange" })
+
+m(
+  "n",
+  "S",
+  '"_S',
+  {
+    desc = "Delete the highlighted lines [into register _] and start insert mode.",
+  }
+)

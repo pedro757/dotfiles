@@ -15,7 +15,10 @@ Run these commands in a bash shell:
 > Make sure your linux distro use `pacman`, otherwise install these programs with your favorite package manager
 
 ```
-sudo pacman -S fish rigrep fd bat fzf kitty alacritty go gopls neovim-nightly-bin tmux xclip exa awesome chromium pulseaudio deno zathura vlc feh maim gopass httpie
+sudo pacman -S fish rigrep fd bat fzf kitty alacritty go gopls \
+  neovim-nightly-bin tmux xclip exa awesome chromium pulseaudio deno zathura vlc \
+  feh maim gopass httpie ttf-jetbrains-mono-nerd ttf-sourcecodepro-nerd \
+  noto-fonts-emoji ttf-firacode-nerd
 ```
 
 #### Setting up podman

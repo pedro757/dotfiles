@@ -335,7 +335,6 @@ return require("packer").startup {
       requires = {
         {
           "folke/twilight.nvim",
-          opt = true,
         },
       },
       cmd = { "ZenMode" },
@@ -355,9 +354,19 @@ return require("packer").startup {
     -- -- TMUX
     -- use "aserowy/tmux.nvim"
 
+    -- use {
+    --   "AndrewRadev/splitjoin.vim",
+    --   keys = { "gJ", "gS" },
+    -- }
     use {
-      "AndrewRadev/splitjoin.vim",
+      'Wansmer/treesj',
       keys = { "gJ", "gS" },
+      requires = { 'nvim-treesitter' },
+      config = function()
+        require('treesj').setup {}
+        vim.keymap.set('n', 'gJ', require('treesj').join, { desc = 'Join lines' })
+        vim.keymap.set('n', 'gS', require('treesj').split, { desc = 'Split lines' })
+      end,
     }
     use {
       "chrisbra/NrrwRgn",
@@ -425,8 +434,10 @@ return require("packer").startup {
       cmd = { "NeoZoomToggle" },
     }
     use {
-      "inkarkat/vim-ReplaceWithRegister",
-      keys = { "<Plug>ReplaceWithRegisterOperator" },
+      "gbprod/substitute.nvim",
+      config = function()
+        require("substitute").setup {}
+      end,
     }
     use {
       "gbprod/stay-in-place.nvim",
@@ -453,10 +464,10 @@ return require("packer").startup {
         require("ts-node-action").setup {}
       end,
     }
-    use {
-      "jesseleite/nvim-noirbuddy",
-      requires = { "tjdevries/colorbuddy.nvim", branch = "dev" }
-    }
+    -- use {
+    --   "jesseleite/nvim-noirbuddy",
+    --   requires = { "tjdevries/colorbuddy.nvim", branch = "dev" }
+    -- }
     if packer_bootstrap then
       require("packer").sync()
     end
