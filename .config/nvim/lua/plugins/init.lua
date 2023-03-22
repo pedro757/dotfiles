@@ -37,6 +37,7 @@ return require("packer").startup {
     use {
       "j-hui/fidget.nvim",
     }
+    use "folke/neodev.nvim"
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use "nvim-telescope/telescope.nvim"
@@ -267,12 +268,6 @@ return require("packer").startup {
       "kevinhwang91/nvim-bqf",
       ft = "qf",
     }
-
-    -- Theme
-    -- use {
-    --   "NTBBloodbath/galaxyline.nvim",
-    --   branch = "main",
-    -- }
     use 'nvim-lualine/lualine.nvim'
     use {
       "tpope/vim-eunuch",
@@ -314,22 +309,6 @@ return require("packer").startup {
       "junegunn/gv.vim",
       cmd = { "GV", "GV!", "GV?" },
     }
-    -- use {
-    --   "haya14busa/vim-asterisk",
-    --   requires = {
-    --     {
-    --       "haya14busa/is.vim",
-    --       -- keys = { "/", "n", "N", "*", "#" },
-    --       opt = false,
-    --     },
-    --   },
-    --   keys = {
-    --     "<Plug>(asterisk-z*)<Plug>(is-nohl-1)",
-    --     "<Plug>(asterisk-gz*)<Plug>(is-nohl-1)",
-    --     "<Plug>(asterisk-z#)<Plug>(is-nohl-1)",
-    --     "<Plug>(asterisk-gz#)<Plug>(is-nohl-1)",
-    --   },
-    -- }
     use {
       "folke/zen-mode.nvim",
       requires = {
@@ -350,14 +329,6 @@ return require("packer").startup {
         "SoftPencil",
       },
     }
-
-    -- -- TMUX
-    -- use "aserowy/tmux.nvim"
-
-    -- use {
-    --   "AndrewRadev/splitjoin.vim",
-    --   keys = { "gJ", "gS" },
-    -- }
     use {
       'Wansmer/treesj',
       keys = { "gJ", "gS" },
@@ -434,6 +405,13 @@ return require("packer").startup {
       cmd = { "NeoZoomToggle" },
     }
     use {
+      "akinsho/toggleterm.nvim",
+      tag = '*',
+      config = function()
+        require("toggleterm").setup()
+      end
+    }
+    use {
       "gbprod/substitute.nvim",
       config = function()
         require("substitute").setup {}
@@ -453,9 +431,6 @@ return require("packer").startup {
         }
       end,
     }
-    -- use {
-    --   "https://git.sr.ht/~soywod/himalaya-vim",
-    -- }
     use {
       "ckolkey/ts-node-action",
       requires = { "nvim-treesitter" },
@@ -464,10 +439,6 @@ return require("packer").startup {
         require("ts-node-action").setup {}
       end,
     }
-    -- use {
-    --   "jesseleite/nvim-noirbuddy",
-    --   requires = { "tjdevries/colorbuddy.nvim", branch = "dev" }
-    -- }
     if packer_bootstrap then
       require("packer").sync()
     end

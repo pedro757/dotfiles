@@ -34,13 +34,6 @@ cmp.setup {
   formatting = {
     format = lspkind.cmp_format(),
   },
-  -- formatting = {
-  --   format = lspkind.cmp_format({
-  --     mode = "symbol_text",
-  --     max_width = 75,
-  --     symbol_map = { Copilot = " " }
-  --   })
-  -- },
   sources = cmp.config.sources({
     { name = "nvim_lsp_signature_help" },
     { name = "nvim_lsp" },
@@ -103,7 +96,7 @@ cmp.setup {
       end
     end, { "i", "s" }),
     ["<C-l>"] = cmp.mapping {
-      i = function()
+      i = function(fallback)
         if cmp.visible() then
           cmp.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
@@ -111,6 +104,8 @@ cmp.setup {
           }
         elseif require("copilot.suggestion").is_visible() then
           require("copilot.suggestion").accept_line()
+        else
+          fallback()
         end
       end,
       c = function(fallback)

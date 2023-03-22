@@ -56,6 +56,17 @@ au("Filetype", {
 
 au("Filetype", {
   pattern = {
+    "toggleterm",
+  },
+  callback = function()
+    map("t", "gq", "<cmd>ToggleTerm<cr>", buf_opts)
+    map("t", "<c-x>", "<cmd>ToggleTerm<cr>", buf_opts)
+  end,
+  group = HelpMappings,
+})
+
+au("Filetype", {
+  pattern = {
     "help",
     "startuptime",
     "checkhealth",

@@ -140,6 +140,8 @@ nvim_lsp.gopls.setup {
   on_attach = on_attach,
 }
 
+require("neodev").setup {}
+
 local lua_ls_root_path = "/home/pedro/Documents/lua-language-server"
 local lua_ls_binary = lua_ls_root_path .. "/bin/lua-language-server"
 

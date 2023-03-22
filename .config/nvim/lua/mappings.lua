@@ -15,7 +15,14 @@ m("c", "<c-a>", "<Home>")
 m("n", "<leader>c", ":nohl<cr>:redraw<cr>:<BS>", { desc = "Clear" })
 -- Vim Defaults
 m("i", "<c-c>", "<Esc>", { remap = true })
+
 m("t", "<Esc>", [[<C-\><C-n>]])
+m('t', '<C-h>', [[<Cmd>wincmd h<CR>]])
+m('t', '<C-j>', [[<Cmd>wincmd j<CR>]])
+m('t', '<C-k>', [[<Cmd>wincmd k<CR>]])
+m('t', '::', [[<C-\><C-n>:]])
+m({ 'n', 't' }, '<C-t>', [[<Cmd>exe v:count1 . "ToggleTerm"<CR>]], { silent = true, desc = "Toggle Terminal" })
+
 m("n", "<leader>o", ":NeoZoomToggle<CR>zz", { desc = "Zoom", silent = true })
 m("n", "j", '(v:count > 5 ? "m\'" . v:count : "") . \'j\'', { expr = true })
 m("n", "k", '(v:count > 5 ? "m\'" . v:count : "") . \'k\'', { expr = true })
