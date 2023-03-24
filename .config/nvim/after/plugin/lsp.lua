@@ -99,6 +99,13 @@ nvim_lsp.rust_analyzer.setup {
   },
   on_attach = on_attach,
   cmd = { "rustup", "run", "stable", "rust-analyzer" },
+  settings = {
+    ["rust-analyzer"] = {
+      check = {
+        command = "clippy",
+      },
+    }
+  }
 }
 
 nvim_lsp.jsonls.setup {
