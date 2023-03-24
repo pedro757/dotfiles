@@ -52,7 +52,8 @@ pnpm
 
 #### Installing rust stuff
 
-`rustup component add rust-src `
+`rustup component add rust-src`
+`rustup component add rust-analyzer`
 
 `cargo install selene stylua dua-cli`
 
