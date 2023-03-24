@@ -37,6 +37,7 @@ require("nvim-tree").setup {
       list = {
         { key = { "l" }, action = "edit" },
         { key = { "h" }, action = "close_node" },
+        { key = { "gq" }, action = "close" },
       },
     },
   },
@@ -69,6 +70,9 @@ require("which-key").setup {
       g = true,
     },
   },
+  window = {
+    border = "single",
+  }
 }
 require("neoscroll").setup {
   mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
