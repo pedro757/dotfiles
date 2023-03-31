@@ -21,7 +21,7 @@ local p = {
 
 local highlight_groups = {
   Normal                    = { bg = p.bg0, fg = p.fg0 },
-  FloatBorder               = { fg = p.fg0 },
+  FloatBorder               = { fg = p.gray },
   NormalFloat               = { fg = p.fg0 },
   Error                     = { fg = p.red },
   NonText                   = { fg = p.vinotinto },
@@ -90,6 +90,7 @@ local highlight_groups = {
   Cursor                    = { reverse = true },
   CursorColumn              = { bg = p.bg1 },
   CurrentWord               = { bg = p.choco },
+
   LspReferenceText          = { bg = p.choco },
   LspReferenceRead          = { bg = p.choco },
   LspReferenceWrite         = { bg = p.choco },
@@ -221,12 +222,14 @@ local highlight_groups = {
   -- NvimTreeLspDiagnosticsInformation = { link = 'BlueSign' },
   -- NvimTreeLspDiagnosticsHint        = { link = 'GreenSign' },
 
+  TelescopeBorder = { fg = p.gray },
+
   MatchParenCur = { bold = true },
   MatchWord     = { underline = true },
   MatchWordCur  = { underline = true },
 
-  ["@annotation"]           = { link      = 'Purple' },
-
+  ["@method.call"]          = { fg = p.red, italic = true },
+  ["@lsp.type.method"]      = { fg = p.red, italic = true },
 }
 
 for group_name, group_settings in pairs(highlight_groups) do
