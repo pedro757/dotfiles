@@ -1,0 +1,15 @@
+[selene]
+base = "lua51"
+name = "awesome"
+
+[client]
+any = true
+
+[awesome]
+any = true
+
+[root]
+any = true
+
+[screen]
+any = true
