@@ -1,5 +1,4 @@
 set fish_greeting
-source /opt/asdf-vm/asdf.fish
 
 alias vim="nvim"
 alias old_vim="\vim"
@@ -65,3 +64,4 @@ end
 
 # Created by `pipx` on 2022-02-23 01:40:52
 set PATH $PATH /home/pedro/.local/bin
+rtx activate fish | source

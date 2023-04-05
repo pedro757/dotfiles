@@ -209,7 +209,7 @@ local highlight_groups = {
   NvimTreeImageFile                 = { fg = p.light_brown },
   NvimTreeMarkdownFile              = { fg = p.light_brown },
   NvimTreeNormal                    = { fg = p.light_brown },
-  NvimTreeFileIcon                  = { fg = p.yellow, bg = p.yellow },
+  NvimTreeFileIcon                  = { fg = p.yellow, bg = p.bg0 },
   -- NvimTreeIndentMarker              = { link = 'Grey' },
   -- NvimTreeGitDirty                  = { link = 'Yellow' },
   -- NvimTreeGitStaged                 = { link = 'Green' },
