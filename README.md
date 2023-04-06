@@ -56,7 +56,7 @@ pnpm cssmodules-language-server
 `rustup component add rust-src`
 `rustup component add rust-analyzer`
 
-`cargo install selene stylua dua-cli`
+`cargo install selene stylua dua-cli rtx-cli`
 
 #### Installing python packages
 
