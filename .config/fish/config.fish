@@ -45,9 +45,9 @@ set -x EDITOR "nvim"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git"
 set -gx GPG_TTY (tty)
 
-set --global tide_character_icon "➜"
-set --global tide_prompt_add_newline_before false
-set --global tide_left_prompt_suffix
+# set --global tide_character_icon "➜"
+# set --global tide_prompt_add_newline_before false
+# set --global tide_left_prompt_suffix
 
 if status --is-interactive
   abbr --add --global celar clear
@@ -64,4 +64,10 @@ end
 
 # Created by `pipx` on 2022-02-23 01:40:52
 set PATH $PATH /home/pedro/.local/bin
+
+starship init fish | source
+
+# tabtab source for packages
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 rtx activate fish | source
