@@ -61,3 +61,10 @@ pnpm cssmodules-language-server
 #### Installing python packages
 
 `python3 -m pip install --user --upgrade pynvim`
+
+
+#### Git aliases
+```bash
+git config --global alias.lod 'log --oneline --decorate --color'
+git config --global alias.lodag 'log --oneline --decorate --all --graph'
+```
