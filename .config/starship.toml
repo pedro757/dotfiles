@@ -68,3 +68,6 @@ format = "[$symbol($version )]($style)"
 
 [bun]
 format = "[$symbol($version )]($style)"
+
+[aws]
+disabled = true

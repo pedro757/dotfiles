@@ -71,7 +71,6 @@ local servers = {
   "intelephense",
   "dockerls",
   "bashls",
-  "yamlls",
   "graphql",
   "svelte",
   "solc",
@@ -92,6 +91,18 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+nvim_lsp.yamlls.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      keyOrdering = false,
+    }
+  }
+}
 nvim_lsp.rust_analyzer.setup {
   capabilities = capabilities,
   flags = {

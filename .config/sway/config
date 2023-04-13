@@ -13,7 +13,10 @@ set $theme /usr/share/sway/themes/matcha-green
 include $theme/definitions
 
 # global variables
-include /etc/sway/definitions
+# include /etc/sway/definitions
+
+# user variables
+include $HOME/.config/sway/definitions.d/*.conf
 
 set $mod Mod4
 set $term kitty
@@ -25,8 +28,6 @@ set $right l
 set $waybar_position top
 set $background /home/pedro/Pictures/ttg.jpg
 
-# user variables
-include $HOME/.config/sway/definitions.d/*.conf
 
 include /etc/sway/inputs/*
 output * bg $background center
@@ -263,3 +264,6 @@ $bindsym $mod+Shift+g mode $mode_recording
 
 ## Launch // Stop Recording Mode ##
 $bindsym $mod+Escape exec killall -s SIGINT wf-recorder
+
+exec xset s off -dpms
+exec xset s noblank

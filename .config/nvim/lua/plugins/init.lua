@@ -24,7 +24,6 @@ return require("packer").startup {
     use "wbthomason/packer.nvim"
     use {
       "neovim/nvim-lspconfig",
-      after = "LuaSnip",
       requires = {
         {
           "jose-elias-alvarez/null-ls.nvim",
@@ -137,12 +136,12 @@ return require("packer").startup {
       event = { "InsertEnter", "CmdlineEnter" },
     }
     use {
-      "onsails/lspkind-nvim",
-      event = { "InsertEnter", "CmdlineEnter" },
-    }
-    use {
       "hrsh7th/nvim-cmp",
-      after = { "LuaSnip", "lspkind-nvim" },
+      after = { "LuaSnip" },
+      requires = {
+        "onsails/lspkind-nvim",
+        "windwp/nvim-autopairs",
+      },
     }
     use {
       "jcha0713/cmp-tw2css",
@@ -237,10 +236,6 @@ return require("packer").startup {
     use {
       "windwp/nvim-ts-autotag",
       event = "InsertEnter",
-    }
-    use {
-      "windwp/nvim-autopairs",
-      after = "nvim-cmp",
     }
     use {
       "iamcco/markdown-preview.nvim",
@@ -417,7 +412,9 @@ return require("packer").startup {
       "akinsho/toggleterm.nvim",
       tag = '*',
       config = function()
-        require("toggleterm").setup()
+        require("toggleterm").setup {
+          shell = "/usr/bin/fish"
+        }
       end
     }
     use {
