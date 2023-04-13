@@ -224,6 +224,9 @@ local highlight_groups = {
 
   TelescopeBorder = { fg = p.gray },
 
+  PackageInfoOutdatedVersion    = { fg = p.red },
+  PackageInfoUptodateVersion    = { fg = p.gray },
+
   MatchParenCur = { bold = true },
   MatchWord     = { underline = true },
   MatchWordCur  = { underline = true },

@@ -1,0 +1,265 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+# styles - set the folder for your theme definition file
+
+
+set $theme /usr/share/sway/themes/matcha-green
+
+# theme variables
+include $theme/definitions
+
+# global variables
+include /etc/sway/definitions
+
+set $mod Mod4
+set $term kitty
+set $menu ~/.config/rofi/launcher/launcher.sh
+set $left h
+set $down j
+set $up k
+set $right l
+set $waybar_position top
+set $background /home/pedro/Pictures/ttg.jpg
+
+# user variables
+include $HOME/.config/sway/definitions.d/*.conf
+
+include /etc/sway/inputs/*
+output * bg $background center
+
+# enable modes
+# include /etc/sway/modes/*
+
+# only enable this if every app you use is compatible with wayland
+# xwayland disable
+
+# user config
+include $HOME/.config/sway/config.d/*.conf
+
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+c kill
+bindsym $mod+w kill
+
+# Start your launcher
+bindsym $mod+r exec $menu
+bindsym $mod+Control+r reload
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Or use $mod+[up|down|left|right]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+bindsym $mod+f fullscreen
+
+# bindsym $mod+b splith
+# bindsym $mod+v splitv
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+## Action // Toggle Waybar ##
+$bindsym $mod+b exec pkill -SIGUSR1 waybar
+
+# --locked flags allow the buttons to be used whilst the screen is locked.
+$bindsym --locked XF86AudioRaiseVolume exec $volume_up
+
+$bindsym --locked XF86AudioLowerVolume exec $volume_down
+
+$bindsym --locked XF86AudioMute exec $volume_mute
+
+$bindsym XF86AudioMicMute exec $mic_mute
+
+$bindsym --locked XF86MonBrightnessUp exec $brightness_up
+
+$bindsym --locked XF86MonBrightnessDown exec $brightness_down
+
+$bindsym --locked XF86AudioPlay exec playerctl play-pause
+
+$bindsym XF86AudioNext exec playerctl next
+
+$bindsym XF86AudioPrev exec playerctl previous
+
+$bindsym XF86Search exec $menu
+
+$bindsym XF86PowerOff exec $shutdown
+
+$bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
+
+##############################################################################
+###### RESIZE MODE ###########################################################
+##############################################################################
+
+set $mode_resize "<span foreground='$color10'></span>  \
+<span foreground='$color5'><b>Resize</b></span> <span foreground='$color10'>(<b>↑ ↓ ← →</b>)</span> \
+<span foreground='$color5'><b>Increase Gaps</b></span> <span foreground='$color10'>(<b>+</b>)</span> \
+<span foreground='$color5'><b>Decrease Gaps</b></span> <span foreground='$color10'>(<b>-</b>)</span>"
+
+mode --pango_markup $mode_resize {
+  # left will shrink the containers width
+  # right will grow the containers width
+  # up will shrink the containers height
+  # down will grow the containers height
+  $bindsym $left resize shrink width 10px
+  $bindsym $down resize grow height 10px
+  $bindsym $up resize shrink height 10px
+  $bindsym $right resize grow width 10px
+
+  $bindsym Shift+$left resize shrink width 50px
+  $bindsym Shift+$down resize grow height 50px
+  $bindsym Shift+$up resize shrink height 50px
+  $bindsym Shift+$right resize grow width 50px
+
+  ## Resize // Window Gaps // + - ##
+  $bindsym minus gaps inner current minus 5px
+  $bindsym plus gaps inner current plus 5px
+
+  # Return to default mode
+  $bindsym Return mode "default"
+  $bindsym Escape mode "default"
+}
+## Launch // Resize Mode ##
+$bindsym $mod+Shift+r mode $mode_resize
+gaps inner 5px
+gaps outer 5px
+
+##############################################################################
+###### SHUTDOWN OPT ##########################################################
+##############################################################################
+
+set $mode_shutdown "\
+<span foreground='$color10'></span>  \
+<span foreground='$color5'> \
+<span foreground='$color10'>(<b>h</b>)</span>hibernate \
+<span foreground='$color10'>(<b>l</b>)</span>lock \
+<span foreground='$color10'>(<b>e</b>)</span>logout \
+<span foreground='$color10'>(<b>r</b>)</span>reboot \
+<span foreground='$color10'>(<b>u</b>)</span>suspend \
+<span foreground='$color10'>(<b>s</b>)</span>shutdown \
+</span>"
+
+set $purge_cliphist [ $purge_cliphist_logout == 'true' ] && rm -f $HOME/.cache/cliphist/db || exit 0
+
+mode --pango_markup $mode_shutdown {
+  # lock
+  $bindsym l mode "default", exec $locking
+  # logout
+  $bindsym e exec $purge_cliphist; exec loginctl terminate-user $USER
+  # suspend
+  $bindsym u mode "default", exec systemctl suspend
+  # hibernate
+  $bindsym h mode "default", exec systemctl hibernate
+  # shutdown
+  $bindsym s exec $purge_cliphist; exec systemctl poweroff
+  # reboot
+  $bindsym r exec $purge_cliphist; exec systemctl reboot
+  # Return to default mode.
+  $bindsym Escape mode "default"
+}
+
+## Launch // Exit Menu ##
+$bindsym $mod+Shift+e mode $mode_shutdown
+
+##############################################################################
+###### SCREENSHOTS ###########################################################
+##############################################################################
+
+set $mode_screenshot "<span foreground='$color10'></span>  \
+<span foreground='$color5'><b>Pick</b></span> <span foreground='$color10'>(<b>p</b>)</span> \
+<span foreground='$color5'><b>Output</b></span> <span foreground='$color10'>(<b>o</b>)</span> \
+<span foreground='$color7'>+ <span foreground='$color10'><b>Shift</b></span> for </span>"
+
+mode --pango_markup $mode_screenshot {
+  # output = currently active output
+  $bindsym o mode "default", exec $screenshot_screen
+  $bindsym Shift+o mode "default", exec $screenshot_screen_upload
+
+  # pick the region to screenshot
+  $bindsym p mode "default", exec $screenshot_selection
+  $bindsym Shift+p mode "default", exec $screenshot_selection_upload
+
+  # Return to default mode.
+  $bindsym Escape mode "default"
+}
+
+## Launch // Screenshot Mode ##
+$bindsym Print mode $mode_screenshot
+$bindsym $mod+p mode $mode_screenshot
+
+##############################################################################
+###### RECORDING   ###########################################################
+##############################################################################
+
+set $mode_recording "<span foreground='$color10'></span>  \
+<span foreground='$color5'><b>Record</b></span> <span foreground='$color10'>(<b>r</b>)</span> \
+<span foreground='$color5'>+ [<span foreground='$color10'><b>Shift</b></span> for ]</span>"
+
+set $recorder /usr/share/sway/scripts/recorder.sh
+
+mode --pango_markup $mode_recording {
+  $bindsym r exec $recorder, mode "default"
+  $bindsym Shift+r exec $recorder -a, mode "default"
+
+  # Return to default mode.
+  $bindsym Escape mode "default"
+}
+
+## Launch // Recording Mode ##
+$bindsym $mod+Shift+g mode $mode_recording
+
+## Launch // Stop Recording Mode ##
+$bindsym $mod+Escape exec killall -s SIGINT wf-recorder
