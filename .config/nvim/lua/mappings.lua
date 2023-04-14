@@ -228,3 +228,16 @@ m(
     desc = "Delete the highlighted lines [into register _] and start insert mode.",
   }
 )
+
+m(
+  "n",
+  "<leader>w",
+  require('telescope').extensions.git_worktree.git_worktrees,
+  { desc = "Git Worktrees" }
+)
+m(
+  "n",
+  "<leader>W",
+  require('telescope').extensions.git_worktree.create_git_worktree,
+  { desc = "Git Worktrees" }
+)
