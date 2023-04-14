@@ -33,6 +33,7 @@ require("nvim-tree").setup {
     }
   },
   view = {
+    relativenumber = true,
     mappings = {
       list = {
         { key = { "l" }, action = "edit" },
