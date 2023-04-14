@@ -227,6 +227,8 @@ local highlight_groups = {
   PackageInfoOutdatedVersion    = { fg = p.red },
   PackageInfoUptodateVersion    = { fg = p.gray },
 
+  InclineNormalNC = { fg = p.beige },
+
   MatchParenCur = { bold = true },
   MatchWord     = { underline = true },
   MatchWordCur  = { underline = true },
