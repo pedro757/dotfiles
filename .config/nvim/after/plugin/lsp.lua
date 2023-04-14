@@ -43,12 +43,12 @@ require("typescript").setup {
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = function(fname)
-      return require("lspconfig.util").root_pattern ".git"(fname)
-        or require("lspconfig.util").root_pattern "tsconfig.json"(fname)
-        or require("lspconfig.util").root_pattern(
-          "package.json",
-          "jsconfig.json"
-        )(fname)
+      return require("lspconfig.util").root_pattern ".git" (fname)
+          or require("lspconfig.util").root_pattern "tsconfig.json" (fname)
+          or require("lspconfig.util").root_pattern(
+            "package.json",
+            "jsconfig.json"
+          )(fname)
     end,
   },
 }
@@ -74,10 +74,8 @@ local servers = {
   "graphql",
   "svelte",
   "solc",
-  "cssmodules_ls",
   "vuels",
   "marksman",
-  "tailwindcss",
   "solargraph",
 }
 
@@ -90,6 +88,29 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
+nvim_lsp.tailwindcss.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  on_attach = on_attach,
+  root_dir = function(fname)
+    return require("lspconfig.util").root_pattern ".git" (fname)
+      or require("lspconfig.util").root_pattern "package.json" (fname)
+      or require("lspconfig.util").root_pattern('tailwind.config.js', 'tailwind.config.ts') (fname)
+  end,
+}
+nvim_lsp.cssmodules_ls.setup {
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  on_attach = on_attach,
+  root_dir = function(fname)
+    return require("lspconfig.util").root_pattern ".git" (fname)
+        or require("lspconfig.util").root_pattern "package.json" (fname)
+  end,
+}
 
 nvim_lsp.yamlls.setup {
   capabilities = capabilities,
@@ -140,8 +161,8 @@ nvim_lsp.prismals.setup {
   },
   on_attach = on_attach,
   root_dir = function(fname)
-    return require("lspconfig.util").root_pattern ".git"(fname)
-      or require("lspconfig.util").root_pattern "package.json"(fname)
+    return require("lspconfig.util").root_pattern ".git" (fname)
+        or require("lspconfig.util").root_pattern "package.json" (fname)
   end,
 }
 
@@ -212,39 +233,39 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
 
-null_ls.setup {
-  sources = {
-    null_ls.builtins.diagnostics.selene,
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.diagnostics.revive,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.eslint_d,
-    null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.yapf,
-    null_ls.builtins.formatting.rustfmt,
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.code_actions.refactoring,
-    null_ls.builtins.code_actions.gitsigns,
-  },
-}
+-- null_ls.setup {
+--   sources = {
+--     null_ls.builtins.diagnostics.selene,
+--     null_ls.builtins.diagnostics.eslint_d,
+--     null_ls.builtins.diagnostics.revive,
+--     null_ls.builtins.formatting.stylua,
+--     null_ls.builtins.formatting.eslint_d,
+--     null_ls.builtins.formatting.prettierd,
+--     null_ls.builtins.formatting.yapf,
+--     null_ls.builtins.formatting.rustfmt,
+--     null_ls.builtins.code_actions.eslint_d,
+--     null_ls.builtins.code_actions.refactoring,
+--     null_ls.builtins.code_actions.gitsigns,
+--   },
+-- }
+--
+-- local null_ls_stop = function()
+--   local null_ls_client
+--   for _, client in ipairs(vim.lsp.get_active_clients()) do
+--     if client.name == "null-ls" then
+--       null_ls_client = client
+--     end
+--   end
+--   if not null_ls_client then
+--     return
+--   end
+--
+--   null_ls_client.stop()
+-- end
+--
+-- vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 
-local null_ls_stop = function()
-  local null_ls_client
-  for _, client in ipairs(vim.lsp.get_active_clients()) do
-    if client.name == "null-ls" then
-      null_ls_client = client
-    end
-  end
-  if not null_ls_client then
-    return
-  end
-
-  null_ls_client.stop()
-end
-
-vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
-
-require"fidget".setup{
+require "fidget".setup {
   text = {
     spinner = "dots",
     done = " "
