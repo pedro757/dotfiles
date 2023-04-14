@@ -413,7 +413,8 @@ return require("packer").startup {
       tag = '*',
       config = function()
         require("toggleterm").setup {
-          shell = "/usr/bin/fish"
+          shell = "/usr/bin/fish",
+          autochdir = true,
         }
       end
     }
