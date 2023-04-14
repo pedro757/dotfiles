@@ -233,37 +233,37 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
 })
 
--- null_ls.setup {
---   sources = {
---     null_ls.builtins.diagnostics.selene,
---     null_ls.builtins.diagnostics.eslint_d,
---     null_ls.builtins.diagnostics.revive,
---     null_ls.builtins.formatting.stylua,
---     null_ls.builtins.formatting.eslint_d,
---     null_ls.builtins.formatting.prettierd,
---     null_ls.builtins.formatting.yapf,
---     null_ls.builtins.formatting.rustfmt,
---     null_ls.builtins.code_actions.eslint_d,
---     null_ls.builtins.code_actions.refactoring,
---     null_ls.builtins.code_actions.gitsigns,
---   },
--- }
---
--- local null_ls_stop = function()
---   local null_ls_client
---   for _, client in ipairs(vim.lsp.get_active_clients()) do
---     if client.name == "null-ls" then
---       null_ls_client = client
---     end
---   end
---   if not null_ls_client then
---     return
---   end
---
---   null_ls_client.stop()
--- end
---
--- vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
+null_ls.setup {
+  sources = {
+    null_ls.builtins.diagnostics.selene,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.diagnostics.revive,
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.yapf,
+    null_ls.builtins.formatting.rustfmt,
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.code_actions.refactoring,
+    null_ls.builtins.code_actions.gitsigns,
+  },
+}
+
+local null_ls_stop = function()
+  local null_ls_client
+  for _, client in ipairs(vim.lsp.get_active_clients()) do
+    if client.name == "null-ls" then
+      null_ls_client = client
+    end
+  end
+  if not null_ls_client then
+    return
+  end
+
+  null_ls_client.stop()
+end
+
+vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 
 require "fidget".setup {
   text = {
