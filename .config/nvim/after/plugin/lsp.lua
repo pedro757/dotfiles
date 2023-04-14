@@ -43,7 +43,7 @@ require("typescript").setup {
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = function(fname)
-      return require("lspconfig.util").root_pattern ".git/"(fname)
+      return require("lspconfig.util").root_pattern ".git"(fname)
         or require("lspconfig.util").root_pattern "tsconfig.json"(fname)
         or require("lspconfig.util").root_pattern(
           "package.json",
@@ -140,7 +140,7 @@ nvim_lsp.prismals.setup {
   },
   on_attach = on_attach,
   root_dir = function(fname)
-    return require("lspconfig.util").root_pattern ".git/"(fname)
+    return require("lspconfig.util").root_pattern ".git"(fname)
       or require("lspconfig.util").root_pattern "package.json"(fname)
   end,
 }
