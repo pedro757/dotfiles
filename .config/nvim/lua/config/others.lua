@@ -48,8 +48,8 @@ require("indent_blankline").setup {
   show_current_context = true,
 }
 require("project_nvim").setup {
-  -- detection_methods = { "pattern", "lsp" },
-  -- patterns = { ".git" },
+  detection_methods = { "pattern", "lsp" },
+  patterns = { ".git" },
 }
 -- require("tmux").setup {
 --   copy_sync = {
