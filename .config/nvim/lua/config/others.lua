@@ -1,48 +1,6 @@
 -- require "config/statusline"
 require("colorizer").setup()
 require("nvim-web-devicons").setup()
-require("nvim-tree").setup {
-  update_cwd = true,
-  respect_buf_cwd = true,
-  sync_root_with_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_root = true
-  },
-  renderer = {
-    icons = {
-      git_placement = "after",
-      glyphs = {
-        git = {
-          unstaged = " ",
-          staged = "烙",
-          unmerged = " ",
-          renamed = "諭",
-          untracked = " ",
-          deleted = " ",
-        }
-      }
-    }
-  },
-  git = {
-    ignore = false,
-  },
-  actions = {
-    open_file = {
-      quit_on_open = true
-    }
-  },
-  view = {
-    relativenumber = true,
-    mappings = {
-      list = {
-        { key = { "l" }, action = "edit" },
-        { key = { "h" }, action = "close_node" },
-        { key = { "gq" }, action = "close" },
-      },
-    },
-  },
-}
 require("indent_blankline").setup {
   char = "▏",
   show_current_context = true,
