@@ -228,10 +228,6 @@ return require("packer").startup {
     }
     -- Treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
-    use {
-      "nvim-treesitter/playground",
-      cmd = { "TSPlaygroundToggle" },
-    }
     use "JoosepAlviste/nvim-ts-context-commentstring"
     use {
       "windwp/nvim-ts-autotag",

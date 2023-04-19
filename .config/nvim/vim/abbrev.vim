@@ -32,4 +32,7 @@ inoreabbrev rutnr return
 inoreabbrev retunr return
 inoreabbrev reunt return
 
+inoreabbrev tpye type
+inoreabbrev tyep type
+
 inoreabbrev treu true
