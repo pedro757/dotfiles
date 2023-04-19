@@ -77,6 +77,7 @@ local servers = {
   "vuels",
   "marksman",
   "solargraph",
+  -- "eslint",
 }
 
 for _, lsp in ipairs(servers) do

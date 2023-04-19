@@ -249,9 +249,6 @@ return require("packer").startup {
     use {
       "lewis6991/gitsigns.nvim",
       event = "BufRead",
-      config = function()
-        require "plugins.gitsigns"
-      end,
     }
     use {
       "rhysd/git-messenger.vim",
