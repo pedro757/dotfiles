@@ -27,7 +27,7 @@ format = "[$time]($style)"
 disabled = true
 
 [directory]
-truncate_to_repo = false
+truncate_to_repo = true
 
 [git_branch]
 symbol = "🌱 "
