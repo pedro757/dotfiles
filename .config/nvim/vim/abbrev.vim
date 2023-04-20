@@ -36,3 +36,9 @@ inoreabbrev tpye type
 inoreabbrev tyep type
 
 inoreabbrev treu true
+
+inoreabbrev defualt default
+inoreabbrev defuatl default
+
+inoreabbrev epoxrt export
+inoreabbrev exprot export
