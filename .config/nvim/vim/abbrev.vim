@@ -39,6 +39,7 @@ inoreabbrev treu true
 
 inoreabbrev defualt default
 inoreabbrev defuatl default
+inoreabbrev defautl default
 
 inoreabbrev epoxrt export
 inoreabbrev exprot export
