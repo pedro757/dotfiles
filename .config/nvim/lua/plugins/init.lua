@@ -375,7 +375,13 @@ return require("packer").startup {
         require("nvim-surround").setup()
       end,
     }
-    use "wellle/targets.vim"
+    -- use "wellle/targets.vim"
+    use {
+      "echasnovski/mini.ai",
+      config = function()
+        require('mini.ai').setup()
+      end,
+    }
     use "lewis6991/impatient.nvim"
     use {
       "dstein64/vim-startuptime",
@@ -413,6 +419,7 @@ return require("packer").startup {
     }
     use {
       "gbprod/substitute.nvim",
+      branch = "fix-substitute-empty-block",
       config = function()
         require("substitute").setup {}
       end,
