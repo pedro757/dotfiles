@@ -31,6 +31,8 @@ inoreabbrev ruetnr return
 inoreabbrev rutnr return
 inoreabbrev retunr return
 inoreabbrev reunt return
+inoreabbrev ruenrt return
+inoreabbrev reuntr return
 
 inoreabbrev tpye type
 inoreabbrev tyep type
@@ -40,6 +42,16 @@ inoreabbrev treu true
 inoreabbrev defualt default
 inoreabbrev defuatl default
 inoreabbrev defautl default
+inoreabbrev deault default
 
 inoreabbrev epoxrt export
 inoreabbrev exprot export
+inoreabbrev expotr export
+inoreabbrev exoprt export
+
+inoreabbrev fucntion function
+inoreabbrev fcuntion function
+inoreabbrev functoin function
+
+inoreabbrev awiat await
+inoreabbrev awati await
