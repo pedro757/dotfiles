@@ -375,13 +375,13 @@ return require("packer").startup {
         require("nvim-surround").setup()
       end,
     }
-    -- use "wellle/targets.vim"
-    use {
-      "echasnovski/mini.ai",
-      config = function()
-        require('mini.ai').setup()
-      end,
-    }
+    use "wellle/targets.vim"
+    -- use {
+    --   "echasnovski/mini.ai",
+    --   config = function()
+    --     require('mini.ai').setup()
+    --   end,
+    -- }
     use "lewis6991/impatient.nvim"
     use {
       "dstein64/vim-startuptime",
