@@ -150,6 +150,23 @@ cmp.setup.filetype("lua", {
   }),
 })
 
+require("cmp-tw2css").setup()
+
+cmp.setup.filetype({ "css", "scss", "less", "sass" }, {
+  sources = cmp.config.sources({
+    { name = "nvim_lsp_signature_help" },
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  }, {
+    { name = "cmp-tw2css" },
+    { name = "emmet_vim" },
+    { name = "buffer" },
+    { name = "path" },
+  }, {
+    { name = "rg" },
+  }),
+})
+
 cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
     { name = "git" },
