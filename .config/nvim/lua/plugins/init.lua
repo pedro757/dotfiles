@@ -419,7 +419,6 @@ return require("packer").startup {
     }
     use {
       "gbprod/substitute.nvim",
-      branch = "fix-substitute-empty-block",
       config = function()
         require("substitute").setup {}
       end,
