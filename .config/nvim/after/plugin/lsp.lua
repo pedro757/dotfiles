@@ -34,6 +34,23 @@ local on_attach = function(client, bufnr)
       false
     )
   end
+  --
+  -- vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
+  --
+  -- vim.api.nvim_create_autocmd("InsertEnter", {
+  --   buffer = bufnr,
+  --   callback = function()
+  --     vim.lsp.buf.inlay_hint(bufnr, true)
+  --   end,
+  --   group = "lsp_augroup",
+  -- })
+  -- vim.api.nvim_create_autocmd("InsertLeave", {
+  --   buffer = bufnr,
+  --   callback = function()
+  --     vim.lsp.buf.inlay_hint(bufnr, false)
+  --   end,
+  --   group = "lsp_augroup",
+  -- })
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -43,13 +60,39 @@ require("typescript").setup {
     on_attach = on_attach,
     capabilities = capabilities,
     root_dir = function(fname)
-      return require("lspconfig.util").root_pattern ".git" (fname)
-          or require("lspconfig.util").root_pattern "tsconfig.json" (fname)
-          or require("lspconfig.util").root_pattern(
-            "package.json",
-            "jsconfig.json"
-          )(fname)
+      return require("lspconfig.util").root_pattern ".git"(fname)
+        or require("lspconfig.util").root_pattern "tsconfig.json"(fname)
+        or require("lspconfig.util").root_pattern(
+          "package.json",
+          "jsconfig.json"
+        )(fname)
     end,
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
   },
 }
 
@@ -96,9 +139,12 @@ nvim_lsp.tailwindcss.setup {
   },
   on_attach = on_attach,
   root_dir = function(fname)
-    return require("lspconfig.util").root_pattern ".git" (fname)
-      or require("lspconfig.util").root_pattern "package.json" (fname)
-      or require("lspconfig.util").root_pattern('tailwind.config.js', 'tailwind.config.ts') (fname)
+    return require("lspconfig.util").root_pattern ".git"(fname)
+      or require("lspconfig.util").root_pattern "package.json"(fname)
+      or require("lspconfig.util").root_pattern(
+        "tailwind.config.js",
+        "tailwind.config.ts"
+      )(fname)
   end,
 }
 nvim_lsp.cssmodules_ls.setup {
@@ -108,8 +154,8 @@ nvim_lsp.cssmodules_ls.setup {
   },
   on_attach = on_attach,
   root_dir = function(fname)
-    return require("lspconfig.util").root_pattern ".git" (fname)
-        or require("lspconfig.util").root_pattern "package.json" (fname)
+    return require("lspconfig.util").root_pattern ".git"(fname)
+      or require("lspconfig.util").root_pattern "package.json"(fname)
   end,
 }
 
@@ -122,8 +168,8 @@ nvim_lsp.yamlls.setup {
   settings = {
     yaml = {
       keyOrdering = false,
-    }
-  }
+    },
+  },
 }
 nvim_lsp.rust_analyzer.setup {
   capabilities = capabilities,
@@ -137,8 +183,13 @@ nvim_lsp.rust_analyzer.setup {
       check = {
         command = "clippy",
       },
-    }
-  }
+    },
+  },
+  tools = {
+    inlay_hints = {
+      auto = false,
+    },
+  },
 }
 
 nvim_lsp.jsonls.setup {
@@ -162,8 +213,8 @@ nvim_lsp.prismals.setup {
   },
   on_attach = on_attach,
   root_dir = function(fname)
-    return require("lspconfig.util").root_pattern ".git" (fname)
-        or require("lspconfig.util").root_pattern "package.json" (fname)
+    return require("lspconfig.util").root_pattern ".git"(fname)
+      or require("lspconfig.util").root_pattern "package.json"(fname)
   end,
 }
 
@@ -225,7 +276,7 @@ vim.diagnostic.config {
   },
   update_in_insert = true,
   float = {
-    border = 'rounded',
+    border = "rounded",
     source = "always",
   },
 }
@@ -266,9 +317,9 @@ end
 
 vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 
-require "fidget".setup {
+require("fidget").setup {
   text = {
     spinner = "dots",
-    done = " "
-  }
+    done = " ",
+  },
 }

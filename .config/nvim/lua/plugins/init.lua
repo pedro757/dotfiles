@@ -35,6 +35,7 @@ return require("packer").startup {
     }
     use {
       "j-hui/fidget.nvim",
+      tag = "legacy",
     }
     use "folke/neodev.nvim"
     use "nvim-lua/popup.nvim"

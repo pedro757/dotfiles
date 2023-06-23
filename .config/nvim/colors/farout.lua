@@ -95,6 +95,8 @@ local highlight_groups = {
   LspReferenceRead          = { bg = p.choco },
   LspReferenceWrite         = { bg = p.choco },
 
+  LspInlayHint              = { fg = p.gray },
+
   DiagnosticFloatingError    = { link = "ErrorFloat" },
   DiagnosticFloatingWarn     = { link = "WarningFloat" },
   DiagnosticFloatingInfo     = { link = "InfoFloat" },
