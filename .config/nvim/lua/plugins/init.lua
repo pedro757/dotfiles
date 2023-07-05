@@ -29,7 +29,12 @@ return require("packer").startup {
           "jose-elias-alvarez/null-ls.nvim",
         },
         {
-          "jose-elias-alvarez/typescript.nvim",
+          -- "jose-elias-alvarez/typescript.nvim",
+          "pmizio/typescript-tools.nvim",
+          requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+          config = function()
+            require("typescript-tools").setup {}
+          end,
         },
       },
     }
