@@ -48,7 +48,8 @@ graphql-language-service-cli intelephense neovim pyright sql-language-server \
 svelte-language-server tree-sitter-cli typescript typescript-language-server \
 vim-language-server vscode-langservers-extracted yaml-language-server ls_emmet \
 eslint_d @fsouza/prettierd @prisma/language-server @tailwindcss/language-server \
-pnpm cssmodules-language-server
+pnpm cssmodules-language-server @styled/typescript-styled-plugin \
+typescript-styled-plugin
 ```
 
 #### Installing rust stuff
