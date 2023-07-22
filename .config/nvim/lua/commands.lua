@@ -189,18 +189,6 @@ au("User", {
   group = Targets,
 })
 
-local NvimConfig = aug("NvimConfig", clear)
-
-au("BufWritePost", {
-  pattern = "init.lua",
-  callback = function()
-    if vim.loop.cwd() == "/home/pedro/.config/nvim" then
-      vim.cmd [[source <afile> | PackerCompile]]
-    end
-  end,
-  group = NvimConfig,
-})
-
 local Mkdir = aug("Mkdir", clear)
 
 au("BufWritePre", {
