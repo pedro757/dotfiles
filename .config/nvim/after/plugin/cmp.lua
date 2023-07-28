@@ -1,9 +1,10 @@
 if
-  not pcall(require, "cmp")
-  or not pcall(require, "lspkind")
-  or not pcall(require, "luasnip")
-  or not pcall(require, "nvim-autopairs")
-  or not pcall(require, "copilot")
+  -- not pcall(require, "cmp")
+  -- or not pcall(require, "lspkind")
+  -- or not pcall(require, "luasnip")
+  -- or not pcall(require, "nvim-autopairs")
+  -- or not pcall(require, "copilot")
+  true
 then
   return
 end
