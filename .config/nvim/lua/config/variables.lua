@@ -29,3 +29,16 @@ if vim.loop.cwd() == "/home/pedro/.config/nvim" then
   vim.env.GIT_DIR = vim.fn.expand("~") .. "/.dotfiles/"
   vim.env.GIT_WORK_TREE = vim.fn.expand("~")
 end
+
+vim.g.clipboard = {
+ name = "xsel",
+ copy = {
+  ["+"] = "xsel --nodetach -i -b",
+  ["*"] = "xsel --nodetach -i -p",
+ },
+ paste = {
+  ["+"] = "xsel  -o -b",
+  ["*"] = "xsel  -o -b",
+ },
+ cache_enabled = 1,
+}
