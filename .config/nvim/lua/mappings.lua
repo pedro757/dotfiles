@@ -210,6 +210,7 @@ m(
 --   }
 -- )
 
+m("x", "p", '"_dP', { desc = "Paste over" })
 m("n", "<leader>p", require("substitute").operator, { desc = "Paste in" })
 m("n", "<leader>pp", require("substitute").line, { desc = "Substitute Line" })
 m("n", "<leader>s", require('substitute.range').operator, { desc = "Substitute in Range" })
