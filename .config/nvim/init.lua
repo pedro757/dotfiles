@@ -221,9 +221,16 @@ local plugins = {
   },
   {
     "booperlv/nvim-gomove",
-    config = 'require("gomove").setup {}',
-    lazy = true,
-    keys = { "<A-k>", "<A-j>", "<A-h>", "<A-l>" },
+    keys = {
+      { "<A-h>", "<Plug>GoVSMLeft", mode = "v" },
+      { "<A-j>", "<Plug>GoVSMDown", mode = "v" },
+      { "<A-k>", "<Plug>GoVSMUp", mode = "v" },
+      { "<A-l>", "<Plug>GoVSMRight", mode = "v" },
+      { "<A-h>", "<Plug>GoNSMRight"  },
+      { "<A-j>", "<Plug>GoNSMDown" },
+      { "<A-k>", "<Plug>GoNSMUp" },
+      { "<A-l>", "<Plug>GoNSMRight" },
+    },
   },
   {
     "nyngwang/NeoZoom.lua",
