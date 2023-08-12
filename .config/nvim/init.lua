@@ -176,24 +176,11 @@ local plugins = {
   },
   {
     "vuki656/package-info.nvim",
-    config = function()
-      require("package-info").setup()
-    end,
-    ft = { "json" },
-    cond = function()
-      if vim.fn.expand "%" == "package.json" then
-        return true
-      end
-    end,
+    ft = "json",
   },
   {
     "saecki/crates.nvim",
     ft = "toml",
-    cond = function()
-      if vim.fn.expand "%" == "Cargo.toml" then
-        return true
-      end
-    end,
     config = function()
       require("crates").setup()
     end,
