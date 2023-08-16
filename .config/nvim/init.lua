@@ -214,7 +214,7 @@ local plugins = {
       { "<A-j>", "<Plug>GoVSMDown", mode = "v" },
       { "<A-k>", "<Plug>GoVSMUp", mode = "v" },
       { "<A-l>", "<Plug>GoVSMRight", mode = "v" },
-      { "<A-h>", "<Plug>GoNSMRight"  },
+      { "<A-h>", "<Plug>GoNSMLeft" },
       { "<A-j>", "<Plug>GoNSMDown" },
       { "<A-k>", "<Plug>GoNSMUp" },
       { "<A-l>", "<Plug>GoNSMRight" },
