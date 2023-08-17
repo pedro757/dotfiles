@@ -21,7 +21,25 @@ local plugins = {
   "folke/neodev.nvim",
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
-  "nvim-telescope/telescope.nvim",
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      {
+        "<leader>w",
+        function()
+          require("telescope").extensions.git_worktree.git_worktrees()
+        end,
+        desc = "Git Worktrees",
+      },
+      {
+        "<leader>W",
+        function()
+          require("telescope").extensions.git_worktree.create_git_worktree()
+        end,
+        desc = "Git Worktrees",
+      },
+    },
+  },
   "nvim-telescope/telescope-ui-select.nvim",
   "kyazdani42/nvim-web-devicons",
   "norcalli/nvim-colorizer.lua",
@@ -30,7 +48,25 @@ local plugins = {
   "ahmedkhalf/project.nvim",
   "ThePrimeagen/refactoring.nvim",
   "ThePrimeagen/git-worktree.nvim",
-  "ThePrimeagen/harpoon",
+  {
+    "ThePrimeagen/harpoon",
+    keys = {
+      {
+        "<leader>g",
+        function()
+          require("harpoon.ui").toggle_quick_menu()
+        end,
+        desc = "Harpoon",
+      },
+      {
+        "<leader>ga",
+        function()
+          require("harpoon.ui").add_file()
+        end,
+        desc = "Harpoon Add Mark",
+      },
+    },
+  },
   "wellle/targets.vim",
   "folke/which-key.nvim",
   "b0o/schemastore.nvim",
@@ -42,6 +78,53 @@ local plugins = {
   "tpope/vim-sleuth",
   "andymass/vim-matchup",
   "mfussenegger/nvim-dap",
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "<leader>t",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "<leader>T",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash",
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function()
+          require("flash").treesitter_search()
+        end,
+        desc = "Treesitter Search",
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function()
+          require("flash").toggle()
+        end,
+        desc = "Toggle Flash Search",
+      },
+    },
+  },
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
@@ -76,7 +159,7 @@ local plugins = {
         require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
       end,
     },
-    lazy = false
+    lazy = false,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -91,6 +174,72 @@ local plugins = {
   },
   {
     "gbprod/substitute.nvim",
+    keys = {
+      {
+        "<leader>p",
+        function()
+          require("substitute").operator()
+        end,
+        mode = "n",
+        desc = "Paste in",
+      },
+      {
+        "<leader>pp",
+        function()
+          require("substitute").line()
+        end,
+        mode = "n",
+        desc = "Substitute Line",
+      },
+      {
+        "<leader>s",
+        function()
+          require("substitute.range").operator()
+        end,
+        mode = "n",
+        desc = "Substitute in Range",
+      },
+      {
+        "<leader>s",
+        function()
+          require("substitute.range").visual()
+        end,
+        mode = "x",
+        desc = "Substitute in Range",
+      },
+      {
+        "<leader>ss",
+        function()
+          require("substitute.range").word()
+        end,
+        mode = "n",
+        desc = "Substitute Curr. Word in Range",
+      },
+      {
+        "<leader>sx",
+        "<cmd>lua require('substitute.exchange').operator()<cr>",
+        mode = "n",
+        desc = "Substitute Exchange",
+      },
+      {
+        "<leader>sxx",
+        "<cmd>lua require('substitute.exchange').line()<cr>",
+        mode = "n",
+        desc = "Substitute Exchange",
+      },
+      {
+        "<leader>X",
+        "<cmd>lua require('substitute.exchange').visual()<cr>",
+        mode = "x",
+        desc = "Substitute Exchange",
+      },
+      {
+        "<leader>sxc",
+        "<cmd>lua require('substitute.exchange').cancel()<cr>",
+        mode = "n",
+        desc = "Substitute Exchange",
+      },
+    },
     config = function()
       require("substitute").setup {}
     end,
@@ -319,10 +468,10 @@ local plugins = {
               markdown = true,
               sh = function()
                 if
-                    string.match(
-                      vim.fs.basename(vim.api.nvim_buf_get_name(0)),
-                      "^%.env.*"
-                    )
+                  string.match(
+                    vim.fs.basename(vim.api.nvim_buf_get_name(0)),
+                    "^%.env.*"
+                  )
                 then
                   return false
                 end
@@ -566,21 +715,21 @@ local plugins = {
 
       npairs.add_rules {
         Rule(" ", " ")
-            :with_pair(cond.done())
-            :replace_endpair(function(opts)
-              local pair = opts.line:sub(opts.col - 1, opts.col)
-              if vim.tbl_contains({ "()", "{}", "[]" }, pair) then
-                return " " -- it return space here
-              end
-              return ""  -- return empty
-            end)
-            :with_move(cond.none())
-            :with_cr(cond.none())
-            :with_del(function(opts)
-              local col = vim.api.nvim_win_get_cursor(0)[2]
-              local context = opts.line:sub(col - 1, col + 2)
-              return vim.tbl_contains({ "(  )", "{  }", "[  ]" }, context)
-            end),
+          :with_pair(cond.done())
+          :replace_endpair(function(opts)
+            local pair = opts.line:sub(opts.col - 1, opts.col)
+            if vim.tbl_contains({ "()", "{}", "[]" }, pair) then
+              return " " -- it return space here
+            end
+            return "" -- return empty
+          end)
+          :with_move(cond.none())
+          :with_cr(cond.none())
+          :with_del(function(opts)
+            local col = vim.api.nvim_win_get_cursor(0)[2]
+            local context = opts.line:sub(col - 1, col + 2)
+            return vim.tbl_contains({ "(  )", "{  }", "[  ]" }, context)
+          end),
       }
     end,
   },

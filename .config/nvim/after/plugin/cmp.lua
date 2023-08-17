@@ -218,6 +218,7 @@ npairs.setup {
   check_ts = true,
   break_undo = false,
   enable_abbr = true,
+  map_cr = true,
 }
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

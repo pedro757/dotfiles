@@ -1,3 +1,6 @@
+if not pcall(require, "colorizer") then
+  return
+end
 -- require "config/statusline"
 require("colorizer").setup()
 require("nvim-web-devicons").setup()

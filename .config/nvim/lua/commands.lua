@@ -201,19 +201,21 @@ au("BufWritePre", {
   group = Mkdir,
 })
 
-au({"BufNewFile", "BufRead"}, {
+au({ "BufNewFile", "BufRead" }, {
   pattern = "/dev/shm/gopass*",
-  callback = function ()
+  callback = function()
     vim.opt.swapfile = false
     vim.opt.backup = false
     vim.opt.undofile = false
     vim.opt.shada = ""
-  end
+  end,
 })
 
-cmd("Worktree", require("telescope").extensions.git_worktree.git_worktrees, {})
 cmd("WW", "SudoWrite", {})
 cmd("DiffSaved", function()
   vim.fn.DiffWithSaved()
 end, {})
 cmd("Dotfiles", "call FugitiveDetect(expand('~/.dotfiles'))", {})
+cmd("Worktree", function()
+  require("telescope").extensions.git_worktree.git_worktrees()
+end, {})

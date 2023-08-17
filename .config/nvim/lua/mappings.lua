@@ -172,19 +172,6 @@ m(
 m("n", "gs", "<plug>(GrepperOperator)", { remap = true })
 m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
 
-m(
-  "n",
-  "<leader>g",
-  require("harpoon.ui").toggle_quick_menu,
-  { desc = "Harpoon" }
-)
-m(
-  "n",
-  "<leader>ga",
-  require("harpoon.mark").add_file,
-  { desc = "Harpoon Add Mark" }
-)
-
 -- m(
 --   "n",
 --   "<leader>tt",
@@ -211,15 +198,6 @@ m(
 -- )
 
 m("x", "p", '"_dP', { desc = "Paste over" })
-m("n", "<leader>p", require("substitute").operator, { desc = "Paste in" })
-m("n", "<leader>pp", require("substitute").line, { desc = "Substitute Line" })
-m("n", "<leader>s", require('substitute.range').operator, { desc = "Substitute in Range" })
-m("x", "<leader>s", require('substitute.range').visual, { desc = "Substitute in Range" })
-m("n", "<leader>ss", require('substitute.range').word, { desc = "Substitute Curr. Word in Range" })
-m("n", "<leader>sx", "<cmd>lua require('substitute.exchange').operator()<cr>", { desc = "Substitute Exchange" })
-m("n", "<leader>sxx", "<cmd>lua require('substitute.exchange').line()<cr>", { desc = "Substitute Exchange" })
-m("x", "<leader>X", "<cmd>lua require('substitute.exchange').visual()<cr>", { desc = "Substitute Exchange" })
-m("n", "<leader>sxc", "<cmd>lua require('substitute.exchange').cancel()<cr>", { desc = "Substitute Exchange" })
 
 m(
   "n",
@@ -228,17 +206,4 @@ m(
   {
     desc = "Delete the highlighted lines [into register _] and start insert mode.",
   }
-)
-
-m(
-  "n",
-  "<leader>w",
-  require('telescope').extensions.git_worktree.git_worktrees,
-  { desc = "Git Worktrees" }
-)
-m(
-  "n",
-  "<leader>W",
-  require('telescope').extensions.git_worktree.create_git_worktree,
-  { desc = "Git Worktrees" }
 )
