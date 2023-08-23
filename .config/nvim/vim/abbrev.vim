@@ -24,6 +24,13 @@ cnoreabbrev Gpush G push
 cnoreabbrev Push push
 cnoreabbrev psuh push
 cnoreabbrev Psuh push
+cnoreabbrev Psuh push
+cnoreabbrev phsu push
+cnoreabbrev Phsu push
+cnoreabbrev Phs push
+cnoreabbrev Psh push
+cnoreabbrev psh push
+cnoreabbrev pll pull
 
 inoreabbrev reutnr return
 inoreabbrev reuntr return
@@ -38,6 +45,8 @@ inoreabbrev tpye type
 inoreabbrev tyep type
 
 inoreabbrev treu true
+
+inoreabbrev flase false
 
 inoreabbrev defualt default
 inoreabbrev defuatl default
@@ -55,3 +64,19 @@ inoreabbrev functoin function
 
 inoreabbrev awiat await
 inoreabbrev awati await
+inoreabbrev awtai await
+
+inoreabbrev whiel while
+inoreabbrev wihle while
+inoreabbrev wihel while
+inoreabbrev whlie while
+
+inoreabbrev asnyc async
+inoreabbrev asny async
+inoreabbrev asyn async
+
+inoreabbrev imoprt import
+inoreabbrev ipmort import
+inoreabbrev impotr import
+inoreabbrev imrpot import
+inoreabbrev imorpt import
