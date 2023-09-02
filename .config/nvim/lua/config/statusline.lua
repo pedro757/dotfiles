@@ -78,7 +78,7 @@ gls.left[5] = {
   FilePath = {
     provider = function()
       local file
-      local cwd = vim.loop.cwd()
+      local cwd = vim.uv.cwd()
       if not cwd then return '' end
       local absolute_path = vim.api.nvim_buf_get_name(0)
       local rel_path = absolute_path:gsub(vim.pesc(cwd .. '/'), '')
