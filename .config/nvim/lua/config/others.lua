@@ -4,10 +4,6 @@ end
 -- require "config/statusline"
 require("colorizer").setup()
 require("nvim-web-devicons").setup()
-require("indent_blankline").setup {
-  char = "▏",
-  show_current_context = true,
-}
 require("project_nvim").setup {
   detection_methods = { "pattern", "lsp" },
   patterns = { ".git" },
