@@ -146,7 +146,7 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
       "hrsh7th/cmp-nvim-lsp",
       {
         "pmizio/typescript-tools.nvim",
