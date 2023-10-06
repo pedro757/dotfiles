@@ -41,13 +41,38 @@ local plugins = {
     },
   },
   "Marskey/telescope-sg",
+  -- {
+  --   "nvim-telescope/telescope-fzf-native.nvim",
+  --   build =
+  --   "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  -- },
   "nvim-telescope/telescope-ui-select.nvim",
   "kyazdani42/nvim-web-devicons",
   "norcalli/nvim-colorizer.lua",
-  "karb94/neoscroll.nvim",
-  "b0o/incline.nvim",
-  "ahmedkhalf/project.nvim",
-  "ThePrimeagen/refactoring.nvim",
+  {
+    "karb94/neoscroll.nvim",
+    opts = {
+      mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
+    },
+  },
+  {
+    "b0o/incline.nvim",
+    opts = {
+      hide = {
+        focused_win = true,
+      },
+    },
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        detection_methods = { "pattern", "lsp" },
+        patterns = { ".git" },
+      }
+    end,
+  },
+  { "ThePrimeagen/refactoring.nvim", opts = {} },
   "ThePrimeagen/git-worktree.nvim",
   {
     "ThePrimeagen/harpoon",
@@ -69,7 +94,25 @@ local plugins = {
     },
   },
   "wellle/targets.vim",
-  "folke/which-key.nvim",
+  {
+    "folke/which-key.nvim",
+    opts = {
+      plugins = {
+        presets = {
+          operators = false,
+          motions = false,
+          text_objects = false,
+          windows = true,
+          nav = true,
+          z = true,
+          g = true,
+        },
+      },
+      window = {
+        border = "single",
+      },
+    },
+  },
   "b0o/schemastore.nvim",
   "nvim-lualine/lualine.nvim",
   "kyazdani42/nvim-tree.lua",

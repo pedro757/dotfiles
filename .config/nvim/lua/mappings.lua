@@ -24,6 +24,8 @@ m('t', '::', [[<C-\><C-n>:]])
 m({ 'n', 't' }, '<C-t>', [[<Cmd>exe v:count1 . "ToggleTerm"<CR>]], { silent = true, desc = "Toggle Terminal" })
 
 m("n", "<leader>o", ":NeoZoomToggle<CR>zz", { desc = "Zoom", silent = true })
+m("n", "n", "nzz")
+m("n", "N", "Nzz")
 m("n", "j", '(v:count > 5 ? "m\'" . v:count : "") . \'j\'', { expr = true })
 m("n", "k", '(v:count > 5 ? "m\'" . v:count : "") . \'k\'', { expr = true })
 m("", "H", "^", { remap = true })
