@@ -40,7 +40,6 @@ cmp.setup {
     { name = "nvim_lsp" },
     { name = "luasnip" },
   }, {
-    { name = "emmet_vim" },
     { name = "buffer" },
     { name = "path" },
   }, {
@@ -160,7 +159,6 @@ cmp.setup.filetype({ "css", "scss", "less", "sass" }, {
     { name = "luasnip" },
   }, {
     { name = "cmp-tw2css" },
-    { name = "emmet_vim" },
     { name = "buffer" },
     { name = "path" },
   }, {

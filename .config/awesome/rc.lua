@@ -230,6 +230,9 @@ local globalkeys = gears.table.join(
     awful.tag.history.restore,
     { description = "go back", group = "tag" }
   ),
+  awful.key({ modkey }, "i", function()
+    awful.spawn "xmouseless"
+  end, { description = "focus next by index", group = "client" }),
 
   awful.key({ modkey }, "j", function()
     awful.client.focus.byidx(1)

@@ -491,8 +491,6 @@ local plugins = {
       "onsails/lspkind-nvim",
       "windwp/nvim-autopairs",
       "jcha0713/cmp-tw2css",
-      "dcampos/cmp-emmet-vim",
-      "mattn/emmet-vim",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
@@ -578,7 +576,6 @@ local plugins = {
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
-          { name = "emmet_vim" },
           { name = "buffer" },
           { name = "path" },
         }, {
@@ -700,7 +697,6 @@ local plugins = {
           { name = "luasnip" },
         }, {
           { name = "cmp-tw2css" },
-          { name = "emmet_vim" },
           { name = "buffer" },
           { name = "path" },
         }, {
