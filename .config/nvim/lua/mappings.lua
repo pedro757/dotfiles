@@ -209,3 +209,4 @@ m(
     desc = "Delete the highlighted lines [into register _] and start insert mode.",
   }
 )
+m("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

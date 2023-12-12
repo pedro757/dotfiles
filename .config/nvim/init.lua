@@ -40,6 +40,12 @@ local plugins = {
       },
     },
   },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   "Marskey/telescope-sg",
   -- {
   --   "nvim-telescope/telescope-fzf-native.nvim",
