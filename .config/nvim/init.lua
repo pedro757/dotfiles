@@ -220,11 +220,14 @@ local plugins = {
     lazy = false,
   },
   {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    opts = {
+      enable_autocmd = false,
+    }
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
   },
   {
     "j-hui/fidget.nvim",

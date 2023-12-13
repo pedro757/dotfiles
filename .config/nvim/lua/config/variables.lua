@@ -12,6 +12,7 @@ vim.g.registers_window_border = "solid"
 vim.g.registers_hide_only_whitespace = 1
 vim.g.indent_blankline_show_first_indent_level = false
 vim.g.indent_blankline_use_treesitter = true
+vim.g.skip_ts_context_commentstring_module = true
 vim.g.loaded_matchit = 1
 vim.g.matchup_delim_start_plaintext = 0
 vim.g.python3_host_prog = vim.fn.expand "~/.virtualenvs/pynvim3/bin/python"

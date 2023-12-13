@@ -53,6 +53,7 @@ set -gx GPG_TTY (tty)
 if status --is-interactive
   abbr --add --global celar clear
   abbr --add --global clar clear
+  abbr --add --global claer clear
   abbr --add --global cñear clear
   abbr --add --global cleara clear
   abbr --add --global clra clear
