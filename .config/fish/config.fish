@@ -6,7 +6,7 @@ alias dcompose="docker-compose"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME/'
 alias la='exa --long --icons --git -a'
 alias ll='exa --long --icons --git'
-alias bun='sde -chip-check-disable -- bun'
+# alias bun='sde -chip-check-disable -- bun'
 
 # set PATH /Users/MyUserName/.nvm/versions/node/v13.13.0/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
