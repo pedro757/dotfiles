@@ -70,7 +70,6 @@ au("Filetype", {
     "help",
     "startuptime",
     "checkhealth",
-    "harpoon",
     [[null-ls-info]],
     "lspinfo",
     "UltestSummary",
@@ -80,6 +79,17 @@ au("Filetype", {
   callback = function()
     map("n", "gq", ":bd<cr>", buf_opts)
     map("n", "<c-x>", ":bd<cr>", buf_opts)
+  end,
+  group = HelpMappings,
+})
+
+au("Filetype", {
+  pattern = {
+    "harpoon",
+  },
+  callback = function()
+    map("n", "gq", ":bd!<cr>", buf_opts)
+    map("n", "<c-x>", ":bd!<cr>", buf_opts)
   end,
   group = HelpMappings,
 })
