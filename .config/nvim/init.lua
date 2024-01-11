@@ -47,6 +47,11 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
+    'barrett-ruth/import-cost.nvim',
+    build = 'sh install.sh bun',
+    config = true
+  },
+  {
     'mikesmithgh/kitty-scrollback.nvim',
     enabled = true,
     lazy = true,
