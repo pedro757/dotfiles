@@ -109,6 +109,10 @@ require("nvim-tree").setup {
   },
   view = {
     relativenumber = true,
+    width = {
+      min = "30%",
+      max = "50%",
+    }
   },
   on_attach = on_attach,
 }
