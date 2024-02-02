@@ -3,7 +3,7 @@ vim.g.colors_name = "farout"
 local p = {
   bg0         = "#0F0908",
   bg1         = "#1F1311",
-  fg0         = "#E0CCAE",
+  fg0         = "#DBC4A2",
   fg1         = "#ddc7a1",
   beige       = "#A4895C",
   beige1      = "#A4896f",
@@ -237,6 +237,8 @@ local highlight_groups = {
 
   ["@method.call"]          = { fg = p.red, italic = true },
   ["@lsp.type.method"]      = { fg = p.red, italic = true },
+  ["@lsp.type.variable"]    = { bg = p.bg0, fg = p.fg0 },
+  ["@variable"]    = { bg = p.bg0, fg = p.fg0 }
 }
 
 for group_name, group_settings in pairs(highlight_groups) do
