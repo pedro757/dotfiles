@@ -1,11 +1,11 @@
 local m = vim.keymap.set
 
-m(
-  "n",
-  "<leader>e",
-  vim.cmd.NvimTreeToggle,
-  { silent = true, desc = "File Explorer" }
-)
+-- m(
+--   "n",
+--   "<leader>e",
+--   vim.cmd.NvimTreeToggle,
+--   { silent = true, desc = "File Explorer" }
+-- )
 
 -- " New Line Pressing Enter
 m("n", "<S-Enter>", ":call AddEmptyLineAbove()<CR>", { silent = true })
