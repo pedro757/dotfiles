@@ -235,6 +235,10 @@ local highlight_groups = {
   MatchWord     = { underline = true },
   MatchWordCur  = { underline = true },
 
+  GitSignsAdd    = { fg = p.green },
+  GitSignsChange = { fg = p.orange },
+  GitSignsDelete = { fg = p.red },
+
   ["@method.call"]          = { fg = p.red, italic = true },
   ["@lsp.type.method"]      = { fg = p.red, italic = true },
   ["@lsp.type.variable"]    = { bg = p.bg0, fg = p.fg0 },
