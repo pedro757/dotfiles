@@ -49,11 +49,11 @@ local plugins = {
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  {
-    'barrett-ruth/import-cost.nvim',
-    build = 'sh install.sh bun',
-    config = true
-  },
+  -- {
+  --   'barrett-ruth/import-cost.nvim',
+  --   build = 'sh install.sh bun',
+  --   config = true
+  -- },
   {
     'mikesmithgh/kitty-scrollback.nvim',
     enabled = true,
@@ -150,6 +150,12 @@ local plugins = {
       end)
       vim.keymap.set("n", "<leader>4", function()
         harpoon:list():select(4)
+      end)
+      vim.keymap.set("n", "<leader>5", function()
+        harpoon:list():select(5)
+      end)
+      vim.keymap.set("n", "<leader>6", function()
+        harpoon:list():select(6)
       end)
     end,
   },
@@ -249,7 +255,12 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "nvimtools/none-ls.nvim",
+      {
+        "nvimtools/none-ls.nvim",
+        dependencies = {
+          "nvimtools/none-ls-extras.nvim",
+        }
+      },
       "hrsh7th/cmp-nvim-lsp",
       {
         "pmizio/typescript-tools.nvim",
@@ -496,6 +507,7 @@ local plugins = {
       require("toggleterm").setup {
         shell = "/usr/bin/fish",
         autochdir = true,
+        size = 20,
       }
     end,
   },

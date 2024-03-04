@@ -68,8 +68,11 @@ local highlight_groups = {
   WildMenu                  = { fg = p.orange },
   SpecialKey                = { fg = p.beige1 },
   DiffAdd                   = { bg = p.choco, fg = p.beige },
+  Added                     = { bg = p.choco, fg = p.beige },
   DiffChange                = { bg = p.choco, fg = p.vinotinto },
+  Changed                   = { bg = p.choco, fg = p.vinotinto },
   DiffDelete                = { bg = p.choco, fg = p.red },
+  Removed                   = { bg = p.choco, fg = p.red },
   DiffText                  = { bg = p.choco, fg = p.beige },
 
   IncSearch                 = { bg = p.light_brown, fg = p.bg0 },
