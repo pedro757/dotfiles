@@ -203,6 +203,9 @@ local Mkdir = aug("Mkdir", clear)
 
 au("BufWritePre", {
   callback = function()
+    if vim.o.filetype == "oil" or vim.o.filetype == "fugitive" then
+      return
+    end
     local dir = vim.fn.expand "<afile>:p:h"
     if vim.fn.isdirectory(dir) == 0 then
       vim.fn.mkdir(dir, "p")

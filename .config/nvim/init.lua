@@ -181,7 +181,7 @@ local plugins = {
   },
   "b0o/schemastore.nvim",
   "nvim-lualine/lualine.nvim",
-  -- "nvim-tree/nvim-tree.lua",
+  "nvim-tree/nvim-tree.lua",
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
