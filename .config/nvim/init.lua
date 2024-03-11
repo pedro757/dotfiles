@@ -274,15 +274,20 @@ local plugins = {
   {
     "numToStr/Comment.nvim",
     dependencies = {
+      "nvim-treesitter/nvim-treesitter",
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
+    config = function()
+      local prehook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
+      require"Comment".setup({
+        pre_hook = prehook,
+        post_hook = nil,
+      })
+    end,
     keys = { "gcc", "gc", "gb", "gbc" },
-    opts = {
-      pre_hook = function()
-        require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
-      end,
-    },
     lazy = false,
+    event = "BufReadPre",
+
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
