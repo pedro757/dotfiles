@@ -14,6 +14,7 @@ local p = {
   red         = "#BF472C",
   orange      = "#D47D49",
   yellow      = "#F2A766",
+  vibrant_yellow = "#ff7b00",
   green       = "#a9b665",
   choco       = "#291916",
   black       = "#000000",
@@ -244,8 +245,9 @@ local highlight_groups = {
 
   ["@method.call"]          = { fg = p.red, italic = true },
   ["@lsp.type.method"]      = { fg = p.red, italic = true },
-  ["@lsp.type.variable"]    = { bg = p.bg0, fg = p.fg0 },
-  ["@variable"]    = { bg = p.bg0, fg = p.fg0 }
+  ["@lsp.type.variable"]      = { bg = p.bg0, fg = p.fg0 },
+  ["@variable"]      = { bg = p.bg0, fg = p.fg0 },
+  ["@lsp.type.parameter"]      = { bg = p.bg0, fg = p.vibrant_yellow },
 }
 
 for group_name, group_settings in pairs(highlight_groups) do
