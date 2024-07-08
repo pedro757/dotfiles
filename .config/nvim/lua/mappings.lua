@@ -172,7 +172,7 @@ m(
 -- end, { desc = "Stage Hunk", silent = true })
 
 m("n", "gs", "<plug>(GrepperOperator)", { remap = true })
-m("x", "gs", "<plug>(GrepperOperator)", { remap = true })
+m("x", "gs", "<plug>(GrepperOperator)<cr>", { remap = true })
 
 -- m(
 --   "n",

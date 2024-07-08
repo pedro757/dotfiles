@@ -12,16 +12,12 @@ local nvim_lsp = require "lspconfig"
 local null_ls = require "null-ls"
 
 local on_attach = function(client, bufnr)
-  local function option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
-  option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", {})
   if client.server_capabilities.colorProvider then
     require("document-color").buf_attach(bufnr, { mode = "background" })
   end
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_exec(
+    vim.api.nvim_exec2(
       [[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -31,7 +27,7 @@ local on_attach = function(client, bufnr)
         autocmd CursorMovedI <buffer> lua vim.lsp.buf.clear_references()
       augroup END
       ]],
-      false
+      { output = false }
     )
   end
   --
@@ -293,7 +289,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 nvim_lsp.lua_ls.setup {
   on_init = function(client)
     local path = client.workspace_folders[1].name
-    if not vim.uv.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
+    if not vim.uv.fs_stat(path..'/.luarc.json') and not vim.uv.fs_stat(path..'/.luarc.jsonc') then
       client.config.settings = vim.tbl_deep_extend('force', client.config.settings.Lua, {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
@@ -322,7 +318,7 @@ vim.diagnostic.config {
   update_in_insert = true,
   float = {
     border = "rounded",
-    source = "always",
+    source = true,
   },
 }
 
@@ -349,7 +345,7 @@ null_ls.setup {
 
 local null_ls_stop = function()
   local null_ls_client
-  for _, client in ipairs(vim.lsp.get_active_clients()) do
+  for _, client in ipairs(vim.lsp.get_clients()) do
     if client.name == "null-ls" then
       null_ls_client = client
     end

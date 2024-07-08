@@ -49,6 +49,22 @@ local plugins = {
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  {
+    "AlejandroSuero/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_line = "<C-e>",
+          accept_suggestion = "<C-i>",
+          accept_word = "<C-n>",
+          clear_suggestion = "<C-x>",
+        },
+        -- disable_keymaps = true,
+        ignore_filetypes = { sh = true },
+      })
+    end,
+    branch = "feature/accept-line",
+  },
   -- {
   --   'barrett-ruth/import-cost.nvim',
   --   build = 'sh install.sh bun',
@@ -251,6 +267,7 @@ local plugins = {
     "mhinz/vim-grepper",
     cmd = { "Grepper", "GrepperRg", "GrepperAg", "GrepperGrep" },
     keys = "<plug>(GrepperOperator)",
+    lazy = false,
   },
   {
     "neovim/nvim-lspconfig",
@@ -456,7 +473,6 @@ local plugins = {
   },
   {
     "vuki656/package-info.nvim",
-    ft = "json",
   },
   {
     "saecki/crates.nvim",
@@ -588,42 +604,42 @@ local plugins = {
           require("cmp_git").setup()
         end,
       },
-      {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-          require("copilot").setup {
-            filetypes = {
-              markdown = true,
-              sh = function()
-                if
-                  string.match(
-                    vim.fs.basename(vim.api.nvim_buf_get_name(0)),
-                    "^%.env.*"
-                  )
-                then
-                  return false
-                end
-                return true
-              end,
-            },
-            suggestion = {
-              enabled = true,
-              auto_trigger = true,
-              debounce = 75,
-              keymap = {
-                accept = "<M-l>",
-                accept_word = "<C-n>",
-                accept_line = "<C-e>",
-                next = "<M-]>",
-                prev = "<M-[>",
-                dismiss = "<C-]>",
-              },
-            },
-          }
-        end,
-      },
+      -- {
+      --   "zbirenbaum/copilot.lua",
+      --   cmd = "Copilot",
+      --   event = "InsertEnter",
+      --   config = function()
+      --     require("copilot").setup {
+      --       filetypes = {
+      --         markdown = true,
+      --         sh = function()
+      --           if
+      --             string.match(
+      --               vim.fs.basename(vim.api.nvim_buf_get_name(0)),
+      --               "^%.env.*"
+      --             )
+      --           then
+      --             return false
+      --           end
+      --           return true
+      --         end,
+      --       },
+      --       suggestion = {
+      --         enabled = true,
+      --         auto_trigger = true,
+      --         debounce = 75,
+      --         keymap = {
+      --           accept = "<M-l>",
+      --           accept_word = "<C-n>",
+      --           accept_line = "<C-e>",
+      --           next = "<M-]>",
+      --           prev = "<M-[>",
+      --           dismiss = "<C-]>",
+      --         },
+      --       },
+      --     }
+      --   end,
+      -- },
     },
     config = function()
       local luasnip = require "luasnip"
@@ -670,8 +686,8 @@ local plugins = {
             i = function(fallback)
               if cmp.visible() then
                 cmp.close()
-              elseif require("copilot.suggestion").is_visible() then
-                require("copilot.suggestion").dismiss()
+              -- elseif require("copilot.suggestion").is_visible() then
+              --   require("copilot.suggestion").dismiss()
               else
                 fallback()
               end
@@ -684,8 +700,8 @@ local plugins = {
             i = function(fallback)
               if cmp.visible() then
                 cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
-              elseif require("copilot.suggestion").is_visible() then
-                require("copilot.suggestion").accept()
+              -- elseif require("copilot.suggestion").is_visible() then
+              --   require("copilot.suggestion").accept()
               else
                 fallback()
               end
@@ -720,8 +736,8 @@ local plugins = {
                   behavior = cmp.ConfirmBehavior.Replace,
                   select = true,
                 }
-              elseif require("copilot.suggestion").is_visible() then
-                require("copilot.suggestion").accept_line()
+              -- elseif require("copilot.suggestion").is_visible() then
+              --   require("copilot.suggestion").accept_line()
               else
                 fallback()
               end

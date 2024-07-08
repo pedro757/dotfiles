@@ -114,32 +114,32 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 ## Action // Toggle Waybar ##
-$bindsym $mod+b exec pkill -SIGUSR1 waybar
+bindsym $mod+b exec pkill -SIGUSR1 waybar
 
 # --locked flags allow the buttons to be used whilst the screen is locked.
-$bindsym --locked XF86AudioRaiseVolume exec $volume_up
+bindsym --locked XF86AudioRaiseVolume exec $volume_up
 
-$bindsym --locked XF86AudioLowerVolume exec $volume_down
+bindsym --locked XF86AudioLowerVolume exec $volume_down
 
-$bindsym --locked XF86AudioMute exec $volume_mute
+bindsym --locked XF86AudioMute exec $volume_mute
 
-$bindsym XF86AudioMicMute exec $mic_mute
+bindsym XF86AudioMicMute exec $mic_mute
 
-$bindsym --locked XF86MonBrightnessUp exec $brightness_up
+bindsym --locked XF86MonBrightnessUp exec $brightness_up
 
-$bindsym --locked XF86MonBrightnessDown exec $brightness_down
+bindsym --locked XF86MonBrightnessDown exec $brightness_down
 
-$bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPlay exec playerctl play-pause
 
-$bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioNext exec playerctl next
 
-$bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPrev exec playerctl previous
 
-$bindsym XF86Search exec $menu
+bindsym XF86Search exec $menu
 
-$bindsym XF86PowerOff exec $shutdown
+bindsym XF86PowerOff exec $shutdown
 
-$bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
+bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 
 ##############################################################################
 ###### RESIZE MODE ###########################################################
@@ -155,26 +155,26 @@ mode --pango_markup $mode_resize {
   # right will grow the containers width
   # up will shrink the containers height
   # down will grow the containers height
-  $bindsym $left resize shrink width 10px
-  $bindsym $down resize grow height 10px
-  $bindsym $up resize shrink height 10px
-  $bindsym $right resize grow width 10px
+  bindsym $left resize shrink width 10px
+  bindsym $down resize grow height 10px
+  bindsym $up resize shrink height 10px
+  bindsym $right resize grow width 10px
 
-  $bindsym Shift+$left resize shrink width 50px
-  $bindsym Shift+$down resize grow height 50px
-  $bindsym Shift+$up resize shrink height 50px
-  $bindsym Shift+$right resize grow width 50px
+  bindsym Shift+$left resize shrink width 50px
+  bindsym Shift+$down resize grow height 50px
+  bindsym Shift+$up resize shrink height 50px
+  bindsym Shift+$right resize grow width 50px
 
   ## Resize // Window Gaps // + - ##
-  $bindsym minus gaps inner current minus 5px
-  $bindsym plus gaps inner current plus 5px
+  bindsym minus gaps inner current minus 5px
+  bindsym plus gaps inner current plus 5px
 
   # Return to default mode
-  $bindsym Return mode "default"
-  $bindsym Escape mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 ## Launch // Resize Mode ##
-$bindsym $mod+Shift+r mode $mode_resize
+bindsym $mod+Shift+r mode $mode_resize
 gaps inner 5px
 gaps outer 5px
 
@@ -197,23 +197,23 @@ set $purge_cliphist [ $purge_cliphist_logout == 'true' ] && rm -f $HOME/.cache/c
 
 mode --pango_markup $mode_shutdown {
   # lock
-  $bindsym l mode "default", exec $locking
+  bindsym l mode "default", exec $locking
   # logout
-  $bindsym e exec $purge_cliphist; exec loginctl terminate-user $USER
+  bindsym e exec $purge_cliphist; exec loginctl terminate-user $USER
   # suspend
-  $bindsym u mode "default", exec systemctl suspend
+  bindsym u mode "default", exec systemctl suspend
   # hibernate
-  $bindsym h mode "default", exec systemctl hibernate
+  bindsym h mode "default", exec systemctl hibernate
   # shutdown
-  $bindsym s exec $purge_cliphist; exec systemctl poweroff
+  bindsym s exec $purge_cliphist; exec systemctl poweroff
   # reboot
-  $bindsym r exec $purge_cliphist; exec systemctl reboot
+  bindsym r exec $purge_cliphist; exec systemctl reboot
   # Return to default mode.
-  $bindsym Escape mode "default"
+  bindsym Escape mode "default"
 }
 
 ## Launch // Exit Menu ##
-$bindsym $mod+Shift+e mode $mode_shutdown
+bindsym $mod+Shift+e mode $mode_shutdown
 
 ##############################################################################
 ###### SCREENSHOTS ###########################################################
@@ -226,20 +226,20 @@ set $mode_screenshot "<span foreground='$color10'></span>  \
 
 mode --pango_markup $mode_screenshot {
   # output = currently active output
-  $bindsym o mode "default", exec $screenshot_screen
-  $bindsym Shift+o mode "default", exec $screenshot_screen_upload
+  bindsym o mode "default", exec $screenshot_screen
+  bindsym Shift+o mode "default", exec $screenshot_screen_upload
 
   # pick the region to screenshot
-  $bindsym p mode "default", exec $screenshot_selection
-  $bindsym Shift+p mode "default", exec $screenshot_selection_upload
+  bindsym p mode "default", exec $screenshot_selection
+  bindsym Shift+p mode "default", exec $screenshot_selection_upload
 
   # Return to default mode.
-  $bindsym Escape mode "default"
+  bindsym Escape mode "default"
 }
 
 ## Launch // Screenshot Mode ##
-$bindsym Print mode $mode_screenshot
-$bindsym $mod+p mode $mode_screenshot
+bindsym Print mode $mode_screenshot
+bindsym $mod+p mode $mode_screenshot
 
 ##############################################################################
 ###### RECORDING   ###########################################################
@@ -252,18 +252,18 @@ set $mode_recording "<span foreground='$color10'></span>  \
 set $recorder /usr/share/sway/scripts/recorder.sh
 
 mode --pango_markup $mode_recording {
-  $bindsym r exec $recorder, mode "default"
-  $bindsym Shift+r exec $recorder -a, mode "default"
+  bindsym r exec $recorder, mode "default"
+  bindsym Shift+r exec $recorder -a, mode "default"
 
   # Return to default mode.
-  $bindsym Escape mode "default"
+  bindsym Escape mode "default"
 }
 
 ## Launch // Recording Mode ##
-$bindsym $mod+Shift+g mode $mode_recording
+bindsym $mod+Shift+g mode $mode_recording
 
 ## Launch // Stop Recording Mode ##
-$bindsym $mod+Escape exec killall -s SIGINT wf-recorder
+bindsym $mod+Escape exec killall -s SIGINT wf-recorder
 
 exec xset s off -dpms
 exec xset s noblank
