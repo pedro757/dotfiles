@@ -16,6 +16,14 @@ local theme = {
   insert = { a = { fg = choco, bg = beige } },
   visual = { a = { fg = choco, bg = orange } },
 }
+local function show_macro_recording()
+  local recording_register = vim.fn.reg_recording()
+  if recording_register == "" then
+    return ""
+  else
+    return "Recording @" .. recording_register
+  end
+end
 
 require("lualine").setup {
   options = {
@@ -25,7 +33,13 @@ require("lualine").setup {
     section_separators = "",
   },
   sections = {
-    lualine_a = { { "filename", path = 1 } },
+    lualine_a = {
+      {
+        "macro-recording",
+        fmt = show_macro_recording,
+      },
+      { "filename", path = 1 },
+    },
     lualine_c = {
       { "branch", color = { bg = choco } },
       { "diff", color = { bg = choco } },
