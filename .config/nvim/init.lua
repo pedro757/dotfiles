@@ -45,14 +45,14 @@ local plugins = {
     opts = {
       view_options = {
         show_hidden = true,
-      }
+      },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
     "AlejandroSuero/supermaven-nvim",
     config = function()
-      require("supermaven-nvim").setup({
+      require("supermaven-nvim").setup {
         keymaps = {
           accept_line = "<C-e>",
           accept_suggestion = "<C-i>",
@@ -61,7 +61,7 @@ local plugins = {
         },
         -- disable_keymaps = true,
         ignore_filetypes = { sh = true },
-      })
+      }
     end,
     branch = "feature/accept-line",
   },
@@ -71,15 +71,15 @@ local plugins = {
   --   config = true
   -- },
   {
-    'mikesmithgh/kitty-scrollback.nvim',
+    "mikesmithgh/kitty-scrollback.nvim",
     enabled = true,
     lazy = true,
-    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
-    event = { 'User KittyScrollbackLaunch' },
+    cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
+    event = { "User KittyScrollbackLaunch" },
     -- version = '*', -- latest stable version, may have breaking changes if major version changed
     -- version = '^3.0.0', -- pin major version, include fixes and features that do not have breaking changes
     config = function()
-      require('kitty-scrollback').setup()
+      require("kitty-scrollback").setup()
     end,
   },
   "Marskey/telescope-sg",
@@ -190,7 +190,7 @@ local plugins = {
           g = true,
         },
       },
-      window = {
+      win = {
         border = "single",
       },
     },
@@ -276,7 +276,7 @@ local plugins = {
         "nvimtools/none-ls.nvim",
         dependencies = {
           "nvimtools/none-ls-extras.nvim",
-        }
+        },
       },
       "hrsh7th/cmp-nvim-lsp",
       {
@@ -686,8 +686,8 @@ local plugins = {
             i = function(fallback)
               if cmp.visible() then
                 cmp.close()
-              -- elseif require("copilot.suggestion").is_visible() then
-              --   require("copilot.suggestion").dismiss()
+                -- elseif require("copilot.suggestion").is_visible() then
+                --   require("copilot.suggestion").dismiss()
               else
                 fallback()
               end
@@ -700,8 +700,8 @@ local plugins = {
             i = function(fallback)
               if cmp.visible() then
                 cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
-              -- elseif require("copilot.suggestion").is_visible() then
-              --   require("copilot.suggestion").accept()
+                -- elseif require("copilot.suggestion").is_visible() then
+                --   require("copilot.suggestion").accept()
               else
                 fallback()
               end
@@ -736,8 +736,8 @@ local plugins = {
                   behavior = cmp.ConfirmBehavior.Replace,
                   select = true,
                 }
-              -- elseif require("copilot.suggestion").is_visible() then
-              --   require("copilot.suggestion").accept_line()
+                -- elseif require("copilot.suggestion").is_visible() then
+                --   require("copilot.suggestion").accept_line()
               else
                 fallback()
               end
@@ -908,7 +908,92 @@ local plugins = {
   },
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufRead",
+    -- event = "BufRead",
+    config = function()
+      require("gitsigns").setup {
+        signs = {
+          add = {
+            text = "▎",
+          },
+          change = {
+            text = "▎",
+          },
+          delete = {
+            text = "契",
+          },
+          topdelete = {
+            text = "契",
+          },
+          changedelete = {
+            text = "▎",
+          },
+          untracked = {
+            text = "▎",
+          },
+        },
+        on_attach = function(bufnr)
+          local gs = require "gitsigns"
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          map("n", "<leader>hn", function()
+            if vim.wo.diff then
+              vim.cmd.normal { "<leader>hn", bang = true }
+            else
+              gs.nav_hunk "next"
+            end
+          end)
+
+          map("n", "<leader>hN", function()
+            if vim.wo.diff then
+              vim.cmd.normal { "<leader>hN", bang = true }
+            else
+              gs.nav_hunk "prev"
+            end
+          end)
+          map(
+            "n",
+            "<Leader>hm",
+            "<Plug>(git-messenger)",
+            { desc = "Commit Message", silent = true }
+          )
+
+          -- Actions
+          map(
+            { "n", "v" },
+            "<leader>hs",
+            ":Gitsigns stage_hunk<CR>",
+            { desc = "Stage Hunk" }
+          )
+          map(
+            { "n", "v" },
+            "<leader>hr",
+            ":Gitsigns reset_hunk<CR>",
+            { desc = "Reset Hunk" }
+          )
+          map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage Buffer" })
+          map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Unstage" })
+          map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset Buffer" })
+          map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview Hunk" })
+          map("n", "<leader>hb", function()
+            gs.blame_line { full = true }
+          end, { desc = "Blame" })
+          -- map("n", "<leader>tb", gs.toggle_current_line_blame)
+          map("n", "<leader>hd", gs.diffthis, { desc = "Diff" })
+          map("n", "<leader>hD", function()
+            gs.diffthis "~"
+          end, { desc = "Diff HEAD~" })
+          -- map("n", "<leader>td", gs.toggle_deleted)
+
+          -- Text object
+          map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        end,
+      }
+    end,
   },
   {
     "rhysd/git-messenger.vim",
