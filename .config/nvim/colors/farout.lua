@@ -242,6 +242,7 @@ local highlight_groups = {
   GitSignsAdd    = { fg = p.green },
   GitSignsChange = { fg = p.orange },
   GitSignsDelete = { fg = p.red },
+  GitSignsUntracked = { fg = p.maroon },
 
   ["@method.call"]          = { fg = p.red, italic = true },
   ["@lsp.type.method"]      = { fg = p.red, italic = true },
