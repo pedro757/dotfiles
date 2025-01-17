@@ -46,6 +46,7 @@ require("telescope").setup {
       "packer_compiled.lua",
       ".next/",
       "target/",
+      "pnpm-lock.yaml",
     },
     set_env = { ["COLORTERM"] = "truecolor" },
   },

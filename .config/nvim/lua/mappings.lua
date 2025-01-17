@@ -210,3 +210,20 @@ m(
   }
 )
 m("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+local function accept_line()
+  local line = vim.fn.line('.')
+  local line_count = vim.fn.line('$')
+
+  require('supermaven-nvim.completion_preview').on_accept_suggestion()
+
+  local added_lines = vim.fn.line('$') - line_count
+
+  if added_lines > 1 then
+    vim.api.nvim_buf_set_lines(0, line + 1, line + added_lines, false, {})
+    local last_col = #vim.api.nvim_buf_get_lines(0, line, line + 1, true)[1] or 0
+    vim.api.nvim_win_set_cursor(0, { line + 1, last_col })
+  end
+end
+
+m("i", "<C-e>", accept_line, { desc = "Accept suggestion" })

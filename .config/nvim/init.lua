@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.cmd.colorscheme "farout"
 require "config.variables"
 require "options"
 vim.cmd "source $HOME/.config/nvim/vim/abbrev.vim"
@@ -70,20 +69,17 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    "AlejandroSuero/supermaven-nvim",
+    "supermaven-inc/supermaven-nvim",
     config = function()
       require("supermaven-nvim").setup {
         keymaps = {
-          accept_line = "<C-e>",
           accept_suggestion = "<C-i>",
           accept_word = "<C-n>",
           clear_suggestion = "<C-x>",
         },
-        -- disable_keymaps = true,
         ignore_filetypes = { sh = true },
       }
     end,
-    branch = "feature/accept-line",
   },
   -- {
   --   'barrett-ruth/import-cost.nvim',
@@ -196,25 +192,25 @@ local plugins = {
     end,
   },
   "wellle/targets.vim",
-  {
-    "folke/which-key.nvim",
-    opts = {
-      plugins = {
-        presets = {
-          operators = false,
-          motions = false,
-          text_objects = false,
-          windows = true,
-          nav = true,
-          z = true,
-          g = true,
-        },
-      },
-      win = {
-        border = "single",
-      },
-    },
-  },
+  -- {
+  --   "folke/which-key.nvim",
+  --   opts = {
+  --     plugins = {
+  --       presets = {
+  --         operators = false,
+  --         motions = false,
+  --         text_objects = false,
+  --         windows = true,
+  --         nav = true,
+  --         z = true,
+  --         g = true,
+  --       },
+  --     },
+  --     win = {
+  --       border = "single",
+  --     },
+  --   },
+  -- },
   "b0o/schemastore.nvim",
   "nvim-lualine/lualine.nvim",
   "nvim-tree/nvim-tree.lua",
@@ -308,24 +304,24 @@ local plugins = {
       },
     },
   },
-  {
-    "numToStr/Comment.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-    config = function()
-      local prehook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
-      require"Comment".setup({
-        pre_hook = prehook,
-        post_hook = nil,
-      })
-    end,
-    keys = { "gcc", "gc", "gb", "gbc" },
-    lazy = false,
-    event = "BufReadPre",
-
-  },
+  -- {
+  --   "numToStr/Comment.nvim",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "JoosepAlviste/nvim-ts-context-commentstring",
+  --   },
+  --   config = function()
+  --     local prehook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
+  --     require"Comment".setup({
+  --       pre_hook = prehook,
+  --       post_hook = nil,
+  --     })
+  --   end,
+  --   keys = { "gcc", "gc", "gb", "gbc" },
+  --   lazy = false,
+  --   event = "BufReadPre",
+  --
+  -- },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     opts = {
@@ -338,7 +334,13 @@ local plugins = {
   },
   {
     "j-hui/fidget.nvim",
-    tag = "legacy",
+    opts = {
+      progress = {
+        display = {
+          done_icon = " ",
+        }
+      }
+    }
   },
   {
     "gbprod/substitute.nvim",
@@ -448,15 +450,15 @@ local plugins = {
     "junegunn/gv.vim",
     cmd = { "GV" },
   },
-  {
-    "folke/zen-mode.nvim",
-    dependencies = {
-      {
-        "folke/twilight.nvim",
-      },
-    },
-    cmd = { "ZenMode" },
-  },
+  -- {
+  --   "folke/zen-mode.nvim",
+  --   dependencies = {
+  --     {
+  --       "folke/twilight.nvim",
+  --     },
+  --   },
+  --   cmd = { "ZenMode" },
+  -- },
   {
     "preservim/vim-pencil",
     cmd = {
@@ -605,7 +607,14 @@ local plugins = {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim",
-      "windwp/nvim-autopairs",
+      {
+        'altermo/ultimate-autopair.nvim',
+        event={'InsertEnter','CmdlineEnter'},
+        branch='v0.6', --recommended as each new version will have breaking changes
+        opts={
+            --Config goes here
+        },
+      },
       "jcha0713/cmp-tw2css",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
@@ -863,38 +872,38 @@ local plugins = {
       --   vim.b.copilot_suggestion_hidden = false
       -- end)
       --
-      local npairs = require "nvim-autopairs"
-      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-
-      npairs.setup {
-        check_ts = true,
-        break_undo = false,
-        enable_abbr = true,
-      }
-
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-      local Rule = require "nvim-autopairs.rule"
-      local cond = require "nvim-autopairs.conds"
-
-      npairs.add_rules {
-        Rule(" ", " ")
-          :with_pair(cond.done())
-          :replace_endpair(function(opts)
-            local pair = opts.line:sub(opts.col - 1, opts.col)
-            if vim.tbl_contains({ "()", "{}", "[]" }, pair) then
-              return " " -- it return space here
-            end
-            return "" -- return empty
-          end)
-          :with_move(cond.none())
-          :with_cr(cond.none())
-          :with_del(function(opts)
-            local col = vim.api.nvim_win_get_cursor(0)[2]
-            local context = opts.line:sub(col - 1, col + 2)
-            return vim.tbl_contains({ "(  )", "{  }", "[  ]" }, context)
-          end),
-      }
+      -- local npairs = require "nvim-autopairs"
+      -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      --
+      -- npairs.setup {
+      --   check_ts = true,
+      --   break_undo = false,
+      --   enable_abbr = true,
+      -- }
+      --
+      -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+      --
+      -- local Rule = require "nvim-autopairs.rule"
+      -- local cond = require "nvim-autopairs.conds"
+      --
+      -- npairs.add_rules {
+      --   Rule(" ", " ")
+      --     :with_pair(cond.done())
+      --     :replace_endpair(function(opts)
+      --       local pair = opts.line:sub(opts.col - 1, opts.col)
+      --       if vim.tbl_contains({ "()", "{}", "[]" }, pair) then
+      --         return " " -- it return space here
+      --       end
+      --       return "" -- return empty
+      --     end)
+      --     :with_move(cond.none())
+      --     :with_cr(cond.none())
+      --     :with_del(function(opts)
+      --       local col = vim.api.nvim_win_get_cursor(0)[2]
+      --       local context = opts.line:sub(col - 1, col + 2)
+      --       return vim.tbl_contains({ "(  )", "{  }", "[  ]" }, context)
+      --     end),
+      -- }
     end,
   },
   {
@@ -912,6 +921,15 @@ local plugins = {
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
+    setup = function()
+      require("nvim-ts-autotag").setup{
+        opts = {
+          enable_close = true,
+          enable_rename = true,
+          enable_close_on_slash = false,
+        }
+      }
+    end,
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -1048,14 +1066,35 @@ local plugins = {
       }
     end,
   },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {},
+  --   config = function ()
+  --     vim.cmd[[colorscheme tokyonight]]
+  --   end
+  -- }
   {
-    "ckolkey/ts-node-action",
-    dependencies = { "nvim-treesitter" },
-    enabled = false,
-    config = function()
-      require("ts-node-action").setup {}
-    end,
+    "n1ghtmare/noirblaze-vim",
+    config = function ()
+      vim.cmd.colorscheme "noirblaze"
+    end
   },
+  -- {
+  --   "cranberry-clockworks/coal.nvim",
+  --   config = function()
+  --     require('coal').setup()
+  --   end
+  -- },
+  -- {
+  --   "ckolkey/ts-node-action",
+  --   dependencies = { "nvim-treesitter" },
+  --   enabled = false,
+  --   config = function()
+  --     require("ts-node-action").setup {}
+  --   end,
+  -- },
 }
 require("lazy").setup(plugins)
 require "options"

@@ -2,7 +2,7 @@ if not pcall(require, "lualine") then
   return
 end
 
-local choco = "#291916"
+local choco = "#0C0C0C"
 local beige = "#A4895C"
 local orange = "#FF8C00"
 local light_brown = "#A67458"
@@ -27,7 +27,7 @@ end
 
 require("lualine").setup {
   options = {
-    theme = theme,
+    theme = "auto",
     icons_enabled = true,
     component_separators = "",
     section_separators = "",

@@ -1,9 +1,6 @@
 if not pcall(require, "lspconfig") then
   return
 end
-if not pcall(require, "fidget") then
-  return
-end
 if not pcall(require, "null-ls") then
   return
 end
@@ -58,7 +55,12 @@ require("typescript-tools").setup {
     separate_diagnostic_server = true,
     -- "change"|"insert_leave" determine when the client asks the server about diagnostic
     publish_diagnostic_on = "insert_leave",
-    -- string|nil -specify a custom path to `tsserver.js` file, if this is nil or file under path
+    -- array of strings("fix_all"|"add_missing_imports"|"remove_unused"|
+    -- "remove_unused_imports"|"organize_imports") -- or string "all"
+    -- to include all supported code actions
+    -- specify commands exposed as code_actions
+    expose_as_code_action = {},
+    -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
     -- not exists then standard path resolution strategy is applied
     tsserver_path = nil,
     -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
@@ -69,6 +71,26 @@ require("typescript-tools").setup {
     tsserver_max_memory = "auto",
     -- described below
     tsserver_format_options = {},
+    -- locale of all tsserver messages, supported locales you can find here:
+    -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
+    tsserver_locale = "en",
+    -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+    complete_function_calls = false,
+    include_completions_with_insert_text = true,
+    -- CodeLens
+    -- WARNING: Experimental feature also in VSCode, because it might hit performance of server.
+    -- possible values: ("off"|"all"|"implementations_only"|"references_only")
+    code_lens = "off",
+    -- by default code lenses are displayed on all referencable values and for some of you it can
+    -- be too much this option reduce count of them by removing member references from lenses
+    disable_member_code_lens = true,
+    -- JSXCloseTag
+    -- WARNING: it is disabled by default (maybe you configuration or distro already uses nvim-ts-autotag,
+    -- that maybe have a conflict if enable this feature. )
+    jsx_close_tag = {
+        enable = false,
+        filetypes = { "javascriptreact", "typescriptreact" },
+    },
     tsserver_file_preferences = {
       includeInlayParameterNameHints = "all",
       includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -82,29 +104,7 @@ require("typescript-tools").setup {
   },
 }
 
-nvim_lsp.emmet_language_server.setup({
-  filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
-  -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
-  -- **Note:** only the options listed in the table are supported.
-  init_options = {
-    --- @type string[]
-    excludeLanguages = {},
-    --- @type string[]
-    extensionsPath = {},
-    --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
-    preferences = {},
-    --- @type boolean Defaults to `true`
-    showAbbreviationSuggestions = true,
-    --- @type "always" | "never" Defaults to `"always"`
-    showExpandedAbbreviation = "always",
-    --- @type boolean Defaults to `false`
-    showSuggestionsAsSnippets = false,
-    --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
-    syntaxProfiles = {},
-    --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
-    variables = {},
-  },
-})
+nvim_lsp.emmet_language_server.setup{}
 
 -- require("typescript").setup {
 --   server = {
@@ -358,10 +358,3 @@ local null_ls_stop = function()
 end
 
 vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
-
-require("fidget").setup {
-  text = {
-    spinner = "dots",
-    done = " ",
-  },
-}
