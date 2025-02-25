@@ -42,6 +42,7 @@ require("telescope").setup {
       "venv",
       ".venv",
       "node_modules",
+      ".turbo/",
       ".git/",
       "packer_compiled.lua",
       ".next/",

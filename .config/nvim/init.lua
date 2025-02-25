@@ -69,6 +69,13 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
+    'stevearc/stickybuf.nvim',
+    opts = {},
+    config = function()
+      require("stickybuf").setup()
+    end,
+  },
+  {
     "supermaven-inc/supermaven-nvim",
     config = function()
       require("supermaven-nvim").setup {
@@ -295,13 +302,13 @@ local plugins = {
         },
       },
       "hrsh7th/cmp-nvim-lsp",
-      {
-        "pmizio/typescript-tools.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-          require("typescript-tools").setup {}
-        end,
-      },
+      -- {
+      --   "pmizio/typescript-tools.nvim",
+      --   dependencies = { "nvim-lua/plenary.nvim" },
+      --   config = function()
+      --     require("typescript-tools").setup {}
+      --   end,
+      -- },
     },
   },
   -- {
@@ -322,11 +329,17 @@ local plugins = {
   --   event = "BufReadPre",
   --
   -- },
+  -- {
+  --   "JoosepAlviste/nvim-ts-context-commentstring",
+  --   opts = {
+  --     enable_autocmd = false,
+  --   },
+  -- },
   {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    opts = {
-      enable_autocmd = false,
-    },
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+    enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -1095,6 +1108,14 @@ local plugins = {
   --     require("ts-node-action").setup {}
   --   end,
   -- },
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
 }
 require("lazy").setup(plugins)
 require "options"

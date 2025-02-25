@@ -199,6 +199,20 @@ au("User", {
   group = Targets,
 })
 
+au("BufEnter", {
+  callback = function()
+    if
+        vim.o.filetype == "oil"
+        or vim.o.filetype == "fugitive"
+        or vim.o.filetype == "help"
+        or vim.o.filetype == "lazy"
+    then
+      local stickybuf = require "stickybuf"
+      stickybuf.pin()
+    end
+  end,
+})
+
 local Mkdir = aug("Mkdir", clear)
 
 au("BufWritePre", {
