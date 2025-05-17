@@ -193,7 +193,7 @@ local plugins = {
         gemini = function()
           return require("codecompanion.adapters").extend("gemini", {
             env = {
-              api_key = "AIzaSyA1f7im84Ru10CrUdNStiryaoZLzq9XplE",
+              api_key = "",
             },
           })
         end,
