@@ -183,21 +183,21 @@ au({ "WinLeave", "InsertEnter" }, {
   group = OnlyOneCursorLine,
 })
 
-local Targets = aug("Targets", clear)
+-- local Targets = aug("Targets", clear)
 
-au("User", {
-  callback = function()
-    vim.fn["targets#mappings#extend"] {
-      b = {
-        pair = { {
-          o = "(",
-          c = ")",
-        } },
-      },
-    }
-  end,
-  group = Targets,
-})
+-- au("User", {
+--   callback = function()
+--     vim.fn["targets#mappings#extend"] {
+--       b = {
+--         pair = { {
+--           o = "(",
+--           c = ")",
+--         } },
+--       },
+--     }
+--   end,
+--   group = Targets,
+-- })
 
 au("BufEnter", {
   callback = function()

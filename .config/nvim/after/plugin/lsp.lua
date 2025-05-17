@@ -46,7 +46,7 @@ local on_attach = function(client, bufnr)
   -- })
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- require("typescript-tools").setup {
 --   on_attach = on_attach,
@@ -148,7 +148,6 @@ nvim_lsp.emmet_language_server.setup{}
 -- }
 
 nvim_lsp.denols.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -176,7 +175,6 @@ local servers = {
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     },
@@ -185,7 +183,6 @@ for _, lsp in ipairs(servers) do
 end
 nvim_lsp.vtsls.setup{
   on_attach = on_attach,
-  capabilities = capabilities,
   settings = {
     vtsls = {
       experimental = {
@@ -197,14 +194,12 @@ nvim_lsp.vtsls.setup{
   }
 }
 nvim_lsp.tailwindcss.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
   on_attach = on_attach,
 }
 nvim_lsp.cssmodules_ls.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -212,7 +207,6 @@ nvim_lsp.cssmodules_ls.setup {
 }
 
 nvim_lsp.yamlls.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -224,7 +218,6 @@ nvim_lsp.yamlls.setup {
   },
 }
 nvim_lsp.rust_analyzer.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -245,7 +238,6 @@ nvim_lsp.rust_analyzer.setup {
 }
 
 nvim_lsp.jsonls.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -259,7 +251,6 @@ nvim_lsp.jsonls.setup {
 }
 
 nvim_lsp.prismals.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -271,7 +262,6 @@ nvim_lsp.prismals.setup {
 }
 
 nvim_lsp.gopls.setup {
-  capabilities = capabilities,
   flags = {
     debounce_text_changes = 150,
   },
