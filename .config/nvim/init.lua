@@ -187,6 +187,13 @@ local plugins = {
     end,
   },
   {
+    'echasnovski/mini.diff',
+    version = false,
+    config = function()
+      require('mini.diff').setup {}
+    end
+  },
+  {
     "olimorris/codecompanion.nvim",
     opts = {
       adapters = {
@@ -201,11 +208,25 @@ local plugins = {
       strategies = {
         chat = {
           adapter = "gemini",
+          keymaps = {
+            close = {
+              modes = {
+                n = "<C-x>",
+                i = "<C-x>",
+              },
+            }
+          },
         },
         inline = {
           adapter = "gemini",
         },
       },
+      display = {
+        diff = {
+          enabled = true,
+          provider = "mini_diff",
+        },
+      }
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
