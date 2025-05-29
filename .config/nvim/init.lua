@@ -191,16 +191,34 @@ local plugins = {
     version = false,
     config = function()
       require('mini.diff').setup {}
+      vim.keymap.set("n", "<leader>z", function()
+        vim.cmd("lua MiniDiff.toggle_overlay()")
+      end)
     end
   },
   {
     "olimorris/codecompanion.nvim",
     opts = {
       adapters = {
+        opts = {
+          show_model_choices = true, -- <<< ADDED THIS
+        },
         gemini = function()
           return require("codecompanion.adapters").extend("gemini", {
             env = {
-              api_key = "",
+              api_key = "AIzaSyCPgQv7ZQxeS1e_yn7IgGh-zRFLA4LnzfY",
+            },
+          })
+        end,
+        geminipro = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            env = {
+              api_key = "AIzaSyCBcJYImznJ_WWHJSXTeom5uo4rtoUyymM",
+            },
+            schema = {
+              model = {
+                default = "gemini-2.5-pro-preview-05-06",
+              },
             },
           })
         end,
@@ -612,7 +630,6 @@ local plugins = {
   {
     'saghen/blink.cmp',
     dependencies = { 'rafamadriz/friendly-snippets' },
-
     version = '1.*',
     opts = {
       -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
@@ -1257,17 +1274,77 @@ local plugins = {
   --     vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline = false, undercurl = true })
   --   end,
   -- },
-  {
-    "slugbyte/lackluster.nvim",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      -- vim.cmd.colorscheme("lackluster")
-      vim.cmd.colorscheme("lackluster-hack") -- my favorite
-      vim.api.nvim_set_hl(0, "CursorLine", { bg = "#202020" })
-      -- vim.cmd.colorscheme("lackluster-mint")
-    end,
-  },
+  -- {
+  --   "slugbyte/lackluster.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   init = function()
+  --     -- vim.cmd.colorscheme("lackluster")
+  --     vim.cmd.colorscheme("lackluster-hack") -- my favorite
+  --     vim.api.nvim_set_hl(0, "CursorLine", { bg = "#202020" })
+  --     vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#bbbbbb", fg = "#000000" })
+  --     vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#bbbbbb", fg = "#000000" })
+  --     vim.api.nvim_set_hl(0, "Visual", { bg = "#ffff00", fg = "#000000" })
+  --     -- vim.cmd.colorscheme("lackluster-mint")
+  --   end,
+  -- },
+  -- {
+  --   "morhetz/gruvbox",
+  --   config = function()
+  --     vim.g.
+  --     vim.cmd.colorscheme("gruvbox")
+  --   end,
+  -- },
+    -- {
+    --   'sainnhe/sonokai',
+    --   lazy = false,
+    --   priority = 1000,
+    --   config = function()
+    --     vim.g.sonokai_enable_italic = true
+    --     vim.g.sonokai_style = 'espresso'
+    --     vim.cmd.colorscheme('sonokai')
+    --   end
+    -- },
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     require('onedark').setup {
+  --       style = 'warmer'
+  --     }
+  --     -- Enable theme
+  --     require('onedark').load()
+  --   end
+  -- },
+  -- {
+  --   'maxmx03/fluoromachine.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function ()
+  --     local fm = require 'fluoromachine'
+  --
+  --     fm.setup {
+  --       glow = true,
+  --       theme = 'fluoromachine',
+  --       transparent = true,
+  --     }
+  --
+  --     vim.cmd.colorscheme 'fluoromachine'
+  --   end
+  -- },
+  -- {
+  --   "aktersnurra/no-clown-fiesta.nvim",
+  --   config = function()
+  --     vim.cmd[[colorscheme no-clown-fiesta]]
+  --   end,
+  -- },
+  -- {
+  --   "dgox16/oldworld.nvim",
+  --   config = function()
+  --     vim.cmd[[colorscheme oldworld]]
+  --     vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, fg = "#ea83a5" })
+  --   end,
+  -- },
   -- {
   --   'sainnhe/gruvbox-material',
   --   lazy = false,
@@ -1296,6 +1373,16 @@ local plugins = {
   --     vim.cmd.colorscheme('vesper')
   --   end
   -- },
+  {
+    "ficcdaf/ashen.nvim",
+    tag = "*",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme('ashen')
+      vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#3fb950" })
+    end
+  },
   -- {
   --   "cranberry-clockworks/coal.nvim",
   --   config = function()
