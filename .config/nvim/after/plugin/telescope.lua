@@ -55,6 +55,14 @@ require("telescope").setup {
   extensions = {
     ["ui-select"] = {
       require("telescope.themes").get_dropdown {}
+    },
+    ast_grep = {
+      command = {
+        "sg",
+        "--json=stream",
+      },
+      grep_open_files = false,
+      lang = nil,
     }
   },
   pickers = {

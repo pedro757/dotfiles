@@ -334,6 +334,8 @@ null_ls.setup {
   },
 }
 
+require('lspconfig').ast_grep.setup {}
+
 local null_ls_stop = function()
   local null_ls_client
   for _, client in ipairs(vim.lsp.get_clients()) do
