@@ -48,10 +48,26 @@ local plugins = {
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
-        ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-        ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-        ["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-        ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+        ["<C-s>"] = {
+          "actions.select",
+          opts = { vertical = true },
+          desc = "Open the entry in a vertical split",
+        },
+        ["<C-v>"] = {
+          "actions.select",
+          opts = { vertical = true },
+          desc = "Open the entry in a vertical split",
+        },
+        ["<C-h>"] = {
+          "actions.select",
+          opts = { horizontal = true },
+          desc = "Open the entry in a horizontal split",
+        },
+        ["<C-t>"] = {
+          "actions.select",
+          opts = { tab = true },
+          desc = "Open the entry in new tab",
+        },
         ["<C-p>"] = "actions.preview",
         ["<C-c>"] = "actions.close",
         ["<C-x>"] = "actions.close",
@@ -59,7 +75,11 @@ local plugins = {
         ["-"] = "actions.parent",
         ["_"] = "actions.open_cwd",
         ["`"] = "actions.cd",
-        ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+        ["~"] = {
+          "actions.cd",
+          opts = { scope = "tab" },
+          desc = ":tcd to the current oil directory",
+        },
         ["gs"] = "actions.change_sort",
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",
@@ -69,7 +89,7 @@ local plugins = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    'stevearc/stickybuf.nvim',
+    "stevearc/stickybuf.nvim",
     opts = {},
     config = function()
       require("stickybuf").setup()
@@ -187,14 +207,14 @@ local plugins = {
     end,
   },
   {
-    'echasnovski/mini.diff',
+    "echasnovski/mini.diff",
     version = false,
     config = function()
-      require('mini.diff').setup {}
+      require("mini.diff").setup {}
       vim.keymap.set("n", "<leader>z", function()
-        vim.cmd("lua MiniDiff.toggle_overlay()")
+        vim.cmd "lua MiniDiff.toggle_overlay()"
       end)
-    end
+    end,
   },
   {
     "olimorris/codecompanion.nvim",
@@ -232,7 +252,7 @@ local plugins = {
                 n = "<C-x>",
                 i = "<C-x>",
               },
-            }
+            },
           },
         },
         inline = {
@@ -249,12 +269,12 @@ local plugins = {
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {
-            show_result_in_chat = true,  -- Show mcp tool results in chat
-            make_vars = true,            -- Convert resources to #variables
-            make_slash_commands = true,  -- Add prompts as /slash commands
-          }
-        }
-      }
+            show_result_in_chat = true, -- Show mcp tool results in chat
+            make_vars = true, -- Convert resources to #variables
+            make_slash_commands = true, -- Add prompts as /slash commands
+          },
+        },
+      },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -264,19 +284,20 @@ local plugins = {
   {
     "ravitemer/mcphub.nvim",
     dependencies = {
-        "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim",
     },
-    build = "npm install -g mcp-hub@latest",  -- Installs `mcp-hub` node binary globally
+    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
     config = function()
-        require("mcphub").setup()
-    end
+      require("mcphub").setup()
+    end,
   },
+  { "echasnovski/mini.bracketed", version = false },
   {
-    'echasnovski/mini.ai',
+    "echasnovski/mini.ai",
     version = false,
-    config = function ()
-      require('mini.ai').setup{}
-    end
+    config = function()
+      require("mini.ai").setup {}
+    end,
   },
   -- "wellle/targets.vim",
   -- {
@@ -419,7 +440,7 @@ local plugins = {
     "folke/ts-comments.nvim",
     opts = {},
     event = "VeryLazy",
-    enabled = vim.fn.has("nvim-0.10.0") == 1,
+    enabled = vim.fn.has "nvim-0.10.0" == 1,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -431,9 +452,9 @@ local plugins = {
       progress = {
         display = {
           done_icon = " ",
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     "gbprod/substitute.nvim",
@@ -636,6 +657,16 @@ local plugins = {
     branch = "neo-zoom-original",
     cmd = { "NeoZoomToggle" },
   },
+  -- {
+  --   "nvzone/floaterm",
+  --   dependencies = "nvzone/volt",
+  --   opts = {
+  --     terminals = {
+  --       { name = "Terminal", cmd = "fish" },
+  --     },
+  --   },
+  --   cmd = "FloatermToggle",
+  -- },
   {
     "akinsho/toggleterm.nvim",
     version = "*",
@@ -648,9 +679,10 @@ local plugins = {
     end,
   },
   {
-    'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    version = '1.*',
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    -- version = '1.*',
+    build = "cargo build --release",
     opts = {
       -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
       -- 'super-tab' for mappings similar to vscode (tab to accept)
@@ -666,13 +698,13 @@ local plugins = {
       -- See :h blink-cmp-config-keymap for defining your own keymap
       cmdline = {
         keymap = {
-          ['<C-j>'] = { 'select_next', 'fallback' },
-          ['<C-k>'] = { 'select_prev', 'fallback' },
-          ['<C-x>'] = { "hide", "fallback" },
-          ['<C-l>'] = { "select_accept_and_enter", "fallback" },
-          ['<C-e>'] = { "accept", "fallback" },
-          ['<down>'] = { "select_next", "fallback" },
-          ['<up>'] = { "select_prev", "fallback" },
+          ["<C-j>"] = { "select_next", "fallback" },
+          ["<C-k>"] = { "select_prev", "fallback" },
+          ["<C-x>"] = { "hide", "fallback" },
+          ["<C-l>"] = { "select_accept_and_enter", "fallback" },
+          ["<C-e>"] = { "accept", "fallback" },
+          ["<down>"] = { "select_next", "fallback" },
+          ["<up>"] = { "select_prev", "fallback" },
         },
         completion = {
           list = {
@@ -682,34 +714,36 @@ local plugins = {
             },
           },
           menu = {
-            auto_show = true
-          }
+            auto_show = true,
+          },
         },
       },
       keymap = {
-        preset = 'default',
-        ['<C-x>'] = { "hide", "fallback" },
-        ['<C-j>'] = { "select_next", "fallback" },
-        ['<C-k>'] = { "select_prev", "fallback" },
-        ['<C-l>'] = { "select_and_accept", "fallback" },
-        ['<C-e>'] = {},
-        ['<C-n>'] = {},
-        ['<C-p>'] = {},
+        preset = "default",
+        ["<C-x>"] = { "hide", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-l>"] = { "select_and_accept", "fallback" },
+        ["<C-e>"] = {},
+        ["<C-n>"] = {},
+        ["<C-p>"] = {},
       },
 
       appearance = {
-        nerd_font_variant = 'mono'
+        nerd_font_variant = "mono",
       },
       accept = { auto_brackets = { enabled = true } },
-      completion = { documentation = { auto_show = true, auto_show_delay_ms = 500 } },
-
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      completion = {
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
       },
 
-      fuzzy = { implementation = "prefer_rust_with_warning" }
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
   },
   {
     "epwalsh/obsidian.nvim",
@@ -1076,10 +1110,10 @@ local plugins = {
     },
   },
   {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      local npairs = require("nvim-autopairs")
+      local npairs = require "nvim-autopairs"
       npairs.setup {
         check_ts = true,
         break_undo = false,
@@ -1108,18 +1142,18 @@ local plugins = {
             return vim.tbl_contains({ "(  )", "{  }", "[  ]" }, context)
           end),
       }
-    end
+    end,
   },
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
     setup = function()
-      require("nvim-ts-autotag").setup{
+      require("nvim-ts-autotag").setup {
         opts = {
           enable_close = true,
           enable_rename = true,
           enable_close_on_slash = false,
-        }
+        },
       }
     end,
   },
@@ -1315,16 +1349,16 @@ local plugins = {
   --     vim.cmd.colorscheme("gruvbox")
   --   end,
   -- },
-    -- {
-    --   'sainnhe/sonokai',
-    --   lazy = false,
-    --   priority = 1000,
-    --   config = function()
-    --     vim.g.sonokai_enable_italic = true
-    --     vim.g.sonokai_style = 'espresso'
-    --     vim.cmd.colorscheme('sonokai')
-    --   end
-    -- },
+  -- {
+  --   'sainnhe/sonokai',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.g.sonokai_enable_italic = true
+  --     vim.g.sonokai_style = 'espresso'
+  --     vim.cmd.colorscheme('sonokai')
+  --   end
+  -- },
   -- {
   --   "navarasu/onedark.nvim",
   --   priority = 1000, -- make sure to load this before all the other start plugins
@@ -1399,9 +1433,9 @@ local plugins = {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme('ashen')
+      vim.cmd.colorscheme "ashen"
       vim.api.nvim_set_hl(0, "DiffAdd", { fg = "#3fb950" })
-    end
+    end,
   },
   -- {
   --   "cranberry-clockworks/coal.nvim",
@@ -1432,14 +1466,15 @@ local plugins = {
     "OXY2DEV/markview.nvim",
     lazy = false,
     dependencies = {
-      "saghen/blink.cmp"
+      "saghen/blink.cmp",
     },
     opts = {
       preview = {
-        filetype = { "md", "rmd", "quarto", "codecompanion" }
-      }
+        filetype = { "md", "rmd", "quarto", "codecompanion" },
+      },
     },
-  }
+  },
+  "LunarVim/bigfile.nvim",
 }
 require("lazy").setup(plugins)
 require "options"
